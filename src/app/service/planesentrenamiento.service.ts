@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
 import { IUsuario } from '../model/usuario.interface';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 import { IPage } from '../model/model.interface';
 import { httpOptions, serverURL } from '../environment/environment';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsuarioService {
+export class PlanesentrenamientoService {
   serverURL: string = serverURL + '/usuario';
 
   constructor(private oHttp: HttpClient) { }
@@ -73,8 +73,4 @@ export class UsuarioService {
   delete(id: number) {
     return this.oHttp.delete(this.serverURL + '/' + id);
   }
-
-  
-
-
 }

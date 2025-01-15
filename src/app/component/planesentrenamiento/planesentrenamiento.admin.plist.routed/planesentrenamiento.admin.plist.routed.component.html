@@ -3,12 +3,12 @@
     <div class="col text-center">
       <h2 class="my-2">
         <i class="bi bi-list"></i>
-        Lista de Usuarios
+        Lista de Planesentrenamiento
         <i class="bi bi-person-circle"></i>
       </h2>
-      <a href="admin/usuario/create"><button class="btn btn-primary my-2 mx-2">
+      <a href="admin/planesentrenamiento/create"><button class="btn btn-primary my-2 mx-2">
           <i class="bi bi-plus-square"></i>
-          Crear nuevo usuario
+          Crear nuevo planesentrenamiento
         </button></a>
 
       <div class="d-inline-flex mx-2">
@@ -110,7 +110,7 @@
                 <i class="bi bi-caret-up-fill"></i>} }
               </th>
               <th (click)="sort('email')" class="bg-primary text-white">
-                Tipo de usuario@if (strField === 'tipousuario') { @if (strDir === 'desc') {
+                Tipo de planesentrenamiento@if (strField === 'tipoPlanesentrenamiento') { @if (strDir === 'desc') {
                 <i class="bi bi-caret-down-fill"></i>
                 } @else {
                 <i class="bi bi-caret-up-fill"></i>} }
@@ -120,31 +120,27 @@
           </thead>
 
           <tbody>
-            @for (usuario of oPage?.content; track usuario.id) {
+            @for (planesentrenamiento of oPage?.content; track planesentrenamiento.id) {
             <tr>
-              <td class="text-center">{{ usuario.id }}</td>
-              <td class="text-start">{{ usuario.nombre | trim : 10 }}</td>
-              <td class="text-start">{{ usuario.apellido1 }}</td>
-              <td class="text-start">{{ usuario.apellido2 }}</td>
-              <td class="text-start" style="font-size: small">{{ usuario.email }}</td>              
-              <td class="text-start">{{ usuario.tipousuario.titulo }}</td>              
-              <td>
+              <td class="text-center">{{ planesentrenamiento.id }}</td>
+              <td class="text-start">{{ planesentrenamiento.titulo | trim : 10 }}</td>
+              <td class="text-start">{{ planesentrenamiento.descripcion }}</td>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-success" (click)="view(usuario)">
+                  <button type="button" class="btn btn-success" (click)="view(planesentrenamiento)">
                     <i class="bi bi-eye icon-15"></i>
                   </button>
-                  <button type="button" class="btn btn-warning icon-15" (click)="edit(usuario)">
+                  <button type="button" class="btn btn-warning icon-15" (click)="edit(planesentrenamiento)">
                     <i class="bi bi-pen"></i>
                   </button>
-                  <button type="button" class="btn btn-danger icon-15" (click)="remove(usuario)">
+                  <button type="button" class="btn btn-danger icon-15" (click)="remove(planesentrenamiento)">
                     <i class="bi bi-trash"></i>
                   </button>
                 </div>
-              </td>
+              
             </tr>
             } @empty {
             <tr>
-              <td colspan="6">No hay usuarios</td>
+              <td colspan="6">No hay Planesentrenamientos</td>
             </tr>
             }
           </tbody>

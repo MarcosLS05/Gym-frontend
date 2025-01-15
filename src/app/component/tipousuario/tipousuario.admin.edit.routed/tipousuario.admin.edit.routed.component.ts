@@ -52,7 +52,7 @@ export class TipousuarioAdminEditRoutedComponent implements OnInit {
   createForm() {
     this.oTipousuarioForm = new FormGroup({
       id: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', [
+      titulo: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(255),
@@ -90,7 +90,7 @@ export class TipousuarioAdminEditRoutedComponent implements OnInit {
 
   updateForm() {
     this.oTipousuarioForm?.controls['id'].setValue(this.oTipousuario?.id);
-    this.oTipousuarioForm?.controls['descripcion'].setValue(this.oTipousuario?.descripcion);
+    this.oTipousuarioForm?.controls['titulo'].setValue(this.oTipousuario?.titulo);
   }
 
   get() {

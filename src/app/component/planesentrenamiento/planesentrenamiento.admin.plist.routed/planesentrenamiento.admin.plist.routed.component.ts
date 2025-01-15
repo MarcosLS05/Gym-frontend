@@ -1,50 +1,40 @@
 import { Component, OnInit } from '@angular/core';
+import { PlanesentrenamientoService } from '../../../service/planesentrenamiento.service';
+import { IPlanesentrenamiento } from '../../../model/planesentrenamiento.interface';
 import { CommonModule } from '@angular/common';
 import { IPage } from '../../../model/model.interface';
 import { FormsModule } from '@angular/forms';
 import { BotoneraService } from '../../../service/botonera.service';
 import { debounceTime, Subject } from 'rxjs';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TrimPipe } from '../../../pipe/trim.pipe';
-import { ITipousuario } from '../../../model/tipousuario.interface';
-import { tipousuarioService } from '../../../service/tipousuario.service';
-import { HttpErrorResponse } from '@angular/common/http';
-
 
 @Component({
-  selector: 'app-tipousuario-admin-routed',
-  templateUrl: './tipousuario.admin.plist.routed.component.html',
-  styleUrls: ['./tipousuario.admin.plist.routed.component.css'],
+  selector: 'app-planesentrenamiento.admin.routed',
+  templateUrl: './planesentrenamiento.admin.plist.routed.component.html',
+  styleUrls: ['./planesentrenamiento.admin.plist.routed.component.css'],
   standalone: true,
   imports: [CommonModule, FormsModule, TrimPipe, RouterModule],
 })
-
-export class TipousuarioAdminPlistRoutedComponent implements OnInit {
-  oPage: IPage<ITipousuario> | null = null;
+export class PlanesentrenamientoAdminPlistRoutedComponent implements OnInit {
+  
+  oPage: IPage<IPlanesentrenamiento> | null = null;
   //
   nPage: number = 0; // 0-based server count
   nRpp: number = 10;
   //
   strField: string = '';
-  strDir: string = 'desc';
+  strDir: string = '';
   //
   strFiltro: string = '';
   //
   arrBotonera: string[] = [];
   //
   private debounceSubject = new Subject<string>();
-  oTipousuario: ITipousuario = {} as ITipousuario;
-  numeroSubcuentas: number = 0;
-  id: number = 0;
-  titulo: string = '';
-  arrNumSubcuentas: Number[] = [];
-
   constructor(
-    private otipousuarioService: tipousuarioService,
+    private oPlanesentrenamientoService: PlanesentrenamientoService,
     private oBotoneraService: BotoneraService,
-    private oRouter: Router,
-    private oActivatedRoute: ActivatedRoute,
-    
+    private oRouter: Router
   ) {
     this.debounceSubject.pipe(debounceTime(10)).subscribe((value) => {
       this.getPage();
@@ -55,32 +45,16 @@ export class TipousuarioAdminPlistRoutedComponent implements OnInit {
     this.getPage();
   }
 
-  getOne() {
-    this.otipousuarioService.getOne(this.id).subscribe({
-      next: (data: ITipousuario) => {
-        this.oTipousuario = data;
-
-      },
-    });
-  }
-
   getPage() {
-    this.otipousuarioService
-      .getPage(
-        this.nPage,
-        this.nRpp,
-        this.strField,
-        this.strDir,
-        this.strFiltro
-      )
+    this.oPlanesentrenamientoService
+      .getPage(this.nPage, this.nRpp, this.strField, this.strDir, this.strFiltro)
       .subscribe({
-        next: (oPageFromServer: IPage<ITipousuario>) => {
+        next: (oPageFromServer: IPage<IPlanesentrenamiento>) => {
           this.oPage = oPageFromServer;
           this.arrBotonera = this.oBotoneraService.getBotonera(
             this.nPage,
             oPageFromServer.totalPages
           );
-
         },
         error: (err) => {
           console.log(err);
@@ -88,18 +62,18 @@ export class TipousuarioAdminPlistRoutedComponent implements OnInit {
       });
   }
 
-  edit(oTipousuario: ITipousuario) {
+  edit(oPlanesentrenamiento: IPlanesentrenamiento) {
     //navegar a la página de edición
-    this.oRouter.navigate(['admin/tipousuario/edit', oTipousuario.id]);
+    this.oRouter.navigate(['admin/planesentrenamiento/edit', oPlanesentrenamiento.id]);
   }
 
-  view(oTipousuario: ITipousuario) {
+  view(oPlanesentrenamiento: IPlanesentrenamiento) {
     //navegar a la página de edición
-    this.oRouter.navigate(['admin/tipousuario/view', oTipousuario.id]);
+    this.oRouter.navigate(['admin/planesentrenamiento/view', oPlanesentrenamiento.id]);
   }
 
-  remove(oTipousuario: ITipousuario) {
-    this.oRouter.navigate(['admin/tipousuario/delete/', oTipousuario.id]);
+  remove(oPlanesentrenamiento: IPlanesentrenamiento) {
+    this.oRouter.navigate(['admin/planesentrenamiento/delete/', oPlanesentrenamiento.id]);
   }
 
   goToPage(p: number) {
@@ -138,16 +112,4 @@ export class TipousuarioAdminPlistRoutedComponent implements OnInit {
   filter(event: KeyboardEvent) {
     this.debounceSubject.next(this.strFiltro);
   }
-
-  getPageSubcuenta(id: number) {
-    this.otipousuarioService.getPageSubcuenta(id).subscribe({
-      next: (data: number) => {
-        this.numeroSubcuentas = data;
-      },
-      error: (error: HttpErrorResponse) => {
-        console.error(error);
-      }
-    });
-  }
-
 }

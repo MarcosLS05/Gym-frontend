@@ -2,7 +2,7 @@
   <div class="col-lg-7 col-md-10 col-sm-12">
     <h1 class="my-5 text-center">
       <i class="bi bi-card-list"></i>
-      Ver tipoCuenta
+      Ver tipo de usuario
       <i class="bi bi-credit-card-fill"></i>
     </h1>
     <br />
@@ -13,26 +13,23 @@
           <td class="text-start ps-5">{{ otipousuario.id }}</td>
         </tr>
         <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">Descripcion</th>
-          <td class="text-start ps-5">{{ otipousuario.descripcion }}</td>
+          <th scope="row" class="bg-primary text-white text-end pe-5">Titulo</th>
+          <td class="text-start ps-5">{{ otipousuario.titulo }}</td>
         </tr>
 
 
 
 
         <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Real o nominal
-          </th>
 
         </tr>
 
         <tr class="text-center">
           <th scope="row" class="bg-primary text-white text-end pe-5">
-            Cuentas
+            Usuarios
           </th>
           <td class="text-start ps-5">
-            <a href="admin/cuenta/plist/xtipocuenta/{{ otipousuario.id }}" class="btn btn-primary">{{
+            <a href="admin/usuario/plist/xtipousuario/{{ otipousuario.id }}" class="btn btn-primary">{{
               otipousuario.usuarios }}</a>
           </td>
         </tr>      

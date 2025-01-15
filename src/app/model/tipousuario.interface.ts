@@ -1,5 +1,5 @@
 export interface ITipousuario {
     id: number;
-    descripcion: string;
+    titulo: string;
     usuarios: number;
   }

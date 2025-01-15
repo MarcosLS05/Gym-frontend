@@ -14,6 +14,15 @@ import { TipousuarioAdminViewRoutedComponent } from './component/tipousuario/tip
 import { TipousuarioAdminCreateRoutedComponent } from './component/tipousuario/tipousuario.admin.create.routed/tipousuario.admin.create.routed.component';
 import { TipousuarioAdminDeleteRoutedComponent } from './component/tipousuario/tipousuario.admin.delete.routed/tipousuario.admin.delete.component';
 
+import { PlanesentrenamientoAdminCreateRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.admin.create.routed/planesentrenamiento.admin.create.routed.component';
+import { PlanesentrenamientoAdminPlistRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.admin.plist.routed/planesentrenamiento.admin.plist.routed.component';
+import { PlanesentrenamientoAdminEditRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.admin.edit.routed/planesentrenamiento.admin.edit.routed.component';
+import { PlanesentrenamientoAdminViewRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.admin.view.routed/planesentrenamiento.admin.view.routed.component';
+import { PlanesentrenamientoAdminDeleteRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.admin.delete.routed/planesentrenamiento.admin.delete.component';
+
+
+
+
 import { serverURL } from './environment/environment';
 
 
@@ -35,4 +44,9 @@ export const routes: Routes = [
     { path: 'admin/tipousuario/create', component: TipousuarioAdminCreateRoutedComponent, pathMatch: 'full', },
     { path: 'admin/tipousuario/delete/:id', component: TipousuarioAdminDeleteRoutedComponent, },
 
+    { path: 'admin/planesentrenamiento/create', component: PlanesentrenamientoAdminCreateRoutedComponent, pathMatch: 'full', },
+    { path: 'admin/planesentrenamiento/plist', component: PlanesentrenamientoAdminPlistRoutedComponent },
+    { path: 'admin/planesentrenamiento/edit/:id', component: PlanesentrenamientoAdminEditRoutedComponent, },
+    { path: 'admin/planesentrenamiento/view/:id', component: PlanesentrenamientoAdminViewRoutedComponent, },
+    { path: 'admin/planesentrenamiento/delete/:id', component: PlanesentrenamientoAdminDeleteRoutedComponent, },
 ];
