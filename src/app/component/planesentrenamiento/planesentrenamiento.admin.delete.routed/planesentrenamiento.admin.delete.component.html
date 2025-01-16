@@ -2,7 +2,7 @@
   <div class="col-lg-7 col-md-10 col-sm-12">
     <h1 class="my-5 text-center">
       <i class="bi bi-trash"></i>
-      Borrar usuario
+      Borrar Plan de Entrenamiento
       <i class="bi bi-person-circle"></i>
     </h1>
     <br />
@@ -10,58 +10,39 @@
       <tbody>
         <tr class="text-center">
           <th scope="row" class="bg-danger text-white text-end pe-5">Id</th>
-          <td class="text-start ps-5">{{ oUsuario!.id }}</td>
+          <td class="text-start ps-5">{{ oPlanesentrenamiento!.id }}</td>
         </tr>
         <tr class="text-center">
           <th scope="row" class="bg-primary text-white text-end pe-5">
-            Nombre
+            titulo
           </th>
-          <td class="text-start ps-5">{{ oUsuario!.nombre }}</td>
+          <td class="text-start ps-5">{{ oPlanesentrenamiento!.titulo }}</td>
         </tr>
         <tr class="text-center">
           <th scope="row" class="bg-primary text-white text-end pe-5">
-            Primer Apellido
+            descripcion
           </th>
-          <td class="text-start ps-5">{{ oUsuario!.apellido1 }}</td>
+          <td class="text-start ps-5">{{ oPlanesentrenamiento!.descripcion }}</td>
         </tr>
-        <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Segundo Apellido
-          </th>
-          <td class="text-start ps-5">{{ oUsuario!.apellido2 }}</td>
-        </tr>
-        <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Correo
-          </th>
-          <td class="text-start ps-5">{{ oUsuario!.email }}</td>
-        </tr>
-        <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Tipo de usuario
-          </th>
-
-
-
       </tbody>
     </table>
   </div>
 
   <div class="d-flex justify-content-center mt-4">
-    <p class="fs-3">¿Seguro que desea borrar el usuario?</p>
+    <p class="fs-3">¿Seguro que desea borrar el Plan de Entrenamiento?</p>
   </div>
 
   <div class="d-flex justify-content-center mt-4">
     <button
       class="btn btn-warning mt-4 mx-1"
-      [routerLink]="['/admin', 'usuario', 'plist']"
+      [routerLink]="['/admin', 'planesentrenamiento', 'plist']"
     >
       <i class="bi bi-list"></i>
-      Ir a listado de Usuarios
+      Ir a listado de Planes de entrenamientos
     </button>
     <button class="btn btn-danger mt-4 mx-1" (click)="delete()">
       <i class="bi bi-trash"></i>
-      Borrar usuario
+      Borrar Plan de entrenamiento
     </button>
   </div>
 </div>
@@ -76,7 +57,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Contante</h5>
+        <h5 class="modal-title" id="exampleModalLabel">GIMNASIO</h5>
         <button
           type="button"
           class="btn-close"

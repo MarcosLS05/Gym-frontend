@@ -83,38 +83,20 @@
                 } @else {
                 <i class="bi bi-caret-up-fill"></i>} }
               </th>
-              <th (click)="sort('nombre')" class="bg-primary text-white">
-                Nombre @if (strField === 'nombre') { @if (strDir === 'desc') {
+              <th (click)="sort('titulo')" class="bg-primary text-white">
+                Titulo @if (strField === 'titulo') { @if (strDir === 'desc') {
                 <i class="bi bi-caret-down-fill"></i>
                 } @else {
                 <i class="bi bi-caret-up-fill"></i>} }
               </th>
-              <th (click)="sort('apellido1')" class="bg-primary text-white">
-                Primer Apellido @if (strField === 'apellido1') { @if (strDir ===
+              <th (click)="sort('descripcion')" class="bg-primary text-white">
+                Descripcion @if (strField === 'descripcion') { @if (strDir ===
                 'desc') {
                 <i class="bi bi-caret-down-fill"></i>
                 } @else {
                 <i class="bi bi-caret-up-fill"></i>} }
               </th>
-              <th (click)="sort('apellido2')" class="bg-primary text-white">
-                Segundo Apellido @if (strField === 'apellido2') { @if (strDir
-                === 'desc') {
-                <i class="bi bi-caret-down-fill"></i>
-                } @else {
-                <i class="bi bi-caret-up-fill"></i>} }
-              </th>
-              <th (click)="sort('email')" class="bg-primary text-white">
-                Correo @if (strField === 'email') { @if (strDir === 'desc') {
-                <i class="bi bi-caret-down-fill"></i>
-                } @else {
-                <i class="bi bi-caret-up-fill"></i>} }
-              </th>
-              <th (click)="sort('email')" class="bg-primary text-white">
-                Tipo de planesentrenamiento@if (strField === 'tipoPlanesentrenamiento') { @if (strDir === 'desc') {
-                <i class="bi bi-caret-down-fill"></i>
-                } @else {
-                <i class="bi bi-caret-up-fill"></i>} }
-              </th>
+
               <th class="bg-warning text-black">Acciones</th>
             </tr>
           </thead>

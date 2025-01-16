@@ -53,24 +53,19 @@ export class PlanesentrenamientoAdminEditRoutedComponent implements OnInit {
   createForm() {
     this.oPlanesentrenamientoForm = new FormGroup({
       id: new FormControl('', [Validators.required]),
-      nombre: new FormControl('', [
+      titulo: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(50),
       ]),
-      apellido1: new FormControl('', [
+      descripcion: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(50),
-      ]),
-      apellido2: new FormControl(''),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      id_tipoPlanesentrenamiento: new FormControl('', [
-        Validators.required,
-        Validators.min(1),
       ]),
     });
   }
+  
 
   onReset() {
     this.oPlanesentrenamientoService.get(this.id).subscribe({
@@ -87,10 +82,10 @@ export class PlanesentrenamientoAdminEditRoutedComponent implements OnInit {
 
   updateForm() {
     this.oPlanesentrenamientoForm?.controls['id'].setValue(this.oPlanesentrenamiento?.id);
-    this.oPlanesentrenamientoForm?.controls['nombre'].setValue(this.oPlanesentrenamiento?.titulo);
-    this.oPlanesentrenamientoForm?.controls['apellido1'].setValue(this.oPlanesentrenamiento?.descripcion);
-    this.oPlanesentrenamientoForm?.controls['id_Planesentrenamiento'].setValue(this.oPlanesentrenamiento?.id);
+    this.oPlanesentrenamientoForm?.controls['titulo'].setValue(this.oPlanesentrenamiento?.titulo);
+    this.oPlanesentrenamientoForm?.controls['descripcion'].setValue(this.oPlanesentrenamiento?.descripcion);
   }
+  
 
   get() {
     this.oPlanesentrenamientoService.get(this.id).subscribe({
@@ -134,5 +129,5 @@ export class PlanesentrenamientoAdminEditRoutedComponent implements OnInit {
         },
       });
     }
-  }
+  }  
 }

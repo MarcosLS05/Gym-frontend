@@ -2,39 +2,28 @@
   <div class="col-lg-7 col-md-10 col-sm-12">
     <h1 class="my-5 text-center">
       <i class="bi bi-card-list"></i>
-      Detalle de planesentrenamiento
-      <i class="bi bi-person-circle"></i>
+      Ver Plan de Entrenamiento
+      <i class="bi bi-credit-card-fill"></i>
     </h1>
-    <br />
     <table class="table table-striped table-bordered my-5 text-center">
       <tbody>
-        <tr class="text-center">
-          <th scope="row" class="bg-danger text-white text-end pe-5">Id</th>
-          <td class="text-start ps-5">{{ oPlanesentrenamiento.id }}</td>
-        </tr>
-        <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Titulo
+        <tr>
+          <th scope="row" class="bg-danger text-white text-end pe-4">
+            Id
           </th>
-          <td class="text-start ps-5">{{ oPlanesentrenamiento.titulo }}</td>
+          <td class="text-start ps-4">{{ id }}</td>
         </tr>
-        <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            descripcion
+        <tr>
+          <th scope="row" class="bg-primary text-white text-end pe-4">
+            Título
           </th>
-          <td class="text-start ps-5">{{ oPlanesentrenamiento.descripcion }}</td>
+          <td class="text-start ps-4">{{ oplanesentrenamiento.titulo }}</td>
         </tr>
-        <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Segundo Apellido
+        <tr>
+          <th scope="row" class="bg-secondary text-white text-end pe-4">
+            Descripción
           </th>
-          <td class="text-start ps-5">{{ oPlanesentrenamiento.apellido2 }}</td>
-        </tr>
-        <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Correo
-          </th>
-          <td class="text-start ps-5">{{ oPlanesentrenamiento.email }}</td>
+          <td class="text-start ps-4">{{ oplanesentrenamiento.descripcion }}</td>
         </tr>
       </tbody>
     </table>
@@ -43,13 +32,19 @@
   <div class="d-flex justify-content-center mt-4">
     <a class="btn btn-warning mt-4 mx-1" href="admin/planesentrenamiento/plist">
       <i class="bi bi-list"></i>
-      Ir a listado de Planesentrenamientos
+      Ir a listado de Planes de entrenamiento
     </a>
-    <a class="btn btn-primary mt-4 mx-1" href="admin/planesentrenamiento/edit/{{ oPlanesentrenamiento.id }}">
+    <a
+      class="btn btn-primary mt-4 mx-1"
+      href="admin/planesentrenamiento/edit/{{ oplanesentrenamiento.id }}"
+    >
       <i class="bi bi-pencil"></i>
       Editar
     </a>
-    <a class="btn btn-danger mt-4 mx-1" href="admin/planesentrenamiento/delete/{{ oPlanesentrenamiento.id }}">
+    <a
+      class="btn btn-danger mt-4 mx-1"
+      href="admin/planesentrenamiento/delete/{{ oplanesentrenamiento.id }}"
+    >
       <i class="bi bi-trash"></i>
       Borrar
     </a>

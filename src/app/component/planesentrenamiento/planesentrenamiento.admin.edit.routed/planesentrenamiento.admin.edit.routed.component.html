@@ -3,11 +3,11 @@
     <div class="col text-center">
       <h2 class="my-5">
         <i class="bi bi-pencil"></i>
-        Edición de Usuario
+        Edición de Planesentrenamiento
         <i class="bi bi-person-circle"></i>
       </h2>
 
-      <form [formGroup]="oUsuarioForm!" (ngSubmit)="onSubmit()" novalidate>
+      <form [formGroup]="oPlanesentrenamientoForm!" (ngSubmit)="onSubmit()" novalidate>
         <div class="row mt-4">
           <mat-form-field>
             <mat-label>Id</mat-label>
@@ -18,80 +18,44 @@
 
         <div class="row mt-4">
           <mat-form-field>
-            <mat-label>Nombre</mat-label>
-            <input matInput formControlName="nombre" placeholder="Nombre" />
+            <mat-label>Titulo</mat-label>
+            <input matInput formControlName="titulo" placeholder="Titulo" />
             <mat-hint align="end">De 3 a 50 caracteres</mat-hint>
-            @if (oUsuarioForm?.get('nombre')?.hasError('required')) {
-            <mat-error>Debes introducir un nombre</mat-error>
-            } @if (oUsuarioForm?.get('nombre')?.hasError('minlength')) {
-            <mat-error>Debes introducir un nombre más largo</mat-error>
-            } @if (oUsuarioForm?.get('nombre')?.hasError('maxlength')) {
-            <mat-error>Debes introducir un nombre más corto</mat-error>
+            @if (oPlanesentrenamientoForm?.get('titulo')?.hasError('required')) {
+            <mat-error>Debes introducir un Titulo</mat-error>
+            } @if (oPlanesentrenamientoForm?.get('titulo')?.hasError('minlength')) {
+            <mat-error>Debes introducir un Titulo más largo</mat-error>
+            } @if (oPlanesentrenamientoForm?.get('titulo')?.hasError('maxlength')) {
+            <mat-error>Debes introducir un Titulo más corto</mat-error>
             }
           </mat-form-field>
         </div>
 
         <div class="row mt-4">
           <mat-form-field>
-            <mat-label>Primer Apellido</mat-label>
+            <mat-label>Descripcion</mat-label>
             <input
               matInput
-              formControlName="apellido1"
-              placeholder="Primer Apellido"
+              formControlName="descripcion"
+              placeholder="Descripcion"
             />
             <mat-hint align="end">De 3 a 50 caracteres</mat-hint>
-            @if (oUsuarioForm?.get('apellido1')?.hasError('required')) {
-            <mat-error>Debes introducir un primer apellido</mat-error>
-            } @if (oUsuarioForm?.get('apellido1')?.hasError('minlength')) {
-            <mat-error>Debes introducir un apellido más largo</mat-error>
-            } @if (oUsuarioForm?.get('apellido1')?.hasError('maxlength')) {
-            <mat-error>Debes introducir un apellido más corto</mat-error>
+            @if (oPlanesentrenamientoForm?.get('descripcion')?.hasError('required')) {
+            <mat-error>Debes introducir una descripcion</mat-error>
+            } @if (oPlanesentrenamientoForm?.get('descripcion')?.hasError('minlength')) {
+            <mat-error>Debes introducir una descripcion más largo</mat-error>
+            } @if (oPlanesentrenamientoForm?.get('descripcion')?.hasError('maxlength')) {
+            <mat-error>Debes introducir una descripcion más corto</mat-error>
             }
           </mat-form-field>
         </div>
-
-        <div class="row mt-4">
-          <mat-form-field>
-            <mat-label>Segundo Apellido</mat-label>
-            <input
-              matInput
-              formControlName="apellido2"
-              placeholder="Segundo Apellido"
-            />
-          </mat-form-field>
-        </div>
-
-        <div class="row mt-4">
-          <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" placeholder="Email" />
-            <mat-hint align="end">Formato email</mat-hint>
-            @if (oUsuarioForm?.get('email')?.hasError('required')) {
-            <mat-error>Debes introducir un primer apellido</mat-error>
-            } @if (oUsuarioForm?.get('email')?.hasError('email')) {
-            <mat-error>Debes introducir un email correcto</mat-error>
-            }
-          </mat-form-field>
-        </div>
-
-        <div class="row mt-4">
-          <mat-form-field>
-            <mat-label>Tipousuario</mat-label>
-            <input
-              matInput
-              formControlName="id_tipousuario"
-              placeholder="Escribe el tipo de usuario"
-            />
-          </mat-form-field>
-        </div>
-
         <div class="mt-4">
           <button
             class="btn btn-warning mt-4 mx-1"
-            [routerLink]="['/admin', 'usuario', 'plist']"
+            [routerLink]="['/admin', 'planesentrenamiento', 'plist']"
           >
             <i class="bi bi-list"></i>
-            Ir a listado de Usuarios
+            Ir a listado de Planes de entrenamientos
           </button>
 
           <button class="btn btn-secondary mt-4 mx-1" (click)="onReset()">
@@ -102,7 +66,7 @@
           <button
             class="btn btn-primary mt-4 mx-1"
             type="submit"
-            [disabled]="!oUsuarioForm?.valid"
+            [disabled]="!oPlanesentrenamientoForm?.valid"
           >
             <i class="bi bi-save"></i>
             Guardar
