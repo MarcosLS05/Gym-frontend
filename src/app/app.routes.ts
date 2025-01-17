@@ -20,7 +20,11 @@ import { PlanesentrenamientoAdminEditRoutedComponent } from './component/planese
 import { PlanesentrenamientoAdminViewRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.admin.view.routed/planesentrenamiento.admin.view.routed.component';
 import { PlanesentrenamientoAdminDeleteRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.admin.delete.routed/planesentrenamiento.admin.delete.component';
 
-
+import { GrupocontrataAdminPlistRoutedComponent } from './component/grupocontrata/grupocontrata.admin.plist.routed/grupocontrata.admin.plist.routed.component';
+import { GrupocontrataAdminEditRoutedComponent } from './component/grupocontrata/grupocontrata.admin.edit.routed/grupocontrata.admin.edit.routed.component';
+import { GrupocontrataAdminViewRoutedComponent } from './component/grupocontrata/grupocontrata.admin.view.routed/grupocontrata.admin.view.routed.component';
+import { GrupocontrataAdminCreateRoutedComponent } from './component/grupocontrata/grupocontrata.admin.create.routed/grupocontrata.admin.create.routed.component';
+import { GrupocontrataAdminDeleteRoutedComponent } from './component/grupocontrata/grupocontrata.admin.delete.routed/grupocontrata.admin.delete.component';
 
 
 import { serverURL } from './environment/environment';
@@ -49,4 +53,10 @@ export const routes: Routes = [
     { path: 'admin/planesentrenamiento/edit/:id', component: PlanesentrenamientoAdminEditRoutedComponent, },
     { path: 'admin/planesentrenamiento/view/:id', component: PlanesentrenamientoAdminViewRoutedComponent, },
     { path: 'admin/planesentrenamiento/delete/:id', component: PlanesentrenamientoAdminDeleteRoutedComponent, },
+
+    { path: 'admin/grupocontrata/create', component: GrupocontrataAdminCreateRoutedComponent, pathMatch: 'full', },
+    { path: 'admin/grupocontrata/plist', component: GrupocontrataAdminPlistRoutedComponent },
+    { path: 'admin/grupocontrata/edit/:id', component: GrupocontrataAdminEditRoutedComponent, },
+    { path: 'admin/grupocontrata/view/:id', component: GrupocontrataAdminViewRoutedComponent, },
+    { path: 'admin/grupocontrata/delete/:id', component: GrupocontrataAdminDeleteRoutedComponent, },
 ];
