@@ -127,7 +127,7 @@
               <td class="text-start">{{ usuario.apellido1 }}</td>
               <td class="text-start">{{ usuario.apellido2 }}</td>
               <td class="text-start" style="font-size: small">{{ usuario.email }}</td>              
-              <td class="text-start">{{ usuario.tipousuario.titulo }}</td>              
+              <td class="text-start">{{ usuario.tipousuario?.titulo }}</td>              
               <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-success" (click)="view(usuario)">

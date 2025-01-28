@@ -91,9 +91,14 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
     this.oUsuarioForm?.controls['apellido1'].setValue(this.oUsuario?.apellido1);
     this.oUsuarioForm?.controls['apellido2'].setValue(this.oUsuario?.apellido2);
     this.oUsuarioForm?.controls['email'].setValue(this.oUsuario?.email);
-    this.oUsuarioForm?.controls['id_tipousuario'].setValue(
-      this.oUsuario?.tipousuario.id
-    );
+  
+    // Asegurarse de que `tipousuario` no sea null o undefined
+    if (this.oUsuario?.tipousuario) {
+      this.oUsuarioForm?.controls['id_tipousuario'].setValue(this.oUsuario.tipousuario.id);
+    } else {
+      // Manejar el caso si tipousuario es null o undefined, por ejemplo asignando un valor predeterminado
+      this.oUsuarioForm?.controls['id_tipousuario'].setValue(null);
+    }
   }
 
   get() {
