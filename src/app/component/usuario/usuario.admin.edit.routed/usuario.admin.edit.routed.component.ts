@@ -11,6 +11,8 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { tipousuarioService } from '../../../service/tipousuario.service';
+import { ITipousuario } from '../../../model/tipousuario.interface';
 
 declare let bootstrap: any;
 
@@ -37,6 +39,7 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
   constructor(
     private oActivatedRoute: ActivatedRoute,
     private oUsuarioService: UsuarioService,
+    private oTipousuarioService: tipousuarioService,
     private oRouter: Router
   ) {
     this.oActivatedRoute.params.subscribe((params) => {
@@ -126,7 +129,18 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
       this.showModal('Formulario no válido');
       return;
     } else {
-      this.oUsuarioService.update(this.oUsuarioForm?.value).subscribe({
+      let oUsuario: IUsuario = this.oUsuarioForm?.value;
+      this.oTipousuarioService.getOne(
+        this.oUsuarioForm?.controls['id_tipousuario'].value
+      ).subscribe({
+        next: (oTipousuario: ITipousuario) => {
+          oUsuario.tipousuario = oTipousuario;
+          oUsuario.tipousuario.usuarios = [];
+        },
+      })
+      console.log(oUsuario);
+      console.log(this.oUsuarioForm.value);
+      this.oUsuarioService.update(oUsuario).subscribe({
         next: (oUsuario: IUsuario) => {
           this.oUsuario = oUsuario;
           this.updateForm();

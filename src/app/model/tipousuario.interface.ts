@@ -1,5 +1,5 @@
 export interface ITipousuario {
     id: number;
     titulo: string;
-    usuarios: number;
+    usuarios: any;
   }
