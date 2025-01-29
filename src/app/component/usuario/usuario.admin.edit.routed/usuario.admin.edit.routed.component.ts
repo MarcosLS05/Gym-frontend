@@ -36,7 +36,7 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
   oUsuario: IUsuario | null = null;
   message: string = '';
   readonly dialog = inject(MatDialog);
-  oTipocuenta: ITipousuario = {} as ITipousuario;
+  oTipousuario: ITipousuario = {} as ITipousuario;
 
 
   myModal: any;
@@ -129,7 +129,7 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
     this.oRouter.navigate(['/admin/usuario/view/' + this.oUsuario?.id]);
   };
 
-  showTipocuentaSelectorModal() {
+  showTipousuarioSelectorModal() {
     const dialogRef = this.dialog.open(TipousuarioAdminSelectorUnroutedComponent, {
       height: '800px',
       maxHeight: '1200px',
@@ -142,8 +142,8 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
       console.log('The dialog was closed');
       if (result !== undefined) {
         console.log(result);
-        this.oUsuarioForm?.controls['tipocuenta'].setValue(result);
-        this.oTipocuenta = result;
+        this.oUsuarioForm?.controls['tipousuario'].setValue(result);
+        this.oTipousuario = result;
         //this.animal.set(result);
       }
     });
