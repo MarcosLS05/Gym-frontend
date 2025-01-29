@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UsuarioService } from '../../../service/usuario.service';
 import { IUsuario } from '../../../model/usuario.interface';
@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { tipousuarioService } from '../../../service/tipousuario.service';
 import { ITipousuario } from '../../../model/tipousuario.interface';
+import { TipousuarioAdminSelectorUnroutedComponent } from '../../tipousuario/tipousuario.admin.selector.unrouted/tipousuario.admin.selector.unrouted.component';
+import { MatDialog } from '@angular/material/dialog';
 
 declare let bootstrap: any;
 
@@ -33,6 +35,9 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
   oUsuarioForm: FormGroup | undefined = undefined;
   oUsuario: IUsuario | null = null;
   message: string = '';
+  readonly dialog = inject(MatDialog);
+  oTipocuenta: ITipousuario = {} as ITipousuario;
+
 
   myModal: any;
 
@@ -123,6 +128,27 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
     this.myModal.hide();
     this.oRouter.navigate(['/admin/usuario/view/' + this.oUsuario?.id]);
   };
+
+  showTipocuentaSelectorModal() {
+    const dialogRef = this.dialog.open(TipousuarioAdminSelectorUnroutedComponent, {
+      height: '800px',
+      maxHeight: '1200px',
+      width: '80%',
+      maxWidth: '90%',
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        console.log(result);
+        this.oUsuarioForm?.controls['tipocuenta'].setValue(result);
+        this.oTipocuenta = result;
+        //this.animal.set(result);
+      }
+    });
+    return false;
+  }
 
   onSubmit() {
     if (!this.oUsuarioForm?.valid) {
