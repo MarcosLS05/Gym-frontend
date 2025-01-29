@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -11,6 +11,8 @@ import {
 } from '@angular/forms';
 import { IUsuario } from '../../../model/usuario.interface';
 import { UsuarioService } from '../../../service/usuario.service';
+import { MatDialog } from '@angular/material/dialog';
+import { TipousuarioAdminSelectorUnroutedComponent } from '../../tipousuario/tipousuario.admin.selector.unrouted/tipousuario.admin.selector.unrouted.component';
 
 declare let bootstrap: any;
 
@@ -33,6 +35,8 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
   oUsuarioForm: FormGroup | undefined = undefined;
   oUsuario: IUsuario | null = null;
   strMessage: string = '';
+  readonly dialog = inject(MatDialog);
+  oTipousuario: IUsuario = {} as IUsuario;
 
   myModal: any;
 
@@ -90,6 +94,27 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
   hideModal = () => {
     this.myModal.hide();
     this.oRouter.navigate(['/admin/usuario/view/' + this.oUsuario?.id]);
+  }
+
+  showTipousuarioSelectorModal() {
+    const dialogRef = this.dialog.open(TipousuarioAdminSelectorUnroutedComponent, {
+      height: '800px',
+      maxHeight: '1200px',
+      width: '80%',
+      maxWidth: '90%',
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        console.log(result);
+        this.oUsuarioForm?.controls['tipousuario'].setValue(result);
+        this.oTipousuario = result;
+        //this.animal.set(result);
+      }
+    });
+    return false;
   }
 
   onSubmit() {
