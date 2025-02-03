@@ -27,14 +27,26 @@ import { GrupocontrataAdminCreateRoutedComponent } from './component/grupocontra
 import { GrupocontrataAdminDeleteRoutedComponent } from './component/grupocontrata/grupocontrata.admin.delete.routed/grupocontrata.admin.delete.component';
 
 
+import { SharedLoginRoutedComponent } from './component/shared/shared.login.routed/shared.login.routed';
+import { SharedLogoutRoutedComponent } from     './component/shared/shared.logout.routed/shared.logout.routed';
+import { SharedByemailRoutedComponent } from './component/shared/shared.byemail.routed/shared.byemail.routed.component';
+import { ClienteGuard } from './guards/cliente.guard';
+import { AdminGuard } from './guards/admin.guard';
+import { AdminOrEntrenadorPersonalGuard } from './guards/admin-or-EntrenadorPersonal.guard';
+
 import { serverURL } from './environment/environment';
+import { EntrenadorPersonalGuard } from './guards/EntrenadorPersonal.guard';
 
 
 
 
 export const routes: Routes = [
-    { path: '', component: SharedHomeRoutedComponent },
-    { path: 'home', component: SharedHomeRoutedComponent },
+
+    { path: '', component: SharedHomeRoutedComponent, canActivate: [AdminOrEntrenadorPersonalGuard] },
+    { path: 'home', component: SharedHomeRoutedComponent, canActivate: [AdminOrEntrenadorPersonalGuard] },
+    { path: 'login', component: SharedLoginRoutedComponent },
+    { path: 'logout', component: SharedLogoutRoutedComponent },
+    { path: 'byemail/:email', component: SharedByemailRoutedComponent, canActivate: [EntrenadorPersonalGuard] },
 
     { path: 'admin/usuario/plist', component: UsuarioAdminPlistRoutedComponent },
     { path: 'admin/usuario/edit/:id', component: UsuarioAdminEditRoutedComponent, },
