@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">GIMNASIO</a>
+    <a class="navbar-brand" href="#">WEJETA</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -17,18 +17,31 @@
             href="/admin/usuario/plist">Usuarios</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [class.active]="strRuta == '/admin/tipousuario/plist'"
-            href="/admin/tipousuario/plist">Tipos de usuarios</a>
+          <a class="nav-link" [class.active]="strRuta == '/admin/usuario/plist'"
+            href="admin/tipousuario/plist">Tipos de Usuario</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [class.active]="strRuta == '/admin/tipousuario/plist'"
-            href="/admin/planesentrenamiento/plist">Planes de entrenamiento</a>
+          <a class="nav-link" [class.active]="strRuta == '/admin/usuario/plist'"
+            href="admin/planesentrenamiento/plist">Planes de entrenamiento</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [class.active]="strRuta == '/admin/tipousuario/plist'"
-            href="/admin/grupocontrata/plist">Listas de contratos</a>
+          <a class="nav-link" [class.active]="strRuta == '/admin/usuario/plist'"
+            href="/admin/grupocontrata/plist">Contratos</a>
         </li>
+
       </ul>
+      @if(!activeSession){
+      <span class="navbar-text">
+        <a href="/login" class="btn btn-outline-primary">Iniciar Sesión</a>
+      </span>
+      } @else {
+      <span class="navbar-text" style="margin-right: 10px;">
+        <a href="/byemail/{{userEmail}}">{{userEmail}}</a>
+      </span>
+      <span class="navbar-text">
+        <a href="/logout" class="btn btn-outline-primary">Logout</a>
+      </span>
+      }
 
     </div>
   </div>

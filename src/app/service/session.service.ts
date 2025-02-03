@@ -13,11 +13,22 @@ export class SessionService {
     subjectLogout: Subject<void> = new Subject<void>();
 
     public getToken(): string | null {
-        return localStorage.getItem('token');
+        if (typeof window !== 'undefined' && window.localStorage) {
+            return localStorage.getItem('token');
+        }
+        return null;
     }
-
+    
     private deleteToken(): void {
-        localStorage.removeItem('token');
+        if (typeof window !== 'undefined' && window.localStorage) {
+            localStorage.removeItem('token');
+        }
+    }
+    
+    private setToken(strToken: string): void {
+        if (typeof window !== 'undefined' && window.localStorage) {
+            localStorage.setItem('token', strToken);
+        }
     }
 
     isSessionActive(): boolean {
@@ -70,9 +81,6 @@ export class SessionService {
         return this.subjectLogout;
     }
 
-    private setToken(strToken: string): void {
-        localStorage.setItem('token', strToken);
-    }
 
     login(strToken: string): void {
         this.setToken(strToken);
