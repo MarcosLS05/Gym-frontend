@@ -54,7 +54,7 @@ export class UsuarioService {
   create(oUsuario: IUsuario): Observable<IUsuario> {
     let URL: string = '';
     URL += this.serverURL;
-    return this.oHttp.put<IUsuario>(URL, oUsuario);
+    return this.oHttp.post<IUsuario>(serverURL + '/new', oUsuario);
   }
 
   update(oUsuario: IUsuario): Observable<IUsuario> {

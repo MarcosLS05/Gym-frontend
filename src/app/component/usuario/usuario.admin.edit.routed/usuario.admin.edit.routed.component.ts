@@ -30,7 +30,7 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
   id: number = 0;
   oUsuarioForm: FormGroup | undefined = undefined;
   oUsuario: IUsuario | null = null;
-  message: string = '';
+  strMessage: string = '';
 
   myModal: any;
 
@@ -43,7 +43,7 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
       this.id = params['id'];
     });
   }
-
+  
   ngOnInit() {
     this.createForm();
     this.get();
@@ -65,17 +65,15 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
       ]),
       apellido2: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
-      id_tipousuario: new FormControl('', [
-        Validators.required,
-        Validators.min(1),
-      ]),
+     
+     
     });
   }
 
   onReset() {
     this.oUsuarioService.get(this.id).subscribe({
       next: (oUsuario: IUsuario) => {
-        this.oUsuario = oUsuario;
+        this.oUsuario= oUsuario;
         this.updateForm();
       },
       error: (error) => {
@@ -91,14 +89,6 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
     this.oUsuarioForm?.controls['apellido1'].setValue(this.oUsuario?.apellido1);
     this.oUsuarioForm?.controls['apellido2'].setValue(this.oUsuario?.apellido2);
     this.oUsuarioForm?.controls['email'].setValue(this.oUsuario?.email);
-  
-    // Asegurarse de que `tipousuario` no sea null o undefined
-    if (this.oUsuario?.tipousuario) {
-      this.oUsuarioForm?.controls['id_tipousuario'].setValue(this.oUsuario.tipousuario.id);
-    } else {
-      // Manejar el caso si tipousuario es null o undefined, por ejemplo asignando un valor predeterminado
-      this.oUsuarioForm?.controls['id_tipousuario'].setValue(null);
-    }
   }
 
   get() {
@@ -113,8 +103,8 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
     });
   }
 
-  showModal(mensaje: string) {
-    this.message = mensaje;
+  showModal(strMessage: string) {
+    this.strMessage = strMessage;
     this.myModal = new bootstrap.Modal(document.getElementById('mimodal'), {
       keyboard: false,
     });
@@ -123,7 +113,7 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
 
   hideModal = () => {
     this.myModal.hide();
-    this.oRouter.navigate(['/admin/usuario/view/' + this.oUsuario?.id]);
+    this.oRouter.navigate(['/admin/usuario/plist/']);
   };
 
   onSubmit() {

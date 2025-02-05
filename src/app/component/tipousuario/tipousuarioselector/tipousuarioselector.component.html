@@ -3,7 +3,7 @@
     <div class="col text-center">
       <h2 class="my-2">
         <i class="bi bi-list"></i>
-        Selector de tipo de usuario
+        Selector de tipo de Usuario
         <i class="bi bi-credit-card-fill"></i>
       </h2>
 
@@ -79,52 +79,30 @@
                 } @else {
                 <i class="bi bi-caret-up-fill"></i>} }
               </th>
-              <th (click)="sort('descripcion')" class="bg-primary text-white">
-                Descripcion @if (strField === 'descripcion') { @if (strDir ===
+              <th (click)="sort('titulo')" class="bg-primary text-white">
+                Titulo @if (strField === 'descripcion') { @if (strDir ===
                 'desc') {
                 <i class="bi bi-caret-down-fill"></i>
                 } @else {
                 <i class="bi bi-caret-up-fill"></i>} }
               </th>
-              <th (click)="sort('creditoodebito')" class="bg-primary text-white">
-                Crédito o débito @if (strField === 'creditoodebito') { @if
-                (strDir === 'desc') {
-                <i class="bi bi-caret-down-fill"></i>
-                } @else {
-                <i class="bi bi-caret-up-fill"></i>} }
-              </th>
-              <th (click)="sort('comentarios')" class="bg-primary text-white">
-                Comentarios @if (strField === 'comentarios') { @if (strDir ===
-                'desc') {
-                <i class="bi bi-caret-down-fill"></i>
-                } @else {
-                <i class="bi bi-caret-up-fill"></i>} }
-              </th>
-              <th (click)="sort('realonominal')" class="bg-primary text-white">
-                Real o nominal @if (strField === 'realonominal') { @if (strDir
-                === 'desc') {
-                <i class="bi bi-caret-down-fill"></i>
-                } @else {
-                <i class="bi bi-caret-up-fill"></i>} }
-              </th>
-              <th class="bg-primary text-white">Usuarios</th>
+              
               <th class="bg-warning text-black">Acciones</th>
             </tr>
           </thead>
 
           <tbody>
-            @for (Tipousuario of oPage?.content; track Tipousuario.id) {
+            @for (tipoUsuario of oPage?.content; track tipoUsuario.id) {
             <tr>
-              <td class="text-center">{{ Tipousuario.id }}</td>
+              <td class="text-center">{{ tipoUsuario.id }}</td>
               <td class="text-start">
-                {{ Tipousuario.titulo | trim : 25 }}
+                {{ tipoUsuario.titulo | trim : 25 }}
               </td>
-              <td class="text-center">
-                {{ Tipousuario.usuarios }}
-              </td>
+              
+
               <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-success" (click)="select(Tipousuario)">
+                  <button type="button" class="btn btn-success" (click)="select(tipoUsuario)">
                     <i class="bi bi-check2-circle icon-15"></i>
                   </button>
                 </div>
@@ -132,7 +110,7 @@
             </tr>
             } @empty {
             <tr>
-              <td colspan="11">No hay Tipousuarios</td>
+              <td colspan="11">No hay tipoUsuarios</td>
             </tr>
             }
           </tbody>

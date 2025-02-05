@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -11,6 +11,11 @@ import {
 } from '@angular/forms';
 import { IUsuario } from '../../../model/usuario.interface';
 import { UsuarioService } from '../../../service/usuario.service';
+import { ITipousuario } from '../../../model/tipousuario.interface';
+import { TipousuarioselectorComponent } from '../../tipousuario/tipousuarioselector/tipousuarioselector.component';
+import { MatDialog } from '@angular/material/dialog';
+import { tipousuarioService } from '../../../service/tipousuario.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 declare let bootstrap: any;
 
@@ -33,21 +38,52 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
   oUsuarioForm: FormGroup | undefined = undefined;
   oUsuario: IUsuario | null = null;
   strMessage: string = '';
-
+  readonly dialog = inject(MatDialog);
+  oTipoUsuario: ITipousuario = {} as ITipousuario;
   myModal: any;
 
   form: FormGroup = new FormGroup({});
+ 
 
   constructor(
     private oUsuarioService: UsuarioService,
-    private oRouter: Router
+    private oRouter: Router,
+    private oTipoUsuarioService: tipousuarioService
+  
   ) {}
 
-  ngOnInit() {
-    this.createForm();
-    this.oUsuarioForm?.markAllAsTouched();
-  }
-
+  
+    ngOnInit() {
+      this.createForm();
+      if (this.oUsuarioForm) {
+        this.oUsuarioForm.markAllAsTouched();
+      
+        // Suscripción a los cambios en el campo 'tipousuario'
+        this.oUsuarioForm.controls['tipoUsuario'].valueChanges.subscribe(change => {
+          if (change && change.id) {
+            // Obtener el objeto tipousuario del servidor
+            this.oTipoUsuarioService.get(change.id).subscribe({
+              next: (oTipoUsuario: ITipousuario) => {
+                this.oTipoUsuario = oTipoUsuario;
+              },
+              error: (err: HttpErrorResponse) => {  // Tipo de error especificado
+                console.log(err);
+                this.oTipoUsuario = {} as ITipousuario;
+                // Marcar el campo como inválido si hay un error
+                if (this.oUsuarioForm) {
+                  this.oUsuarioForm.controls['tipoUsuario'].setErrors({
+                    invalid: true,
+                  });
+                }
+              }
+            });
+          } else {
+            this.oTipoUsuario = {} as ITipousuario;
+          }
+        });
+      }
+    }
+    
   createForm() {
     this.oUsuarioForm = new FormGroup({
       nombre: new FormControl('', [
@@ -62,7 +98,11 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
       ]),
       apellido2: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
-      id_tipousuario: new FormControl('', [Validators.required, Validators.min(1)]),
+      password: new FormControl(''),
+      tipousuario: new FormGroup({
+        id: new FormControl('', Validators.required), // ID de tipocuenta
+        descripcion: new FormControl(''), // Descripción de tipocuenta
+      }),
     });
   }
 
@@ -71,7 +111,12 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
     this.oUsuarioForm?.controls['apellido1'].setValue('');
     this.oUsuarioForm?.controls['apellido2'].setValue('');
     this.oUsuarioForm?.controls['email'].setValue('');
-    this.oUsuarioForm?.controls['id_tipousuario'].setValue('');
+    this.oUsuarioForm?.controls['password'].setValue('');
+    this.oUsuarioForm?.controls['tipousuario'].setValue({
+      id: null,
+      descripcion: null,
+    });
+   
   }
 
   showModal(mensaje: string) {
@@ -108,6 +153,29 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
         },
       });
     }
+  }
+  showTipoUsuarioSelectorModal() {
+    const dialogRef = this.dialog.open(TipousuarioselectorComponent, {
+      height: '800px',
+      maxHeight: '1200px',
+      width: '80%',
+      maxWidth: '90%',
+      data: { origen: '', idBalance: '' },
+
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        console.log(result);
+        this.oUsuarioForm?.controls['tipousuario'].setValue({
+          id: result.id,
+          descripcion: result.descripcion,
+        });
+      }
+    });
+    return false;
   }
 
 
