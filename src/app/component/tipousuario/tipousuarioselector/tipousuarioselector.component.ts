@@ -49,24 +49,7 @@ export class TipousuarioselectorComponent implements OnInit {
       }
     
       getPage() {
-        if (this.data.origen == "xbalance"){
-          this.oTipoUsuarioService.getPageXBalanceNoTiene(
-            this.nPage,
-            this.nRpp,
-            this.data.idBalance
-          ).subscribe({
-            next: (oPageFromServer: IPage<ITipousuario>) => {
-              this.oPage = oPageFromServer;
-              this.arrBotonera = this.oBotoneraService.getBotonera(
-                this.nPage,
-                oPageFromServer.totalPages
-              );
-            },
-            error: (err) => {
-              console.log(err);
-            },
-          })
-        } else {
+        
         this.oTipoUsuarioService
           .getPage(
             this.nPage,
@@ -87,7 +70,7 @@ export class TipousuarioselectorComponent implements OnInit {
               console.log(err);
             },
           });
-        }
+        
       }
     
      

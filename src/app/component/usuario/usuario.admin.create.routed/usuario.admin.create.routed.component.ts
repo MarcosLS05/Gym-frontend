@@ -59,7 +59,7 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
         this.oUsuarioForm.markAllAsTouched();
       
         // Suscripción a los cambios en el campo 'tipousuario'
-        this.oUsuarioForm.controls['tipoUsuario'].valueChanges.subscribe(change => {
+        this.oUsuarioForm.controls['tipousuario'].valueChanges.subscribe(change => {
           if (change && change.id) {
             // Obtener el objeto tipousuario del servidor
             this.oTipoUsuarioService.get(change.id).subscribe({
@@ -71,7 +71,7 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
                 this.oTipoUsuario = {} as ITipousuario;
                 // Marcar el campo como inválido si hay un error
                 if (this.oUsuarioForm) {
-                  this.oUsuarioForm.controls['tipoUsuario'].setErrors({
+                  this.oUsuarioForm.controls['tipousuario'].setErrors({
                     invalid: true,
                   });
                 }
@@ -101,7 +101,7 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
       password: new FormControl(''),
       tipousuario: new FormGroup({
         id: new FormControl('', Validators.required), // ID de tipocuenta
-        descripcion: new FormControl(''), // Descripción de tipocuenta
+        titulo: new FormControl(''), // titulo de tipocuenta
       }),
     });
   }
@@ -114,7 +114,7 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
     this.oUsuarioForm?.controls['password'].setValue('');
     this.oUsuarioForm?.controls['tipousuario'].setValue({
       id: null,
-      descripcion: null,
+      titulo: null,
     });
    
   }
@@ -171,7 +171,7 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
         console.log(result);
         this.oUsuarioForm?.controls['tipousuario'].setValue({
           id: result.id,
-          descripcion: result.descripcion,
+          titulo: result.titulo,
         });
       }
     });
