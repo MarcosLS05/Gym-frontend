@@ -3,6 +3,8 @@ import { Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { CryptoService } from '../../../service/crypto.service';
+import { MatIconModule } from '@angular/material/icon';
 import {
   FormControl,
   FormGroup,  
@@ -16,6 +18,7 @@ import { TipousuarioselectorComponent } from '../../tipousuario/tipousuarioselec
 import { MatDialog } from '@angular/material/dialog';
 import { tipousuarioService } from '../../../service/tipousuario.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 declare let bootstrap: any;
 
@@ -29,6 +32,9 @@ declare let bootstrap: any;
     MatSelectModule,
     ReactiveFormsModule,
     RouterModule,
+    CommonModule,
+    MatIconModule,
+    
   ],
   styleUrls: ['./usuario.admin.create.routed.component.css'],
 })
@@ -48,7 +54,8 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
   constructor(
     private oUsuarioService: UsuarioService,
     private oRouter: Router,
-    private oTipoUsuarioService: tipousuarioService
+    private oTipoUsuarioService: tipousuarioService,
+    private oCryptoService: CryptoService
   
   ) {}
 
@@ -126,6 +133,14 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
     });
     this.myModal.show();
   }
+
+  isPasswordVisible = false;
+
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+
 
   onReset() {
     this.updateForm();

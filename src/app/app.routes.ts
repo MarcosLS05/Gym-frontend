@@ -33,6 +33,8 @@ import { SharedByemailRoutedComponent } from './component/shared/shared.byemail.
 import { ClienteGuard } from './guards/cliente.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { AdminOrEntrenadorPersonalGuard } from './guards/admin-or-EntrenadorPersonal.guard';
+import { AdminOrEntrenadorPersonalOrClienteGuard } from './guards/admin-or-EntrenadorPersonal-or-Cliente.guard';
+
 
 import { serverURL } from './environment/environment';
 import { EntrenadorPersonalGuard } from './guards/EntrenadorPersonal.guard';
@@ -46,29 +48,29 @@ export const routes: Routes = [
     { path: 'home', component: SharedHomeRoutedComponent, canActivate: [AdminOrEntrenadorPersonalGuard] },
     { path: 'login', component: SharedLoginRoutedComponent },
     { path: 'logout', component: SharedLogoutRoutedComponent },
-    { path: 'byemail/:email', component: SharedByemailRoutedComponent, canActivate: [EntrenadorPersonalGuard] },
+    { path: 'byemail/:email', component: SharedByemailRoutedComponent, canActivate: [AdminOrEntrenadorPersonalOrClienteGuard] },
 
-    { path: 'admin/usuario/plist', component: UsuarioAdminPlistRoutedComponent },
-    { path: 'admin/usuario/edit/:id', component: UsuarioAdminEditRoutedComponent, },
-    { path: 'admin/usuario/view/:id', component: UsuarioAdminViewRoutedComponent, },
-    { path: 'admin/usuario/create', component: UsuarioAdminCreateRoutedComponent, pathMatch: 'full', },
-    { path: 'admin/usuario/delete/:id', component: UsuarioAdminDeleteRoutedComponent, },
+    { path: 'admin/usuario/plist', component: UsuarioAdminPlistRoutedComponent, canActivate: [AdminGuard] },
+    { path: 'admin/usuario/edit/:id', component: UsuarioAdminEditRoutedComponent, canActivate: [AdminGuard]},
+    { path: 'admin/usuario/view/:id', component: UsuarioAdminViewRoutedComponent, canActivate: [AdminGuard]},
+    { path: 'admin/usuario/create', component: UsuarioAdminCreateRoutedComponent, canActivate: [AdminGuard], pathMatch: 'full', },
+    { path: 'admin/usuario/delete/:id', component: UsuarioAdminDeleteRoutedComponent, canActivate: [AdminGuard]},
 
-    { path: 'admin/tipousuario/plist', component: TipousuarioAdminPlistRoutedComponent },
-    { path: 'admin/tipousuario/edit/:id', component: TipousuarioAdminEditRoutedComponent, },
-    { path: 'admin/tipousuario/view/:id', component: TipousuarioAdminViewRoutedComponent, },
-    { path: 'admin/tipousuario/create', component: TipousuarioAdminCreateRoutedComponent, pathMatch: 'full', },
-    { path: 'admin/tipousuario/delete/:id', component: TipousuarioAdminDeleteRoutedComponent, },
+    { path: 'admin/tipousuario/plist', component: TipousuarioAdminPlistRoutedComponent, canActivate: [AdminGuard] },
+    { path: 'admin/tipousuario/edit/:id', component: TipousuarioAdminEditRoutedComponent, canActivate: [AdminGuard]},
+    { path: 'admin/tipousuario/view/:id', component: TipousuarioAdminViewRoutedComponent, canActivate: [AdminGuard]},
+    { path: 'admin/tipousuario/create', component: TipousuarioAdminCreateRoutedComponent, canActivate: [AdminGuard], pathMatch: 'full', },
+    { path: 'admin/tipousuario/delete/:id', component: TipousuarioAdminDeleteRoutedComponent, canActivate: [AdminGuard]},
 
     { path: 'admin/planesentrenamiento/create', component: PlanesentrenamientoAdminCreateRoutedComponent, pathMatch: 'full', },
-    { path: 'admin/planesentrenamiento/plist', component: PlanesentrenamientoAdminPlistRoutedComponent },
-    { path: 'admin/planesentrenamiento/edit/:id', component: PlanesentrenamientoAdminEditRoutedComponent, },
-    { path: 'admin/planesentrenamiento/view/:id', component: PlanesentrenamientoAdminViewRoutedComponent, },
+    { path: 'admin/planesentrenamiento/plist', component: PlanesentrenamientoAdminPlistRoutedComponent, canActivate: [AdminGuard]},
+    { path: 'admin/planesentrenamiento/edit/:id', component: PlanesentrenamientoAdminEditRoutedComponent, canActivate: [AdminGuard]},
+    { path: 'admin/planesentrenamiento/view/:id', component: PlanesentrenamientoAdminViewRoutedComponent, canActivate: [AdminGuard]},
     { path: 'admin/planesentrenamiento/delete/:id', component: PlanesentrenamientoAdminDeleteRoutedComponent, },
 
-    { path: 'admin/grupocontrata/create', component: GrupocontrataAdminCreateRoutedComponent, pathMatch: 'full', },
-    { path: 'admin/grupocontrata/plist', component: GrupocontrataAdminPlistRoutedComponent },
-    { path: 'admin/grupocontrata/edit/:id', component: GrupocontrataAdminEditRoutedComponent, },
-    { path: 'admin/grupocontrata/view/:id', component: GrupocontrataAdminViewRoutedComponent, },
-    { path: 'admin/grupocontrata/delete/:id', component: GrupocontrataAdminDeleteRoutedComponent, },
+    { path: 'admin/grupocontrata/create', component: GrupocontrataAdminCreateRoutedComponent, canActivate: [AdminGuard], pathMatch: 'full', },
+    { path: 'admin/grupocontrata/plist', component: GrupocontrataAdminPlistRoutedComponent, canActivate: [AdminGuard]},
+    { path: 'admin/grupocontrata/edit/:id', component: GrupocontrataAdminEditRoutedComponent, canActivate: [AdminGuard]},
+    { path: 'admin/grupocontrata/view/:id', component: GrupocontrataAdminViewRoutedComponent, canActivate: [AdminGuard]},
+    { path: 'admin/grupocontrata/delete/:id', component: GrupocontrataAdminDeleteRoutedComponent, canActivate: [AdminGuard]},
 ];

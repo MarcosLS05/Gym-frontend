@@ -10,7 +10,7 @@
                 <div class="row mt-4">
                     <mat-form-field>
                         <mat-label>Nombre</mat-label>
-                        <input matInput formControlName="nombre" placeholder="Pon aquí tu nombre" />
+                        <input matInput formControlName="nombre" required />
                         <mat-hint align="start">De 3 caracteres a 50 caracteres</mat-hint>
                         @if (oUsuarioForm?.get('nombre')?.hasError('required')) {
                             <mat-error> El campo nombre es obligatorio </mat-error>
@@ -26,7 +26,7 @@
                 <div class="row mt-4">
                     <mat-form-field>
                         <mat-label>Primer Apellido</mat-label>
-                        <input matInput formControlName="apellido1" placeholder="Escribe tu primer apellido" />
+                        <input matInput formControlName="apellido1"  />
                         <mat-hint align="start">De 3 caracteres a 50 caracteres</mat-hint>
                         @if (oUsuarioForm?.get('apellido1')?.hasError('required')) {
                             <mat-error>Debes introducir un primer apellido</mat-error>
@@ -42,13 +42,13 @@
                 <div class="row mt-4">
                     <mat-form-field>
                         <mat-label>Segundo Apellido</mat-label>
-                        <input matInput formControlName="apellido2" placeholder="Escribe tu segundo apellido" />
+                        <input matInput formControlName="apellido2" />
                     </mat-form-field>
                 </div>
-                <div class="row mt-4">
+                <div class="row mt-4 ">
                     <mat-form-field>
                         <mat-label>Email</mat-label>
-                        <input matInput formControlName="email" placeholder="Pon aquí tu email" required />
+                        <input matInput formControlName="email" required />
                         <mat-hint align="start">Formato email</mat-hint>
                         @if (oUsuarioForm?.get('email')?.hasError('required')) {
                             <mat-error>Debes introducir un email</mat-error>
@@ -61,7 +61,7 @@
                     <div class="row mt-4">
                         <mat-form-field>
                             <mat-label>Password</mat-label>
-                            <input matInput formControlName="password" placeholder="Escribe la contraseña" />
+                            <input matInput formControlName="password" />
                         </mat-form-field>
                     </div>
                     <div formGroupName="tipousuario">
@@ -78,7 +78,7 @@
                                     {{oTipoUsuario.titulo}}
                                 </div>
 
-                                <input matInput formControlName="id" placeholder="Tipo Usuario" />
+                                <input matInput formControlName="id" />
                             </mat-form-field>
                         </div>
                     </div>

@@ -52,10 +52,10 @@ export class UsuarioService {
   }
 
   create(oUsuario: IUsuario): Observable<IUsuario> {
-    let URL: string = '';
-    URL += this.serverURL;
-    return this.oHttp.post<IUsuario>(serverURL + '/new', oUsuario);
+    const URL: string = `${serverURL}/usuario/new`;  // Asegúrate de que "usuario" está en la ruta
+    return this.oHttp.post<IUsuario>(URL, oUsuario, httpOptions);
   }
+  
 
   update(oUsuario: IUsuario): Observable<IUsuario> {
     let URL: string = '';
