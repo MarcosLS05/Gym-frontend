@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { PlanesentrenamientoselectorComponent } from '../../planesentrenamiento/planesentrenamientoselector/planesentrenamientoselector.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {
@@ -11,6 +12,8 @@ import {
 } from '@angular/forms';
 import { IGrupocontrata } from '../../../model/grupocontrata.interface';
 import { GrupocontrataService } from '../../../service/grupocontrata.service';
+import { MatDialog } from '@angular/material/dialog';
+import { IPlanesentrenamiento } from '../../../model/planesentrenamiento.interface';
 
 declare let bootstrap: any;
 
@@ -32,6 +35,8 @@ export class GrupocontrataAdminCreateRoutedComponent implements OnInit {
   id: number = 0;
   oGrupocontrataForm: FormGroup | undefined = undefined;
   oGrupocontrata: IGrupocontrata | null = null;
+  oPlanesentrenamiento: IPlanesentrenamiento = {} as IPlanesentrenamiento;
+  readonly dialog = inject(MatDialog);
   strMessage: string = '';
 
   myModal: any;
@@ -61,6 +66,11 @@ export class GrupocontrataAdminCreateRoutedComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(50),
       ]),
+      planesentrenamiento: new FormGroup({
+        id: new FormControl('', [Validators.required]),
+        titulo: new FormControl(''),
+        descripcion: new FormControl(''),
+      })
     });
   }
 
@@ -68,6 +78,12 @@ export class GrupocontrataAdminCreateRoutedComponent implements OnInit {
     this.oGrupocontrataForm?.controls['id'].setValue(this.oGrupocontrata?.id);
     this.oGrupocontrataForm?.controls['titulo'].setValue(this.oGrupocontrata?.titulo);
     this.oGrupocontrataForm?.controls['descripcion'].setValue(this.oGrupocontrata?.descripcion);
+    this.oGrupocontrataForm?.controls['planesentrenamiento'].setValue({
+      id: null,
+      titulo: null,
+      descripcion: null,
+    });
+
   }
 
   showModal(mensaje: string) {
@@ -93,19 +109,43 @@ export class GrupocontrataAdminCreateRoutedComponent implements OnInit {
       this.showModal('Formulario no válido');
       return;
     } else {
-      this.oGrupocontrataService.update(this.oGrupocontrataForm?.value).subscribe({
+      this.oGrupocontrataService.create(this.oGrupocontrataForm?.value).subscribe({
         next: (oGrupocontrata: IGrupocontrata) => {
           this.oGrupocontrata = oGrupocontrata;
-          this.updateForm();
-          this.showModal('grupocontrata ' + this.oGrupocontrata.id + ' actualizado');
+          this.showModal('Contrato creado con el id: ' + this.oGrupocontrata.id);
         },
         error: (error) => {
-          this.showModal('Error al actualizar el grupocontrata');
+          this.showModal('Error al crear el contrato');
           console.error(error);
         },
       });
     }
-  }  
+  }
+  
+  showPlanesentrenamientoSelectorModal() {
+    const dialogRef = this.dialog.open(PlanesentrenamientoselectorComponent, {
+      height: '800px',
+      maxHeight: '1200px',
+      width: '80%',
+      maxWidth: '90%',
+      
+
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        console.log(result);
+        this.oGrupocontrataForm?.controls['planesentrenamiento'].setValue({
+          id: result.id,
+          titulo: result.titulo,
+          descripcion: result.descripcion,
+        });
+      }
+    });
+    return false;
+  }
 
 
 

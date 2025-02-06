@@ -53,9 +53,8 @@ export class GrupocontrataService {
   }
 
   create(oGrupocontrata: IGrupocontrata): Observable<IGrupocontrata> {
-    let URL: string = '';
-    URL += this.serverURL;
-    return this.oHttp.put<IGrupocontrata>(URL, oGrupocontrata);
+    const URL: string = `${serverURL}/grupocontrata/new`; 
+    return this.oHttp.post<IGrupocontrata>(URL, oGrupocontrata, httpOptions);
   }
 
   update(oGrupocontrata: IGrupocontrata): Observable<IGrupocontrata> {

@@ -43,6 +43,27 @@
             }
           </mat-form-field>
         </div>
+        <div formGroupName="planesentrenamiento">
+          <div class="row mt-4">
+              <mat-form-field>
+                  <mat-label>Planes de entrenamiento disponibles</mat-label>
+                  <div class="d-flex justify-content-end">
+                      <button class="btn btn-primary" (click)="showPlanesentrenamientoSelectorModal()">
+                          <i class="bi bi-search"></i>
+                          Buscar
+                      </button>
+                  </div>
+                  <div class="d-flex justify-content-start">
+                      {{oPlanesentrenamiento.titulo}}
+                  </div>
+                  <div class="d-flex justify-content-start">
+                    {{oPlanesentrenamiento.descripcion}}
+                  </div>
+
+                  <input matInput formControlName="id" />
+              </mat-form-field>
+          </div>
+      </div>
         <br />
         <button
           class="btn btn-warning mt-4 mx-1"
@@ -57,14 +78,10 @@
           Reset
         </button>
 
-        <button
-          class="btn btn-primary mt-4 mx-1"
-          type="submit"
-          [disabled]="!oGrupocontrataForm?.valid"
-        >
-        <i class="bi bi-floppy"></i>
+        <button class="btn btn-primary mt-4 mx-1" type="submit" [disabled]="!oGrupocontrataForm?.valid">
+          <i class="bi bi-floppy"></i>
           Guardar
-        </button>
+      </button>
       </form>
     </div>
   </div>
