@@ -52,9 +52,8 @@ export class PlanesentrenamientoService {
   }
 
   create(oPlanesentrenamiento: IPlanesentrenamiento): Observable<IPlanesentrenamiento> {
-    let URL: string = '';
-    URL += this.serverURL;
-    return this.oHttp.put<IPlanesentrenamiento>(URL, oPlanesentrenamiento);
+    const URL: string = `${serverURL}/planesentrenamiento/new`;  // Asegúrate de que "serverURL" es la URL correcta
+    return this.oHttp.post<IPlanesentrenamiento>(URL, oPlanesentrenamiento, httpOptions);
   }
 
   update(oPlanesentrenamiento: IPlanesentrenamiento): Observable<IPlanesentrenamiento> {

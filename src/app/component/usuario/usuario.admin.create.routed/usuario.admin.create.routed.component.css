@@ -1,37 +1,5 @@
-/* Contenedor de la contraseña */
-.password-container {
-    position: relative;
-  }
-  
-  .password-toggle-btn {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .col-12 {
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-  
-    .password-toggle-btn {
-      right: 5px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .container {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-  
-    .btn {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-  }
-  
-  
+.mat-dialog-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}

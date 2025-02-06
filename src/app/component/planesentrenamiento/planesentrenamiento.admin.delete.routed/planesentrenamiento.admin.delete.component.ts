@@ -30,7 +30,7 @@ export class PlanesentrenamientoAdminDeleteRoutedComponent implements OnInit {
         this.oPlanesentrenamiento = oPlanesentrenamiento;
       },
       error: (err) => {
-        this.showModal('Error al cargar el planesentrenamiento');
+        this.showModal('Error al cargar el Plan de entrenamiento');
       },
     });
   }
@@ -44,16 +44,21 @@ export class PlanesentrenamientoAdminDeleteRoutedComponent implements OnInit {
   }
 
   delete(): void {
-    this.oPlanesentrenamientoService.delete(this.oPlanesentrenamiento!.id).subscribe({
-      next: (data) => {
-        this.showModal(
-          'planesentrenamiento con id ' + this.oPlanesentrenamiento!.id + ' ha sido borrado'
-        );
-      },
-      error: (error) => {
-        this.showModal('Error al borrar el planesentrenamiento');
-      },
-    });
+    // Usando el encadenamiento opcional
+    if (this.oPlanesentrenamiento?.id) {
+      this.oPlanesentrenamientoService.delete(this.oPlanesentrenamiento.id).subscribe({
+        next: (data) => {
+          this.showModal(
+            'Plan de entrenamiento con id ' + this.oPlanesentrenamiento?.id + ' ha sido borrado'
+          );
+        },
+        error: (error) => {
+          this.showModal('Error al borrar el Plan de entrenamiento');
+        },
+      });
+    } else {
+      this.showModal('No se encontró el Plan de entrenamiento para eliminar');
+    }
   }
 
   hideModal = () => {

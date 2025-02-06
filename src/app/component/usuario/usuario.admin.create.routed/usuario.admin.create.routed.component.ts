@@ -15,7 +15,7 @@ import { IUsuario } from '../../../model/usuario.interface';
 import { UsuarioService } from '../../../service/usuario.service';
 import { ITipousuario } from '../../../model/tipousuario.interface';
 import { TipousuarioselectorComponent } from '../../tipousuario/tipousuarioselector/tipousuarioselector.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { tipousuarioService } from '../../../service/tipousuario.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -27,6 +27,7 @@ declare let bootstrap: any;
   selector: 'app-usuario.admin.create.routed',
   templateUrl: './usuario.admin.create.routed.component.html',
   imports: [
+    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
@@ -175,7 +176,7 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
       maxHeight: '1200px',
       width: '80%',
       maxWidth: '90%',
-      data: { origen: '', idBalance: '' },
+      
 
 
     });

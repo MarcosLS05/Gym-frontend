@@ -16,13 +16,15 @@
               placeholder="Pon aquí tu Titulo"
             />
             <mat-hint align="start">De 3 caracteres a 50 caracteres</mat-hint>
-            @if (oPlanesentrenamientoForm?.get('titulo')?.hasError('required')){
-            <mat-error> El campo titulo es obligatorio </mat-error>
-            } @if (oPlanesentrenamientoForm?.get('titulo')?.hasError('minlength')){
-            <mat-error> El titulo debe ser mas largo </mat-error>
-            } @if (oPlanesentrenamientoForm?.get('titulo')?.hasError('maxlength')){
-            <mat-error> El titulo debe ser mas corto </mat-error>
-            }
+            <mat-error *ngIf="oPlanesentrenamientoForm?.get('titulo')?.hasError('required')">
+              El campo titulo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="oPlanesentrenamientoForm?.get('titulo')?.hasError('minlength')">
+              El titulo debe ser mas largo
+            </mat-error>
+            <mat-error *ngIf="oPlanesentrenamientoForm?.get('titulo')?.hasError('maxlength')">
+              El titulo debe ser mas corto
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="row mt-4">
@@ -34,19 +36,21 @@
               placeholder="Pon aqui tu Descripcion"
             />
             <mat-hint align="start">De 3 caracteres a 50 caracteres</mat-hint>
-            @if (oPlanesentrenamientoForm?.get('descripcion')?.hasError('required')) {
-            <mat-error>Debes introducir una descripcion</mat-error>
-            } @if (oPlanesentrenamientoForm?.get('descripcion')?.hasError('minlength')) {
-            <mat-error>Debes introducir una descripcion mas larga</mat-error>
-            } @if (oPlanesentrenamientoForm?.get('descripcion')?.hasError('maxlength')) {
-            <mat-error>Debes introducir una descripcion mas corta</mat-error>
-            }
+            <mat-error *ngIf="oPlanesentrenamientoForm?.get('descripcion')?.hasError('required')">
+              Debes introducir una descripcion
+            </mat-error>
+            <mat-error *ngIf="oPlanesentrenamientoForm?.get('descripcion')?.hasError('minlength')">
+              Debes introducir una descripcion mas larga
+            </mat-error>
+            <mat-error *ngIf="oPlanesentrenamientoForm?.get('descripcion')?.hasError('maxlength')">
+              Debes introducir una descripcion mas corta
+            </mat-error>
           </mat-form-field>
         </div>
         <br />
         <button
           class="btn btn-warning mt-4 mx-1"
-          [routerLink]="['/admin', 'Planesentrenamiento', 'plist']"
+          [routerLink]="['/admin', 'planesentrenamiento', 'plist']"
         >
           <i class="bi bi-list"></i>
           Ir a listado de Planesentrenamientos
@@ -62,7 +66,7 @@
           type="submit"
           [disabled]="!oPlanesentrenamientoForm?.valid"
         >
-        <i class="bi bi-floppy"></i>
+          <i class="bi bi-floppy"></i>
           Guardar
         </button>
       </form>
@@ -70,37 +74,19 @@
   </div>
 </div>
 
-<div
-  class="modal fade"
-  [id]="'mimodal'"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<!-- Modal -->
+<div class="modal fade" id="mimodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">GIMNASIO</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-          (click)="hideModal()"
-        ></button>
+        <h5 class="modal-title" id="exampleModalLabel">Información</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>{{ strMessage }}</p>
+        {{ strMessage }}
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-dismiss="modal"
-          (click)="hideModal()"
-        >
-          Cerrar
-        </button>
+        <button type="button" class="btn btn-secondary" (click)="hideModal()">Cerrar</button>
       </div>
     </div>
   </div>
