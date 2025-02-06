@@ -55,7 +55,6 @@ export class GrupocontrataAdminCreateRoutedComponent implements OnInit {
 
   createForm() {
     this.oGrupocontrataForm = new FormGroup({
-      id: new FormControl('', [Validators.required]),
       titulo: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
