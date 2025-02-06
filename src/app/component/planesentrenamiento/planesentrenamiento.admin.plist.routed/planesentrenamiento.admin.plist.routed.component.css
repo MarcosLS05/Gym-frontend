@@ -1,0 +1,85 @@
+/* Efecto hover para las tarjetas */
+.hover-effect {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+}
+
+.hover-effect:hover {
+    transform: translateY(-5px); /* Mueve la tarjeta hacia arriba */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+}
+
+/* Estilo para los botones de acción */
+.btn-group .btn {
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.btn-group .btn:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+}
+
+/* Efecto en el input de búsqueda */
+.input-group input {
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.input-group input:focus {
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    border-color: #007bff;
+}
+
+/* Animación de botones en la paginación */
+.pagination .page-link {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border-radius: 5px;
+}
+
+.pagination .page-link:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Botón activo en la paginación */
+.pagination .page-item.active .page-link {
+    background-color: #0056b3;
+    color: white;
+    font-weight: bold;
+}
+
+/* Estilos para el encabezado */
+h2 {
+    font-size: 1.8rem;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+h2:hover {
+    color: #007bff;
+}
+
+/* Mejoras en la disposición de la lista de filtros */
+.text-muted span {
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.text-muted span:hover {
+    color: #007bff;
+}
+
+/* Mejoras en la transición de la paginación */
+.page-item .page-link {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border-radius: 20px;
+}

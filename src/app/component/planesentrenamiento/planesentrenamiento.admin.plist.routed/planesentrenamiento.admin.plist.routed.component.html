@@ -1,23 +1,74 @@
-<div class="container mt-5 d-flex align-items-center justify-content-center">
-  <div class="row">
-    <div class="col text-center">
-      <h2 class="my-2">
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10 text-center">
+      <h2 class="my-4">
         <i class="bi bi-list"></i>
-        Lista de Planesentrenamiento
+        Lista de Planes de Entrenamiento
         <i class="bi bi-person-circle"></i>
       </h2>
-      <a href="admin/planesentrenamiento/create"><button class="btn btn-primary my-2 mx-2">
-          <i class="bi bi-plus-square"></i>
-          Crear nuevo planesentrenamiento
-        </button></a>
 
-      <div class="d-inline-flex mx-2">
-        <input type="text" class="form-control" placeholder="Buscar" (keyup)="filter($event)" [(ngModel)]="strFiltro" />
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="admin/planesentrenamiento/create" class="btn btn-success">
+          <i class="bi bi-plus-circle"></i>
+          Crear nuevo plan
+        </a>
+        <div class="input-group w-25">
+          <input type="text" class="form-control" placeholder="Buscar" (keyup)="filter($event)" [(ngModel)]="strFiltro" />
+          <button class="btn btn-outline-secondary" type="button">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
       </div>
 
-      <div class="d-inline-flex mx-2">
-        <nav class="my-4">
-          <ul class="pagination justify-content-center">
+      <div class="d-flex justify-content-between mb-3">
+        <h5 class="text-muted">
+          @if (strFiltro.length > 0) {
+            Filtrado por: <span class="text-primary">{{ strFiltro }}</span>
+          } @else {
+            Sin filtrar
+          }
+        </h5>
+        <h5 class="text-muted">
+          Mostrando {{ oPage?.numberOfElements | number : "1.0-0" }} de
+          {{ oPage?.totalElements | number : "1.0-0" }}
+        </h5>
+      </div>
+
+      <!-- Cards de planes de entrenamiento -->
+      <div class="row">
+        @for (planesentrenamiento of oPage?.content; track planesentrenamiento.id) {
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm hover-effect">
+            <div class="card-body">
+              <h5 class="card-title">{{ planesentrenamiento.titulo }}</h5>
+              <p class="card-text">{{ planesentrenamiento.descripcion }}</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <div class="btn-group w-100" role="group">
+                <button type="button" class="btn btn-outline-primary" (click)="view(planesentrenamiento)">
+                  <i class="bi bi-eye"></i> Ver
+                </button>
+                <button type="button" class="btn btn-outline-warning" (click)="edit(planesentrenamiento)">
+                  <i class="bi bi-pencil"></i> Editar
+                </button>
+                <button type="button" class="btn btn-outline-danger" (click)="remove(planesentrenamiento)">
+                  <i class="bi bi-trash"></i> Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        } @empty {
+        <div class="col-12 text-center">
+          <p>No hay planes de entrenamiento disponibles.</p>
+        </div>
+        }
+      </div>
+
+      <!-- Paginación -->
+      <div class="d-flex justify-content-between align-items-center mt-4">
+        <nav>
+          <ul class="pagination mb-0">
             <li class="page-item" [class.active]="nRpp === 10">
               <a class="page-link" (click)="goToRpp(10)" href="#">10</a>
             </li>
@@ -29,104 +80,34 @@
             </li>
           </ul>
         </nav>
-      </div>
 
-      <nav class="my-2">
-        <ul class="pagination justify-content-center">
-          <li class="page-item">
-            <a class="page-link" [class.disabled]="nPage - -1 === 1" (click)="goToPrev()" href="#">
-              Anterior
-              <i class="bi bi-caret-left-square-fill"></i>
-            </a>
-          </li>
-
-          <li class="page-item" *ngFor="let pag of arrBotonera">
-            @if(pag==='...'){
-            <a class="page-link">{{ pag }}</a>
-            } @else {
-            <a class="page-link" href="#" (click)="goToPage(-(-pag))" [class.active]="nPage - -1 === -(-pag)">
-              {{ pag }}
-            </a>
+        <nav>
+          <ul class="pagination mb-0">
+            <li class="page-item">
+              <a class="page-link" [class.disabled]="nPage - -1 === 1" (click)="goToPrev()" href="#">
+                <i class="bi bi-chevron-left"></i>
+                Anterior
+              </a>
+            </li>
+            @for (pag of arrBotonera; track pag) {
+            <li class="page-item">
+              @if (pag === '...') {
+              <a class="page-link">{{ pag }}</a>
+              } @else {
+              <a class="page-link" href="#" (click)="goToPage(-(-pag))" [class.active]="nPage - -1 === -(-pag)">
+                {{ pag }}
+              </a>
+              }
+            </li>
             }
-          </li>
-
-          <li class="page-item">
-            <a class="page-link" [class.disabled]="nPage - -1 === oPage?.totalPages" (click)="goToNext()" href="#">
-              <i class="bi bi-caret-right-square-fill"></i>
-              Siguiente</a>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="d-flex justify-content-between">
-        @if (strFiltro.length>0) {
-        <h5 class="text-muted">
-          Filtrado por: <span class="text-danger">{{ strFiltro }}</span>
-        </h5>
-        } @else{
-        <h5 class="text-muted">Sin filtrar</h5>
-        }
-        <h5 class="text-muted">
-          Mostrando {{ oPage?.numberOfElements | number : "1.0-0" }} de
-          {{ oPage?.totalElements | number : "1.0-0" }}
-        </h5>
-      </div>
-
-      <div class="d-flex flex-column">
-        <table class="table table-striped table-bordered my-2"
-          style="table-layout: fixed; width: 100%; word-break: break-all">
-          <thead>
-            <tr>
-              <th (click)="sort('id')" class="bg-danger text-white">
-                ID @if (strField === 'id') { @if (strDir === 'desc') {
-                <i class="bi bi-caret-down-fill"></i>
-                } @else {
-                <i class="bi bi-caret-up-fill"></i>} }
-              </th>
-              <th (click)="sort('titulo')" class="bg-primary text-white">
-                Titulo @if (strField === 'titulo') { @if (strDir === 'desc') {
-                <i class="bi bi-caret-down-fill"></i>
-                } @else {
-                <i class="bi bi-caret-up-fill"></i>} }
-              </th>
-              <th (click)="sort('descripcion')" class="bg-primary text-white">
-                Descripcion @if (strField === 'descripcion') { @if (strDir ===
-                'desc') {
-                <i class="bi bi-caret-down-fill"></i>
-                } @else {
-                <i class="bi bi-caret-up-fill"></i>} }
-              </th>
-
-              <th class="bg-warning text-black">Acciones</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            @for (planesentrenamiento of oPage?.content; track planesentrenamiento.id) {
-            <tr>
-              <td class="text-center">{{ planesentrenamiento.id }}</td>
-              <td class="text-start">{{ planesentrenamiento.titulo | trim : 10 }}</td>
-              <td class="text-start">{{ planesentrenamiento.descripcion }}</td>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-success" (click)="view(planesentrenamiento)">
-                    <i class="bi bi-eye icon-15"></i>
-                  </button>
-                  <button type="button" class="btn btn-warning icon-15" (click)="edit(planesentrenamiento)">
-                    <i class="bi bi-pen"></i>
-                  </button>
-                  <button type="button" class="btn btn-danger icon-15" (click)="remove(planesentrenamiento)">
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </div>
-              
-            </tr>
-            } @empty {
-            <tr>
-              <td colspan="6">No hay Planesentrenamientos</td>
-            </tr>
-            }
-          </tbody>
-        </table>
+            <li class="page-item">
+              <a class="page-link" [class.disabled]="nPage - -1 === oPage?.totalPages" (click)="goToNext()" href="#">
+                Siguiente
+                <i class="bi bi-chevron-right"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
