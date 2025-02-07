@@ -41,7 +41,7 @@ export class PlanesentrenamientoselectorComponent implements OnInit {
     private oBotoneraService: BotoneraService,
     private oRouter: Router
   ) {
-     this.debounceSubject.pipe(debounceTime(10)).subscribe((value) => {
+     this.debounceSubject.pipe(debounceTime(100)).subscribe((value) => {
       this.getPage();
     });
   }

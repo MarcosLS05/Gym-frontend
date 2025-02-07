@@ -121,10 +121,10 @@ export class GrupocontrataAdminEditRoutedComponent implements OnInit {
         next: (oGrupocontrata: IGrupocontrata) => {
           this.oGrupocontrata = oGrupocontrata;
           this.updateForm();
-          this.showModal('grupocontrata ' + this.oGrupocontrata.id + ' actualizado');
+          this.showModal('Contrato ' + this.oGrupocontrata.id + ' actualizado');
         },
         error: (error) => {
-          this.showModal('Error al actualizar el grupocontrata');
+          this.showModal('Error al actualizar el Contrato');
           console.error(error);
         },
       });

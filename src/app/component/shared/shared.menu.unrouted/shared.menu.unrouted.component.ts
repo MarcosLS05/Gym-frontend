@@ -13,6 +13,7 @@ export class SharedMenuUnroutedComponent implements OnInit {
   strRuta: string = '';
   activeSession: boolean = false;
   userEmail: string = '';
+  
 
   constructor(
     private oRouter: Router,
@@ -26,6 +27,7 @@ export class SharedMenuUnroutedComponent implements OnInit {
     this.activeSession = this.oSessionService.isSessionActive();
     if (this.activeSession) {
       this.userEmail = this.oSessionService.getSessionEmail();
+      
     }
   }
 
@@ -34,12 +36,14 @@ export class SharedMenuUnroutedComponent implements OnInit {
       next: () => {        
         this.activeSession = true;
         this.userEmail = this.oSessionService.getSessionEmail();
+        
       },
     });
     this.oSessionService.onLogout().subscribe({
       next: () => {
         this.activeSession = false;
         this.userEmail = '';
+        
       },
     });
 

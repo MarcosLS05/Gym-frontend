@@ -123,8 +123,8 @@ export class GrupocontrataAdminCreateRoutedComponent implements OnInit {
   
   showPlanesentrenamientoSelectorModal() {
     const dialogRef = this.dialog.open(PlanesentrenamientoselectorComponent, {
-      height: '800px',
-      maxHeight: '1200px',
+      height: '500px',
+      maxHeight: '800px',
       width: '80%',
       maxWidth: '90%',
       

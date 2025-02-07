@@ -158,6 +158,8 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
       this.showModal('Formulario inválido');
       return;
     } else {      
+      const hashedPassword = this.oCryptoService.getHashSHA256(this.oUsuarioForm?.value.password);
+      this.oUsuarioForm?.controls['password'].setValue(hashedPassword);
       this.oUsuarioService.create(this.oUsuarioForm?.value).subscribe({
         next: (oUsuario: IUsuario) => {
           this.oUsuario = oUsuario;
@@ -172,9 +174,9 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
   }
   showTipoUsuarioSelectorModal() {
     const dialogRef = this.dialog.open(TipousuarioselectorComponent, {
-      height: '800px',
-      maxHeight: '1200px',
-      width: '80%',
+      height: '500px',
+      maxHeight: '500px',
+      width: '50%',
       maxWidth: '90%',
       
 
