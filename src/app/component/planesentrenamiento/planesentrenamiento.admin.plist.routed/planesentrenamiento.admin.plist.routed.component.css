@@ -77,9 +77,14 @@ h2:hover {
     color: #007bff;
 }
 
+.btn-group {
+    gap: 10px; /* Ajusta el espacio entre los botones */
+}
+
 /* Mejoras en la transición de la paginación */
 .page-item .page-link {
     padding: 8px 12px;
     margin: 0 5px;
     border-radius: 20px;
 }
+
