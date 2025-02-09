@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { UsuarioService } from '../../../service/usuario.service';
 import { IUsuario } from '../../../model/usuario.interface';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-usuario.admin.view.routed',
+  standalone: true,
+  imports: [RouterModule],
+  
   templateUrl: './usuario.admin.view.routed.component.html',
   styleUrls: ['./usuario.admin.view.routed.component.css']
 })

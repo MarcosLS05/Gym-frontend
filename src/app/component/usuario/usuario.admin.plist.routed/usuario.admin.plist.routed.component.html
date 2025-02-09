@@ -88,7 +88,15 @@
                   <td>{{ usuario.apellido1 }}</td>
                   <td>{{ usuario.apellido2 }}</td>
                   <td style="font-size: small">{{ usuario.email }}</td>
-                  <td>{{ usuario.tipousuario.titulo }}</td>
+                    <td class="text-start">
+                      <a href="admin/tipousuario/view/{{ usuario.tipousuario.id }}">
+                        {{ usuario.tipousuario.titulo }} ({{ usuario.tipousuario.id }})
+                      </a>
+                      <a href="admin/usuario/plist/xtipousuario/{{ usuario.tipousuario.id }}">
+                        <i class="bi bi-filter-circle"></i>
+                      </a>
+                    </td>
+
                   <td>
                     <div class="btn-group" role="group">
                       <button type="button" class="btn btn-sm btn-outline-primary" (click)="view(usuario)">

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ITipousuario } from '../../../model/tipousuario.interface';
 import { tipousuarioService } from '../../../service/tipousuario.service';
 
+
 @Component({
-  selector: 'app-tipousuario.admin.view.routed',
+  selector: 'app-tipousuario-admin-view-routed',
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './tipousuario.admin.view.routed.component.html',
   styleUrls: ['./tipousuario.admin.view.routed.component.css'],
 })

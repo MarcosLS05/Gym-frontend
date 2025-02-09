@@ -6,38 +6,58 @@ import { IPage } from '../../../model/model.interface';
 import { FormsModule } from '@angular/forms';
 import { BotoneraService } from '../../../service/botonera.service';
 import { debounceTime, Subject } from 'rxjs';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TrimPipe } from '../../../pipe/trim.pipe';
+import { ITipousuario } from '../../../model/tipousuario.interface';
+import { tipousuarioService } from '../../../service/tipousuario.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-usuario.admin.routed',
-  templateUrl: './usuario.admin.plist.routed.component.html',
-  styleUrls: ['./usuario.admin.plist.routed.component.css'],
+  templateUrl: './usuario.xtipousuario.admin.plist.routed.component.html',
+  styleUrls: ['./usuario.xtipousuario.admin.plist.routed.component.css'],
   standalone: true,
   imports: [CommonModule, FormsModule, TrimPipe, RouterModule],
 })
-export class UsuarioAdminPlistRoutedComponent implements OnInit {
-  
+export class UsuarioXTipousuarioAdminPlistRoutedComponent implements OnInit {
   oPage: IPage<IUsuario> | null = null;
   //
   nPage: number = 0; // 0-based server count
   nRpp: number = 10;
   //
   strField: string = '';
-  strDir: string = '';
+  strDir: string = 'desc';
   //
   strFiltro: string = '';
   //
   arrBotonera: string[] = [];
   //
   private debounceSubject = new Subject<string>();
+
+  oTipousuario: ITipousuario = {} as ITipousuario;
+
   constructor(
     private oUsuarioService: UsuarioService,
+    private oTipousuarioService: tipousuarioService,
     private oBotoneraService: BotoneraService,
-    private oRouter: Router
+    private oRouter: Router,
+    private oActivatedRoute: ActivatedRoute
   ) {
-    this.debounceSubject.pipe(debounceTime(10)).subscribe((value) => {
+    this.debounceSubject.pipe(debounceTime(500)).subscribe((value) => {
+      this.nPage = 0;
       this.getPage();
+    });
+    // get id from route admin/usuario/plist/xtipousuario/:id
+    this.oActivatedRoute.params.subscribe((params) => {
+      this.oTipousuarioService.get(params['id']).subscribe({
+        next: (oTipousuario: ITipousuario) => {
+          this.oTipousuario = oTipousuario;
+          this.getPage();
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        },
+      });
     });
   }
 
@@ -47,7 +67,14 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
 
   getPage() {
     this.oUsuarioService
-      .getPage(this.nPage, this.nRpp, this.strField, this.strDir, this.strFiltro)
+      .getPageXTipoUsuario(
+        this.nPage,
+        this.nRpp,
+        this.strField,
+        this.strDir,
+        this.strFiltro,
+        this.oTipousuario.id
+      )
       .subscribe({
         next: (oPageFromServer: IPage<IUsuario>) => {
           this.oPage = oPageFromServer;
@@ -64,12 +91,12 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
 
   edit(oUsuario: IUsuario) {
     //navegar a la página de edición
-    this.oRouter.navigate(['admin/usuario/edit', oUsuario.id]);
+    this.oRouter.navigate(['admin/usuario/edit/', oUsuario.id]);
   }
 
   view(oUsuario: IUsuario) {
     //navegar a la página de edición
-    this.oRouter.navigate(['admin/usuario/view', oUsuario.id]);
+    this.oRouter.navigate(['admin/usuario/view/', oUsuario.id]);
   }
 
   remove(oUsuario: IUsuario) {
@@ -112,13 +139,4 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
   filter(event: KeyboardEvent) {
     this.debounceSubject.next(this.strFiltro);
   }
-
-//  <td class="text-start">
-//  <a href="admin/tipousuario/view/{{ usuario.tipousuario.id }}">
-//    {{ usuario.tipousuario.titulo }} ({{ usuario.tipousuario.id }})
-//  </a>
-//  <a href="admin/usuario/plist/xtipousuario/{{ usuario.tipousuario.id }}">
-//    <i class="bi bi-filter-circle"></i>
- // </a>
-//</td>
 }

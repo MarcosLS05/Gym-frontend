@@ -44,6 +44,38 @@ export class UsuarioService {
     return this.oHttp.get<IPage<IUsuario>>(URL, httpOptions);
   }
 
+  getPageXTipoUsuario(
+    page: number,
+    size: number,
+    field: string,
+    dir: string,
+    filtro: string,
+    id_tipo_usuario: number
+  ): Observable<IPage<IUsuario>> {
+    let URL: string = '';
+    URL += this.serverURL + '/xtipousuario/' + id_tipo_usuario;
+    if (!page) {
+      page = 0;
+    }
+    URL += '?page=' + page;
+    if (!size) {
+      size = 10;
+    }
+    URL += '&size=' + size;
+    if (field) {
+      URL += '&sort=' + field;
+      if (dir === 'asc') {
+        URL += ',asc';
+      } else {
+        URL += ',desc';
+      }
+    }
+    if (filtro) {
+      URL += '&filter=' + filtro;
+    }
+    return this.oHttp.get<IPage<IUsuario>>(URL, httpOptions);
+  }
+
   get(id: number): Observable<IUsuario> {
     let URL: string = '';
     URL += this.serverURL;
