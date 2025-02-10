@@ -93,8 +93,22 @@
               } @else {
               <i class="bi bi-caret-up-fill"></i>} }
             </th>
-            <th (click)="sort('descripcion')">
+            <th (click)="sort('usuario')">
               Descripción @if (strField === 'descripcion') { @if (strDir ===
+              'desc') {
+              <i class="bi bi-caret-down-fill"></i>
+              } @else {
+              <i class="bi bi-caret-up-fill"></i>} }
+            </th>
+            <th (click)="sort('usuario')">
+              Usuario @if (strField === 'usuario') { @if (strDir ===
+              'desc') {
+              <i class="bi bi-caret-down-fill"></i>
+              } @else {
+              <i class="bi bi-caret-up-fill"></i>} }
+            </th>
+            <th (click)="sort('planesentrenamiento')">
+              Plan de entrenamiento @if (strField === 'descripcion') { @if (strDir ===
               'desc') {
               <i class="bi bi-caret-down-fill"></i>
               } @else {
@@ -110,6 +124,8 @@
             <td class="text-center">{{ grupocontrata.id }}</td>
             <td class="text-start">{{ grupocontrata.titulo | trim : 10 }}</td>
             <td class="text-start">{{ grupocontrata.descripcion }}</td>
+            <td class="text-start">{{ grupocontrata.usuario.nombre }}</td>
+            <td class="text-start">{{ grupocontrata.planesentrenamiento.titulo }}</td>
             <td class="text-center">
               <div class="btn-group" role="group">
                 <button type="button" class="btn btn-outline-success btn-sm" (click)="view(grupocontrata)">

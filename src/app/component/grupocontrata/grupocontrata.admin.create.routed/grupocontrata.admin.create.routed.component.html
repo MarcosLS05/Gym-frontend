@@ -64,7 +64,35 @@
                   
               </mat-form-field>
           </div>
-      </div>
+        </div>
+        <div formGroupName="usuario">
+          <div class="row mt-4">
+              <mat-form-field>
+                  <mat-label>Usuarios disponibles</mat-label>
+                  <div class="d-flex justify-content-end">
+                      <button class="btn btn-primary" (click)="showUsuarioSelectorModal()">
+                          <i class="bi bi-search"></i>
+                          Buscar
+                      </button>
+                  </div>
+                  <div class="d-flex justify-content-start">
+                      {{oUsuario.nombre}}
+                  </div>
+                  <div class="d-flex justify-content-start">
+                    {{oUsuario.apellido1}}
+                </div>
+                    <div class="d-flex justify-content-start">
+                  {{oUsuario.apellido2}}
+                    </div>
+                  <div class="d-flex justify-content-start">
+                      {{oUsuario.email}}
+                  </div>
+                  <input matInput formControlName="nombre" />
+                  <input matInput formControlName="id" />
+                  
+              </mat-form-field>
+          </div>
+        </div>
         <br />
         <button
           class="btn btn-warning mt-4 mx-1"

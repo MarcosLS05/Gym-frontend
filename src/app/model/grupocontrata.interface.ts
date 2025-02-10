@@ -4,7 +4,7 @@ export interface IGrupocontrata {
   id: number;
   titulo: string;
   descripcion: string;
-  Usuario: IUsuario;
-  Planesentrenamiento: IPlanesentrenamiento;
+  usuario: IUsuario;
+  planesentrenamiento: IPlanesentrenamiento;
   
 }

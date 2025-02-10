@@ -21,39 +21,67 @@
             <mat-label>Titulo</mat-label>
             <input matInput formControlName="titulo" placeholder="Titulo" />
             <mat-hint align="end">De 3 a 50 caracteres</mat-hint>
-            @if (oGrupocontrataForm?.get('titulo')?.hasError('required')) {
-            <mat-error>Debes introducir un Titulo</mat-error>
-            } @if (oGrupocontrataForm?.get('titulo')?.hasError('minlength')) {
-            <mat-error>Debes introducir un Titulo más largo</mat-error>
-            } @if (oGrupocontrataForm?.get('titulo')?.hasError('maxlength')) {
-            <mat-error>Debes introducir un Titulo más corto</mat-error>
-            }
+            <mat-error *ngIf="oGrupocontrataForm?.get('titulo')?.hasError('required')">Debes introducir un Titulo</mat-error>
+            <mat-error *ngIf="oGrupocontrataForm?.get('titulo')?.hasError('minlength')">Debes introducir un Titulo más largo</mat-error>
+            <mat-error *ngIf="oGrupocontrataForm?.get('titulo')?.hasError('maxlength')">Debes introducir un Titulo más corto</mat-error>
           </mat-form-field>
         </div>
 
         <div class="row mt-4">
           <mat-form-field>
             <mat-label>Descripcion</mat-label>
-            <input
-              matInput
-              formControlName="descripcion"
-              placeholder="Descripcion"
-            />
+            <input matInput formControlName="descripcion" placeholder="Descripcion" />
             <mat-hint align="end">De 3 a 50 caracteres</mat-hint>
-            @if (oGrupocontrataForm?.get('descripcion')?.hasError('required')) {
-            <mat-error>Debes introducir una descripcion</mat-error>
-            } @if (oGrupocontrataForm?.get('descripcion')?.hasError('minlength')) {
-            <mat-error>Debes introducir una descripcion más largo</mat-error>
-            } @if (oGrupocontrataForm?.get('descripcion')?.hasError('maxlength')) {
-            <mat-error>Debes introducir una descripcion más corto</mat-error>
-            }
+            <mat-error *ngIf="oGrupocontrataForm?.get('descripcion')?.hasError('required')">Debes introducir una descripcion</mat-error>
+            <mat-error *ngIf="oGrupocontrataForm?.get('descripcion')?.hasError('minlength')">Debes introducir una descripcion más larga</mat-error>
+            <mat-error *ngIf="oGrupocontrataForm?.get('descripcion')?.hasError('maxlength')">Debes introducir una descripcion más corta</mat-error>
           </mat-form-field>
         </div>
+
+        <!-- Usuario -->
+        <div formGroupName="planesentrenamiento">
+          <div class="row mt-4">
+              <mat-form-field>
+                  <mat-label>Planes de entrenamiento disponibles</mat-label>
+                  <div class="d-flex justify-content-end">
+                      <button class="btn btn-primary" (click)="showPlanesentrenamientoSelectorModal()">
+                          <i class="bi bi-search"></i>
+                          Buscar
+                      </button>
+                  </div>
+                  <input matInput formControlName="titulo" />
+                  <input matInput formControlName="id" />
+                  
+              </mat-form-field>
+          </div>
+        </div>
+<!-- Usuario -->
+<div formGroupName="usuario">
+  <div class="row mt-4">
+    <mat-form-field>
+      <mat-label>Usuarios disponibles</mat-label>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-primary" (click)="showUsuarioSelectorModal()">
+          <i class="bi bi-search"></i> Buscar
+        </button>
+      </div>
+      
+      <!-- Eliminar la parte donde muestras el nombre, apellido, etc. fuera del formulario -->
+      <!-- <div class="d-flex justify-content-start">
+        {{oUsuario.nombre}}
+      </div>
+      <div class="d-flex justify-content-start">
+        {{oUsuario.apellido1}}
+      </div> -->
+
+      <input matInput formControlName="nombre" />
+      <input matInput formControlName="id" />
+    </mat-form-field>
+  </div>
+</div>
+
         <div class="mt-4">
-          <button
-            class="btn btn-warning mt-4 mx-1"
-            [routerLink]="['/admin', 'grupocontrata', 'plist']"
-          >
+          <button class="btn btn-warning mt-4 mx-1" [routerLink]="['/admin', 'grupocontrata', 'plist']">
             <i class="bi bi-list"></i>
             Ir a listado de Contratos
           </button>
@@ -63,11 +91,7 @@
             Reset
           </button>
 
-          <button
-            class="btn btn-primary mt-4 mx-1"
-            type="submit"
-            [disabled]="!oGrupocontrataForm?.valid"
-          >
+          <button class="btn btn-primary mt-4 mx-1" type="submit" [disabled]="!oGrupocontrataForm?.valid">
             <i class="bi bi-save"></i>
             Guardar
           </button>
@@ -77,35 +101,18 @@
   </div>
 </div>
 
-<div
-  class="modal fade"
-  [id]="'mimodal'"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" [id]="'mimodal'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Contante</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-          (click)="hideModal()"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="hideModal()"></button>
       </div>
       <div class="modal-body">
         <p>{{ message }}</p>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-dismiss="modal"
-          (click)="hideModal()"
-        >
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="hideModal()">
           Cerrar
         </button>
       </div>
