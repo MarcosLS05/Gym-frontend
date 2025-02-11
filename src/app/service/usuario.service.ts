@@ -77,16 +77,16 @@ export class UsuarioService {
   }
 
 
-  getPageXGrupocontrata(
+  getPageXPlanesentrenamiento(
     page: number,
     size: number,
     field: string,
     dir: string,
     filtro: string,
-    id_grupo_contrata: number
+    id_planesentrenamiento: number
   ): Observable<IPage<IUsuario>> {
     let URL: string = '';
-    URL += this.serverURL + '/xgrupocontrata/' + id_grupo_contrata;
+    URL += this.serverURL + '/xplanesentrenamiento/' + id_planesentrenamiento;
     if (!page) {
       page = 0;
     }
@@ -116,7 +116,7 @@ export class UsuarioService {
   }
 
   create(oUsuario: IUsuario): Observable<IUsuario> {
-    const URL: string = `${serverURL}/usuario/new`;  // Asegúrate de que "usuario" está en la ruta
+    const URL: string = `${serverURL}/usuario/new`; 
     return this.oHttp.post<IUsuario>(URL, oUsuario, httpOptions);
   }
   

@@ -8,6 +8,8 @@ import { UsuarioAdminViewRoutedComponent } from './component/usuario/usuario.adm
 import { UsuarioAdminCreateRoutedComponent } from './component/usuario/usuario.admin.create.routed/usuario.admin.create.routed.component';
 import { UsuarioAdminDeleteRoutedComponent } from './component/usuario/usuario.admin.delete.routed/usuario.admin.delete.component';
 import { UsuarioXTipousuarioAdminPlistRoutedComponent } from './component/usuario/usuario.xtipousuario.admin.plist.routed/usuario.xtipousuario.admin.plist.routed.component';
+//import { UsuarioXPlanesentrenamientoAdminPlistRoutedComponent } from './component/usuario/usuario.xplanesentrenamiento.admin.plist.routed/usuario.xplanesentrenamiento.admin.plist.routed.component';
+
 
 import { TipousuarioAdminPlistRoutedComponent } from './component/tipousuario/tipousuario.admin.plist.routed/tipousuario.admin.plist.routed.component';
 import { TipousuarioAdminEditRoutedComponent } from './component/tipousuario/tipousuario.admin.edit.routed/tipousuario.admin.edit.routed.component';

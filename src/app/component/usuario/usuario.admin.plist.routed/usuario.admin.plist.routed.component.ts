@@ -121,4 +121,9 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
 //    <i class="bi bi-filter-circle"></i>
  // </a>
 //</td>
+
+//<td class="text-center">
+//<a href="/admin/planesentrenamiento/plist/xusuario/{{ usuario.id }}" class="btn btn-primary">{{ usuario.planesentrenamiento }}</a>
+
+//</td>
 }

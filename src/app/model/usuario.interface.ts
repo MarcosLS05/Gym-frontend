@@ -8,5 +8,6 @@ export interface IUsuario {
   email: string;
   password: string;
   tipousuario: ITipousuario;
+  planesentrenamiento?: any;
   
 }
