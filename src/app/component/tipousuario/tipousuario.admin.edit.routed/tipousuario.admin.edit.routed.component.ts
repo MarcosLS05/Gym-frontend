@@ -57,19 +57,6 @@ export class TipousuarioAdminEditRoutedComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(255),
       ]),
-      creditoOdebito: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[01]$'),
-      ]),
-      comentarios: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(255),
-      ]),
-      realOnominal: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[01]$'),
-      ]),
     });
   }
 
@@ -116,7 +103,7 @@ export class TipousuarioAdminEditRoutedComponent implements OnInit {
 
   hideModal = () => {
     this.myModal.hide();
-    this.oRouter.navigate(['/admin/Tipousuario/view/' + this.oTipousuario?.id]);
+    this.oRouter.navigate(['/admin/tipousuario/view/' + this.oTipousuario?.id]);
   };
 
   onSubmit() {
