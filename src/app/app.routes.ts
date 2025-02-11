@@ -64,7 +64,7 @@ export const routes: Routes = [
     { path: 'admin/tipousuario/create', component: TipousuarioAdminCreateRoutedComponent, canActivate: [AdminGuard], pathMatch: 'full', },
     { path: 'admin/tipousuario/delete/:id', component: TipousuarioAdminDeleteRoutedComponent, canActivate: [AdminGuard]},
 
-    { path: 'admin/planesentrenamiento/create', component: PlanesentrenamientoAdminCreateRoutedComponent, pathMatch: 'full', },
+    { path: 'admin/planesentrenamiento/create', component: PlanesentrenamientoAdminCreateRoutedComponent, pathMatch: 'full', canActivate: [AdminOrEntrenadorPersonalGuard] },
     { path: 'admin/planesentrenamiento/plist', component: PlanesentrenamientoAdminPlistRoutedComponent, canActivate: [AdminGuard]},
     { path: 'admin/planesentrenamiento/edit/:id', component: PlanesentrenamientoAdminEditRoutedComponent, canActivate: [AdminGuard]},
     { path: 'admin/planesentrenamiento/view/:id', component: PlanesentrenamientoAdminViewRoutedComponent, canActivate: [AdminGuard]},

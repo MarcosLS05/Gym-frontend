@@ -52,10 +52,10 @@ serverURL: string = serverURL + '/tipousuario';
     return this.oHttp.get<ITipousuario>(URL);
   }
 
+
   create(otipousuario: ITipousuario): Observable<ITipousuario> {
-    let URL: string = '';
-    URL += this.serverURL;
-    return this.oHttp.put<ITipousuario>(URL, otipousuario);
+    const URL: string = `${serverURL}/tipousuario/new`;  // Asegúrate de que "usuario" está en la ruta
+    return this.oHttp.post<ITipousuario>(URL, otipousuario, httpOptions);
   }
 
   update(otipousuario: ITipousuario): Observable<ITipousuario> {

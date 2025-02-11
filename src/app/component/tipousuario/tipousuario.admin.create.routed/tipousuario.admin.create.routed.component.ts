@@ -46,23 +46,11 @@ export class TipousuarioAdminCreateRoutedComponent implements OnInit {
 
   createForm() {
     this.oTipousuarioForm = new FormGroup({
-      descripcion: new FormControl('', [
+      titulo: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(255),
-      ]),
-      creditoOdebito: new FormControl('', [
-        Validators.required,
-        Validators.pattern(''),
-      ]),
-      comentarios: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(255),
-      ]),
-      realOnominal: new FormControl('', [
-        Validators.required,
-        Validators.pattern(''),
+
       ]),
     });
   }
@@ -87,7 +75,7 @@ export class TipousuarioAdminCreateRoutedComponent implements OnInit {
 
   hideModal = () => {
     this.myModal.hide();
-    this.oRouter.navigate(['/admin/Tipousuario/view/' + this.oTipousuario?.id]);
+    this.oRouter.navigate(['/admin/tipousuario/view/' + this.oTipousuario?.id]);
   };
 
   onSubmit() {
@@ -99,7 +87,7 @@ export class TipousuarioAdminCreateRoutedComponent implements OnInit {
       this.otipousuarioService.create(this.oTipousuarioForm?.value).subscribe({
         next: (oTipousuario: ITipousuario) => {
           this.oTipousuario = oTipousuario;
-          this.showModal('Tipousuario creado con el id: ' + this.oTipousuario.id);
+          this.showModal('Tipo usuario creado con el id: ' + this.oTipousuario.id);
         },
         error: (err) => {
           this.showModal('Error al crear el Tipousuario');
