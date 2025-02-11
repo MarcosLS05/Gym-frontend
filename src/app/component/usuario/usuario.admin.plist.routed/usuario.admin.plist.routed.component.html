@@ -77,6 +77,12 @@
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
+                  <th (click)="sort('tipousuario')" class="cursor-pointer">
+                    Contratos Activos @if (strField === 'tipousuario') { @if (strDir === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
                   <th>Acciones</th>
                 </tr>
               </thead>
