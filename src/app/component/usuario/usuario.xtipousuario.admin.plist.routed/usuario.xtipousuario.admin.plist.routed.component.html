@@ -109,28 +109,35 @@
                 } @else {
                 <i class="bi bi-caret-up-fill"></i>} }
               </th>
-              <th (click)="sort('codigo')" class="bg-primary text-white">
-                Nombre @if (strField === 'codigo') { @if (strDir === 'desc') {
+              <th (click)="sort('nombre')" class="bg-primary text-white">
+                Nombre @if (strField === 'nombre') { @if (strDir === 'desc') {
                 <i class="bi bi-caret-down-fill"></i>
                 } @else {
                 <i class="bi bi-caret-up-fill"></i>} }
               </th>
-              <th (click)="sort('descripcion')" class="bg-primary text-white">
-                Primer Apellido @if (strField === 'descripcion') { @if (strDir ===
+              <th (click)="sort('apellido1')" class="bg-primary text-white">
+                Primer Apellido @if (strField === 'apellido1') { @if (strDir ===
                 'desc') {
                 <i class="bi bi-caret-down-fill"></i>
                 } @else {
                 <i class="bi bi-caret-up-fill"></i>} }
               </th>
-              <th (click)="sort('descripcion')" class="bg-primary text-white">
-                Segundo Apellido @if (strField === 'descripcion') { @if (strDir ===
+              <th (click)="sort('apellido2')" class="bg-primary text-white">
+                Segundo Apellido @if (strField === 'apellido2') { @if (strDir ===
                 'desc') {
                 <i class="bi bi-caret-down-fill"></i>
                 } @else {
                 <i class="bi bi-caret-up-fill"></i>} }
               </th>
-              <th (click)="sort('descripcion')" class="bg-primary text-white">
-                Email @if (strField === 'descripcion') { @if (strDir ===
+              <th (click)="sort('email')" class="bg-primary text-white">
+                Email @if (strField === 'email') { @if (strDir ===
+                'desc') {
+                <i class="bi bi-caret-down-fill"></i>
+                } @else {
+                <i class="bi bi-caret-up-fill"></i>} }
+              </th>
+              <th (click)="sort('tipousuario')" class="bg-primary text-white">
+                Tipo de usuario @if (strField === 'tipousuario') { @if (strDir ===
                 'desc') {
                 <i class="bi bi-caret-down-fill"></i>
                 } @else {
@@ -150,6 +157,7 @@
               <td class="text-start">{{ usuario.apellido1 }}</td>
               <td class="text-center">{{ usuario.apellido2 }}</td>
               <td class="text-center">{{ usuario.email }}</td>
+              <td class="text-center">{{ usuario.tipousuario.titulo }}</td>
               <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <button
