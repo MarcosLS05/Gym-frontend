@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UsuarioService } from '../../../service/usuario.service';
 import { IUsuario } from '../../../model/usuario.interface';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,9 @@ import { BotoneraService } from '../../../service/botonera.service';
 import { debounceTime, Subject } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 import { TrimPipe } from '../../../pipe/trim.pipe';
+import { MatDialog } from '@angular/material/dialog';
+import { TipousuarioselectorComponent } from '../../tipousuario/tipousuarioselector/tipousuarioselector.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-usuario.admin.routed',
@@ -31,6 +34,7 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
   arrBotonera: string[] = [];
   //
   private debounceSubject = new Subject<string>();
+  readonly dialog = inject(MatDialog);
   constructor(
     private oUsuarioService: UsuarioService,
     private oBotoneraService: BotoneraService,
@@ -60,6 +64,50 @@ export class UsuarioAdminPlistRoutedComponent implements OnInit {
           console.log(err);
         },
       });
+  }
+
+  showTipousuarioSelectorModal(id: number | undefined) {
+    if (id) {
+      const dialogRef = this.dialog.open(TipousuarioselectorComponent, {
+        height: '500px',
+        maxHeight: '500px',
+        width: '50%',
+        maxWidth: '90%',
+
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        if (result !== undefined) {
+          console.log(result);
+
+          /*   ----> ejercicio
+          // sustituir el tipo de apunte en el id de apunte seleccionado en oPage.content        
+          this.oPage?.content.forEach((apunte) => {
+            if (apunte.id === id) {
+              apunte.tipoapunte = result;
+            }
+          });
+          */
+
+          // llamada al servidor
+          this.oUsuarioService.setTipousuario(id, result.id).subscribe({
+            next: (response: IUsuario) => {
+              console.log(response);
+              this.getPage();
+            },
+            error: (err: HttpErrorResponse) => {
+              console.log(err);
+            },
+          });
+
+        }
+      });
+      return false;
+    } else {
+      return false;
+    }
+
   }
 
   edit(oUsuario: IUsuario) {

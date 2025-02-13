@@ -145,6 +145,10 @@ export class UsuarioService {
     return this.oHttp.delete(this.serverURL + '/' + id);
   }
 
+  setTipousuario(id: number, id_tipousuario: number): Observable<IUsuario> {
+    return this.oHttp.put<IUsuario>(this.serverURL + '/settipousuario/' + id + '/' + id_tipousuario, null);
+  }
+
   
 
 
