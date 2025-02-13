@@ -77,6 +77,12 @@
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
+                  <th (click)="sort('tipousuario')" class="cursor-pointer">
+                    Contratos @if (strField === 'tipousuario') { @if (strDir === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
                   
                   <th>Acciones</th>
                 </tr>
@@ -97,7 +103,12 @@
                         <i class="bi bi-filter-circle"></i>
                       </a>
                     </td>
-
+                    <td class="text-center">
+                      <a href="admin/grupocontrata/xusuario/plist/{{ usuario.id }}" class="btn btn-primary">
+                        {{ usuario.grupocontrata }}
+                      </a>
+                    </td>
+                    
                     
                   <td>
                     <div class="btn-group" role="group">

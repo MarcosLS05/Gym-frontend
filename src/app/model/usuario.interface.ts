@@ -9,5 +9,6 @@ export interface IUsuario {
   password: string;
   tipousuario: ITipousuario;
   //planesentrenamiento?: any;
+  grupocontrata: number;
   
 }

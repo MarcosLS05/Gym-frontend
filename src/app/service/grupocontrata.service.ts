@@ -4,6 +4,7 @@ import { IPage } from '../model/model.interface';
 import { httpOptions, serverURL } from '../environment/environment';
 import { Injectable } from '@angular/core';
 import { IGrupocontrata } from '../model/grupocontrata.interface';
+import { IUsuario } from '../model/usuario.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,38 @@ export class GrupocontrataService {
   ): Observable<IPage<IGrupocontrata>> {
     let URL: string = '';
     URL += this.serverURL;
+    if (!page) {
+      page = 0;
+    }
+    URL += '?page=' + page;
+    if (!size) {
+      size = 10;
+    }
+    URL += '&size=' + size;
+    if (field) {
+      URL += '&sort=' + field;
+      if (dir === 'asc') {
+        URL += ',asc';
+      } else {
+        URL += ',desc';
+      }
+    }
+    if (filtro) {
+      URL += '&filter=' + filtro;
+    }
+    return this.oHttp.get<IPage<IGrupocontrata>>(URL, httpOptions);
+  }
+
+  getPageXUsuario(
+    page: number,
+    size: number,
+    field: string,
+    dir: string,
+    filtro: string,
+    id_usuario: number
+  ): Observable<IPage<IGrupocontrata>> {
+    let URL: string = '';
+    URL += this.serverURL + '/xusuario/' + id_usuario;
     if (!page) {
       page = 0;
     }
