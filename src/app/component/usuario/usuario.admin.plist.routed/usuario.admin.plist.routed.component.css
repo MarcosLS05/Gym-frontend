@@ -14,7 +14,7 @@
   
   .btn-ver-contratos:hover {
     background-color: #45a049; /* Verde un poco más oscuro al pasar el mouse */
-    transform: translateY(-2px); /* Efecto de elevación */
+    transform: translateY(-5px); /* Efecto de elevación */
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   }
   
