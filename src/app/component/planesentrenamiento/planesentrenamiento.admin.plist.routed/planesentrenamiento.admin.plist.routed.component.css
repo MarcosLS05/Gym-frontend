@@ -5,7 +5,7 @@
 }
 
 .hover-effect:hover {
-    transform: translateY(-5px); /* Mueve la tarjeta hacia arriba */
+    transform: translateY(-6px); /* Mueve la tarjeta hacia arriba */
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
 }
 
