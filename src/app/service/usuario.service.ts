@@ -119,6 +119,19 @@ export class UsuarioService {
     const URL: string = `${serverURL}/usuario/new`; 
     return this.oHttp.post<IUsuario>(URL, oUsuario, httpOptions);
   }
+
+    // Método para registrar un nuevo usuario
+register(datos: {
+  nombre: string;
+  apellido1: string;
+  apellido2: string;
+  email: string;
+  password: string;
+}): Observable<any> {
+  const URL = `${serverURL}/auth/register`;
+  return this.oHttp.post<any>(URL, datos, httpOptions);
+}
+
   
 
   update(oUsuario: IUsuario): Observable<IUsuario> {

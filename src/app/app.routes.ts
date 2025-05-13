@@ -9,6 +9,7 @@ import { UsuarioAdminCreateRoutedComponent } from './component/usuario/usuario.a
 import { UsuarioAdminDeleteRoutedComponent } from './component/usuario/usuario.admin.delete.routed/usuario.admin.delete.component';
 import { UsuarioXTipousuarioAdminPlistRoutedComponent } from './component/usuario/usuario.xtipousuario.admin.plist.routed/usuario.xtipousuario.admin.plist.routed.component';
 //import { UsuarioXPlanesentrenamientoAdminPlistRoutedComponent } from './component/usuario/usuario.xplanesentrenamiento.admin.plist.routed/usuario.xplanesentrenamiento.admin.plist.routed.component';
+import { newusuarioACCComponent } from './component/usuario/newusuarioACC.routed/newusuarioAACC.component';
 
 
 import { TipousuarioAdminPlistRoutedComponent } from './component/tipousuario/tipousuario.admin.plist.routed/tipousuario.admin.plist.routed.component';
@@ -59,6 +60,7 @@ export const routes: Routes = [
     { path: 'admin/usuario/create', component: UsuarioAdminCreateRoutedComponent, canActivate: [AdminGuard], pathMatch: 'full', },
     { path: 'admin/usuario/delete/:id', component: UsuarioAdminDeleteRoutedComponent, canActivate: [AdminGuard]},
     { path: 'admin/usuario/plist/xtipousuario/:id', component: UsuarioXTipousuarioAdminPlistRoutedComponent, canActivate: [AdminGuard]},
+    { path: 'newusuario', component: newusuarioACCComponent, pathMatch: 'full' },
 
     { path: 'admin/tipousuario/plist', component: TipousuarioAdminPlistRoutedComponent, canActivate: [AdminGuard] },
     { path: 'admin/tipousuario/edit/:id', component: TipousuarioAdminEditRoutedComponent, canActivate: [AdminGuard]},
