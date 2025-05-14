@@ -49,7 +49,7 @@ import { EntrenadorPersonalGuard } from './guards/EntrenadorPersonal.guard';
 export const routes: Routes = [
 
     { path: '', component: SharedHomeRoutedComponent, canActivate: [AdminOrEntrenadorPersonalGuard] },
-    { path: 'home', component: SharedHomeRoutedComponent, canActivate: [AdminOrEntrenadorPersonalGuard] },
+    { path: 'home', component: SharedHomeRoutedComponent },
     { path: 'login', component: SharedLoginRoutedComponent },
     { path: 'logout', component: SharedLogoutRoutedComponent },
     { path: 'byemail/:email', component: SharedByemailRoutedComponent, canActivate: [AdminOrEntrenadorPersonalOrClienteGuard] },

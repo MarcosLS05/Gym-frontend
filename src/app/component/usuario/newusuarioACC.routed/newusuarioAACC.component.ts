@@ -3,9 +3,10 @@ import { UsuarioService } from '../../../service/usuario.service';
 import { IUsuario } from '../../../model/usuario.interface';
 import { CryptoService } from '../../../service/crypto.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, Validators } from '@angular/forms';
 import { TrimPipe } from '../../../pipe/trim.pipe';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-registro-usuario',
@@ -15,6 +16,9 @@ import { RouterModule } from '@angular/router';
     imports: [CommonModule, FormsModule, RouterModule],
 })
 export class newusuarioACCComponent {
+togglePasswordVisibility() {
+throw new Error('Method not implemented.');
+}
   usuario: IUsuario = {
     id: 0,
     nombre: '',
@@ -28,31 +32,83 @@ export class newusuarioACCComponent {
     },
   };
 
+  esEntrenador: boolean = false; // Por defecto es cliente
+  mensajeExito: string = '';
+  mensajeError: string = '';
+
   constructor(
     private usuarioService: UsuarioService,
-    private oCryptoService: CryptoService
+    private oCryptoService: CryptoService,
+    private router: Router
   ) {}
 
-  registrarUsuario() {
-    // Crear un objeto con los campos necesarios y la contraseña hasheada
-    const usuarioHasheado = {
-      nombre: this.usuario.nombre,
-      apellido1: this.usuario.apellido1,
-      apellido2: this.usuario.apellido2,
-      email: this.usuario.email,
-      password: this.oCryptoService.getHashSHA256(this.usuario.password),
-      
-    };
+  limpiarMensajes() {
+  this.mensajeExito = '';
+  this.mensajeError = '';
+}
 
-    this.usuarioService.register(usuarioHasheado).subscribe(
-      (response) => {
-        console.log('Usuario registrado con éxito:', response);
-        // Aquí puedes manejar el éxito, como redirigir a otra página o mostrar un mensaje
-      },
-      (error) => {
-        console.error('Error al registrar el usuario:', error);
-        // Aquí puedes manejar el error, como mostrar un mensaje de error en la UI
-      }
-    );
+registrarUsuario() {
+  this.limpiarMensajes();
+
+  // Validaciones manuales
+  if (!this.usuario.nombre || this.usuario.nombre.trim().length === 0) {
+    this.mensajeError = 'El nombre es obligatorio.';
+    this.resetError();
+    return;
   }
+
+  if (!this.usuario.apellido1 || this.usuario.apellido1.trim().length === 0) {
+    this.mensajeError = 'El primer apellido es obligatorio.';
+    this.resetError();
+    return;
+  }
+
+  if (!this.usuario.email || !this.validarEmail(this.usuario.email)) {
+    this.mensajeError = 'Correo electrónico inválido.';
+    this.resetError();
+    return;
+  }
+
+  if (!this.usuario.password || this.usuario.password.length < 8) {
+    this.mensajeError = 'La contraseña debe tener al menos 8 caracteres.';
+    this.resetError();
+    return;
+  }
+
+  const usuarioHasheado = {
+    nombre: this.usuario.nombre.trim(),
+    apellido1: this.usuario.apellido1.trim(),
+    apellido2: this.usuario.apellido2?.trim() || '',
+    email: this.usuario.email.trim(),
+    password: this.oCryptoService.getHashSHA256(this.usuario.password),
+    esEntrenador: this.esEntrenador
+  };
+
+  this.usuarioService.register(usuarioHasheado).subscribe(
+    (response) => {
+      this.mensajeExito = 'Cuenta creada correctamente. Redirigiendo...';
+      setTimeout(() => {
+        this.limpiarMensajes();
+        this.router.navigate(['/login']);
+      }, 3000);
+    },
+    (error) => {
+      this.mensajeError = 'Error al registrar el usuario. Intente nuevamente.';
+      this.resetError();
+    }
+  );
+}
+
+private validarEmail(email: string): boolean {
+  const patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return patron.test(email);
+}
+
+private resetError() {
+  setTimeout(() => {
+    this.limpiarMensajes();
+  }, 3000);
+}
+
+
 }
