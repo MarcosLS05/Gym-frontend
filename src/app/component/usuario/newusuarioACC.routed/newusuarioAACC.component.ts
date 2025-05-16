@@ -26,6 +26,12 @@ throw new Error('Method not implemented.');
     apellido2: '',
     email: '',
     password: '',
+    telefono: '',
+    provincia: '',
+    codigo_postal: 0,
+    direccion: '',
+    dni: '',
+    fecha_nacimiento: new Date(),
     tipousuario: {
       id: 0,
       titulo: '',
@@ -75,11 +81,59 @@ registrarUsuario() {
     return;
   }
 
+  if (!this.usuario.telefono || this.usuario.telefono.trim().length !== 9) {
+    this.mensajeError = 'El teléfono debe tener 9 dígitos.';
+    this.resetError();
+    return;
+  }
+
+  if (!this.usuario.codigo_postal || this.usuario.codigo_postal.toString().length !== 5) {
+    this.mensajeError = 'El código postal debe tener 5 dígitos.';
+    this.resetError();
+    return;
+  }
+
+  if (!this.usuario.direccion || this.usuario.direccion.trim().length === 0) {
+    this.mensajeError = 'La dirección es obligatoria.';
+    this.resetError();
+    return;
+  }
+
+  if (!this.usuario.dni || this.usuario.dni.trim().length === 0) {
+    this.mensajeError = 'El DNI es obligatorio.';
+    this.resetError();
+    return;
+  }
+
+  if (!this.usuario.provincia || this.usuario.provincia.trim().length === 0) {
+    this.mensajeError = 'La provincia es obligatoria.';
+    this.resetError();
+    return;
+  }
+
+  if (!this.usuario.fecha_nacimiento) {
+    this.mensajeError = 'La fecha de nacimiento es obligatoria.';
+    this.resetError();
+    return;
+  }
+
+  if (this.usuario.fecha_nacimiento > new Date()) {
+    this.mensajeError = 'La fecha de nacimiento no puede ser futura.';
+    this.resetError();
+    return;
+  }
+
   const usuarioHasheado = {
     nombre: this.usuario.nombre.trim(),
     apellido1: this.usuario.apellido1.trim(),
     apellido2: this.usuario.apellido2?.trim() || '',
     email: this.usuario.email.trim(),
+    telefono: this.usuario.telefono.trim(),
+    provincia: this.usuario.provincia.trim(),
+    codigo_postal: this.usuario.codigo_postal,
+    direccion: this.usuario.direccion.trim(),
+    dni: this.usuario.dni.trim(),
+    fecha_nacimiento: this.usuario.fecha_nacimiento,
     password: this.oCryptoService.getHashSHA256(this.usuario.password),
     esEntrenador: this.esEntrenador
   };

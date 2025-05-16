@@ -120,17 +120,24 @@ export class UsuarioService {
     return this.oHttp.post<IUsuario>(URL, oUsuario, httpOptions);
   }
 
-    // Método para registrar un nuevo usuario
+// Método para registrar un nuevo usuario con todos los campos requeridos
 register(datos: {
   nombre: string;
   apellido1: string;
   apellido2: string;
   email: string;
   password: string;
+  telefono: string;
+  codigo_postal: number;
+  direccion: string;
+  provincia: string;
+  dni: string;
+  fecha_nacimiento: Date; // Formato 'yyyy-MM-dd'
 }): Observable<any> {
   const URL = `${serverURL}/auth/register`;
   return this.oHttp.post<any>(URL, datos, httpOptions);
 }
+
 
   
 

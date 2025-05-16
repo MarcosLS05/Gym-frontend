@@ -32,6 +32,30 @@
               <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Correo</th>
               <td class="text-start ps-4 py-3">{{ oUsuario.email }}</td>
             </tr>
+                        <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Télefono</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.telefono }}</td>
+            </tr>
+                        <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Provincia</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.provincia }}</td>
+            </tr>
+                        <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Código Postal</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.codigo_postal }}</td>
+            </tr>
+                        <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Dirección</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.direccion }}</td>
+            </tr>
+                        <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">DNI</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.dni }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Fecha nacimiento</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.fecha_nacimiento | date : 'dd/MM/yyyy' }}</td>
+            </tr>
             <tr>
               <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Tipo de Usuario</th>
               <td class="text-start ps-5">

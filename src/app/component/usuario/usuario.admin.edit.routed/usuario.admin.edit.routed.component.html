@@ -9,18 +9,7 @@
         </div>
         <div class="card-body">
           <form [formGroup]="oUsuarioForm!" (ngSubmit)="onSubmit()" novalidate>
-            <div class="mb-3">
-              <label for="id" class="form-label fw-bold">ID</label>
-              <input
-                type="text"
-                id="id"
-                class="form-control"
-                formControlName="id"
-                placeholder="ID"
-                readonly
-              />
-              <div class="form-text">No se puede cambiar.</div>
-            </div>
+
 
             <div class="mb-3">
               <label for="nombre" class="form-label fw-bold">Nombre</label>
@@ -84,6 +73,93 @@
               </div>
             </div>
 
+            <div class="mb-3">
+              <label for="telefono" class="form-label fw-bold">Télefono</label>
+              <input
+                type="telefono"
+                id="telefono"
+                class="form-control"
+                formControlName="telefono"
+                placeholder="Teléfono"
+              />
+              <div *ngIf="oUsuarioForm?.get('telefono')?.errors" class="text-danger">
+                <small *ngIf="oUsuarioForm?.get('telefono')?.hasError('required')">Debes introducir un telefono.</small>
+                <small *ngIf="oUsuarioForm?.get('telefono')?.hasError('maxlength')">El formato del código postal debe contener 9 dígitos.</small>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="provincia" class="form-label fw-bold">Provincia</label>
+              <input
+                type="provincia"
+                id="provincia"
+                class="form-control"
+                formControlName="provincia"
+                placeholder="Provincia"
+              />
+              <div *ngIf="oUsuarioForm?.get('provincia')?.errors" class="text-danger">
+                <small *ngIf="oUsuarioForm?.get('provincia')?.hasError('required')">Debes introducir una provincia.</small>
+                <small *ngIf="oUsuarioForm?.get('provincia')?.hasError('provincia')">El formato de la provincia es incorrecto.</small>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="codigo_postal" class="form-label fw-bold">Código postal</label>
+              <input
+                type="codigo_postal"
+                id="codigo_postal"
+                class="form-control"
+                formControlName="codigo_postal"
+                placeholder="Código postal"
+              />
+              <div *ngIf="oUsuarioForm?.get('codigo_postal')?.errors" class="text-danger">
+                <small *ngIf="oUsuarioForm?.get('codigo_postal')?.hasError('required')">Debes introducir un código postal.</small>
+                <small *ngIf="oUsuarioForm?.get('codigo_postal')?.hasError('maxlength')">El formato del código postal debe contener 5 dígitos.</small>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="direccion" class="form-label fw-bold">Dirección</label>
+              <input
+                type="direccion"
+                id="direccion"
+                class="form-control"
+                formControlName="direccion"
+                placeholder="Dirección"
+              />
+              <div *ngIf="oUsuarioForm?.get('direccion')?.errors" class="text-danger">
+                <small *ngIf="oUsuarioForm?.get('direccion')?.hasError('required')">Debes introducir una dirección.</small>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="direccion" class="form-label fw-bold">DNI</label>
+              <input
+                type="dni"
+                id="dni"
+                class="form-control"
+                formControlName="dni"
+                placeholder="DNI"
+              />
+              <div *ngIf="oUsuarioForm?.get('dni')?.errors" class="text-danger">
+                <small *ngIf="oUsuarioForm?.get('dni')?.hasError('required')">Debes introducir una dirección.</small>
+                <small *ngIf="oUsuarioForm?.get('dni')?.hasError('maxlength')">El campo dni ha de contener 9 digitos</small>
+              </div>
+            </div>
+
+            <div>
+              <label for="password" class="form-label fw-bold">Fecha nacimiento</label>
+              <input
+                type="date"
+                id="fecha_nacimiento"
+                class="form-control"
+                formControlName="fecha_nacimiento"
+                placeholder="Fecha de nacimiento"
+              />
+              <div *ngIf="oUsuarioForm?.get('fecha_nacimiento')?.errors" class="text-danger">
+                <small *ngIf="oUsuarioForm?.get('fecha_nacimiento')?.hasError('required')">Debes introducir una fecha de nacimiento.</small>
+              </div>
+            </div>
 
            
 

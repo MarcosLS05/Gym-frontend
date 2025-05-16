@@ -41,43 +41,79 @@
             <table class="table table-hover table-striped">
               <thead class="thead-dark">
                 <tr>
-                  <th (click)="sort('id')" class="cursor-pointer">
+                  <th (click)="sort('id')" class="cursor-pointer text-center">
                     ID @if (strField === 'id') { @if (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('nombre')" class="cursor-pointer">
+                  <th (click)="sort('nombre')" class="cursor-pointer text-center">
                     Nombre @if (strField === 'nombre') { @if (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('apellido1')" class="cursor-pointer">
+                  <th (click)="sort('apellido1')" class="cursor-pointer text-center">
                     Primer Apellido @if (strField === 'apellido1') { @if (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('apellido2')" class="cursor-pointer">
+                  <th (click)="sort('apellido2')" class="cursor-pointer text-center">
                     Segundo Apellido @if (strField === 'apellido2') { @if (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('email')" class="cursor-pointer">
+                  <th (click)="sort('email')" class="cursor-pointer text-center">
                     Correo @if (strField === 'email') { @if (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('tipousuario')" class="cursor-pointer">
+                  <th (click)="sort('telefono')" class="cursor-pointer text-center">
+                    Télefono @if (strField === 'telefono') { @if (strDir === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
+                  <th (click)="sort('telefono')" class="cursor-pointer text-center">
+                    Provincia @if (strField === 'telefono') { @if (strDir === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
+                    <th (click)="sort('codigo_postal')" class="cursor-pointer text-center">
+                    Código postal @if (strField === 'codigo_postal') { @if (strDir === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
+                  <th (click)="sort('direccion')" class="cursor-pointer text-center">
+                    Direccion @if (strField === 'direccion') { @if (strDir === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>                                  
+                    <th (click)="sort('dni')" class="cursor-pointer text-center">
+                    DNI @if (strField === 'dni') { @if (strDir === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>                                    
+                    <th (click)="sort('fecha_nacimiento')" class="cursor-pointer text-center">
+                    Fecha Nacimiento @if (strField === 'fecha_nacimiento') { @if (strDir === 'desc') {
+                    <i class="bi bi-caret-down-fill"></i>
+                    } @else {
+                    <i class="bi bi-caret-up-fill"></i>} }
+                  </th>
+                  <th (click)="sort('tipousuario')" class="cursor-pointer text-center">
                     Tipo de usuario @if (strField === 'tipousuario') { @if (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
                     <i class="bi bi-caret-up-fill"></i>} }
                   </th>
-                  <th (click)="sort('tipousuario')" class="cursor-pointer">
+                  <th (click)="sort('tipousuario')" class="cursor-pointer text-center">
                     Contratos @if (strField === 'tipousuario') { @if (strDir === 'desc') {
                     <i class="bi bi-caret-down-fill"></i>
                     } @else {
@@ -91,10 +127,16 @@
                 @for (usuario of oPage?.content; track usuario.id) {
                 <tr>
                   <td class="text-center">{{ usuario.id }}</td>
-                  <td>{{ usuario.nombre | trim : 10 }}</td>
-                  <td>{{ usuario.apellido1 }}</td>
-                  <td>{{ usuario.apellido2 }}</td>
-                  <td style="font-size: small">{{ usuario.email }}</td>
+                  <td class="text-center">{{ usuario.nombre | trim : 10 }}</td>
+                  <td class="text-center">{{ usuario.apellido1 }}</td>
+                  <td class="text-center">{{ usuario.apellido2 }}</td>
+                  <td style="font-size: small text-center">{{ usuario.email }}</td>
+                  <td class="text-center">{{ usuario.telefono }}</td>
+                  <td class="text-center">{{ usuario.provincia }}</td>
+                  <td class="text-center">{{ usuario.codigo_postal }}</td>
+                  <td class="text-center">{{ usuario.direccion }}</td>
+                  <td class="text-center">{{ usuario.dni }}</td>
+                  <td class="text-center">{{ usuario.fecha_nacimiento | date : 'dd/MM/yyyy' }}</td>
                     <td class="text-start">
                       <a href="admin/tipousuario/view/{{ usuario.tipousuario.id }}">
                         {{ usuario.tipousuario.titulo }} ({{ usuario.tipousuario.id }})

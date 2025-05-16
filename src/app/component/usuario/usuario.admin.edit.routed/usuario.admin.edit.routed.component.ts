@@ -74,7 +74,7 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
 
   createForm() {
     this.oUsuarioForm = new FormGroup({
-      id: new FormControl('', [Validators.required]),
+      id: new FormControl(0),
       nombre: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
@@ -87,10 +87,25 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
       ]),
       apellido2: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
+      telefono: new FormControl('', [
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(9),]),
+      provincia: new FormControl(''),
+      codigo_postal: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(5),]),
+      direccion: new FormControl(''),
+      dni: new FormControl('', [
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(9),]),
+      fecha_nacimiento: new FormControl(''),
       password: new FormControl(''),
       tipousuario: new FormGroup({
-        id: new FormControl('', Validators.required),
-        titulo: new FormControl(''),
+        id: new FormControl('', Validators.required), 
+        titulo: new FormControl(''), 
       }),
     });
   }
@@ -103,6 +118,12 @@ export class UsuarioAdminEditRoutedComponent implements OnInit {
         apellido1: this.oUsuario.apellido1,
         apellido2: this.oUsuario.apellido2,
         email: this.oUsuario.email,
+        telefono: this.oUsuario.telefono,
+        provincia: this.oUsuario.provincia,
+        codigo_postal: this.oUsuario.codigo_postal,
+        direccion: this.oUsuario.direccion,
+        dni: this.oUsuario.dni,
+        fecha_nacimiento: this.oUsuario.fecha_nacimiento,
         tipousuario: {
           id: this.oUsuario.tipousuario?.id || '',
           titulo: this.oUsuario.tipousuario?.titulo || '',

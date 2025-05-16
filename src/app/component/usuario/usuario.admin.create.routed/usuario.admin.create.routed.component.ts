@@ -2,13 +2,18 @@ import { Component,inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+
+
 import { MatSelectModule } from '@angular/material/select';
 import { CryptoService } from '../../../service/crypto.service';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import {
   FormControl,
   FormGroup,  
   ReactiveFormsModule,
+  FormsModule,
   Validators,
 } from '@angular/forms';
 import { IUsuario } from '../../../model/usuario.interface';
@@ -35,6 +40,13 @@ declare let bootstrap: any;
     RouterModule,
     CommonModule,
     MatIconModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     
   ],
   styleUrls: ['./usuario.admin.create.routed.component.css'],
@@ -106,10 +118,25 @@ export class UsuarioAdminCreateRoutedComponent implements OnInit {
       ]),
       apellido2: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
+      telefono: new FormControl('', [
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(9),]),
+      provincia: new FormControl(''),
+      codigo_postal: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(5),]),
+      direccion: new FormControl(''),
+      dni: new FormControl('', [
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(9),]),
+      fecha_nacimiento: new FormControl(''),
       password: new FormControl(''),
       tipousuario: new FormGroup({
-        id: new FormControl('', Validators.required), // ID de tipocuenta
-        titulo: new FormControl(''), // titulo de tipocuenta
+        id: new FormControl('', Validators.required), 
+        titulo: new FormControl(''), 
       }),
     });
   }
