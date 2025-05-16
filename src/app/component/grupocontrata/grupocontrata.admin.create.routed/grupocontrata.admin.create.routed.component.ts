@@ -121,23 +121,25 @@ export class GrupocontrataAdminCreateRoutedComponent implements OnInit {
     this.oRouter.navigate(['/admin/grupocontrata/view/' + this.oGrupocontrata?.id]);
   }
 
-  onSubmit() {
-    if (!this.oGrupocontrataForm?.valid) {
-      this.showModal('Formulario no válido');
-      return;
-    } else {
-      this.oGrupocontrataService.create(this.oGrupocontrataForm?.value).subscribe({
-        next: (oGrupocontrata: IGrupocontrata) => {
-          this.oGrupocontrata = oGrupocontrata;
-          this.showModal('Contrato creado con el id: ' + this.oGrupocontrata.id);
-        },
-        error: (error) => {
-          this.showModal('Error al crear el contrato');
-          console.error(error);
-        },
-      });
-    }
+onSubmit() {
+  if (!this.oGrupocontrataForm?.valid) {
+    this.showModal('Formulario no válido');
+    return;
+  } else {
+    // Añade la fecha de creación al objeto antes de enviarlo
+    const formValue = { ...this.oGrupocontrataForm.value, creadoEn: new Date() };
+    this.oGrupocontrataService.create(formValue).subscribe({
+      next: (oGrupocontrata: IGrupocontrata) => {
+        this.oGrupocontrata = oGrupocontrata;
+        this.showModal('Contrato creado con el id: ' + this.oGrupocontrata.id);
+      },
+      error: (error) => {
+        this.showModal('Error al crear el contrato');
+        console.error(error);
+      },
+    });
   }
+}
   
   showPlanesentrenamientoSelectorModal() {
     const dialogRef = this.dialog.open(PlanesentrenamientoselectorComponent, {

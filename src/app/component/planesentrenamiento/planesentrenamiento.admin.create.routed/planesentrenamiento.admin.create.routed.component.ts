@@ -58,6 +58,7 @@ export class PlanesentrenamientoAdminCreateRoutedComponent implements OnInit {
 
   createForm() {
     this.oPlanesentrenamientoForm = new FormGroup({
+      dificultad: new FormControl(''),
       titulo: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
@@ -68,13 +69,15 @@ export class PlanesentrenamientoAdminCreateRoutedComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(50),
       ]),
+      
     });
   }
 
   updateForm() {
     this.oPlanesentrenamientoForm?.controls['titulo'].setValue('');
     this.oPlanesentrenamientoForm?.controls['descripcion'].setValue('');
-
+    this.oPlanesentrenamientoForm?.controls['dificultad'].setValue('');
+    this.oPlanesentrenamientoForm?.controls['fecha_creacion'].setValue(new Date());
    
   }
 

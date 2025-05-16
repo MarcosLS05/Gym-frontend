@@ -5,6 +5,7 @@ export interface IGrupocontrata {
   titulo: string;
   descripcion: string;
   usuario: IUsuario;
+  creadoEn: Date;
   planesentrenamiento: IPlanesentrenamiento;
   
 }
