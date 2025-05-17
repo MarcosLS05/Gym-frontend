@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../../service/login.service';
 import { SessionService } from '../../../service/session.service';
 import { CryptoService } from '../../../service/crypto.service';
+import { UsuarioService } from '../../../service/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class SharedLoginRoutedComponent implements OnInit {
     private oLoginService: LoginService,
     private oSessionService: SessionService,
     private oRouter: Router,
-    private oCryptoService: CryptoService
+    private oCryptoService: CryptoService,
+    private oUsuarioService: UsuarioService
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -40,29 +42,36 @@ export class SharedLoginRoutedComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      const hashedPassword = this.oCryptoService.getHashSHA256(this.loginForm.value.password);
-      this.oLoginService.login(this.loginForm.value.email, hashedPassword).subscribe({
-        next: (token: string) => {
-          console.log('Token recibido:', token);
-          alert('Inicio de sesión exitoso');
+onSubmit() {
+  if (this.loginForm.valid) {
+    const hashedPassword = this.oCryptoService.getHashSHA256(this.loginForm.value.password);
+    this.oLoginService.login(this.loginForm.value.email, hashedPassword).subscribe({
+      next: (token: string) => {
+        this.oSessionService.login(token);
+        console.log('Token recibido:', token);
+        // Obtener usuario completo con rol
+        this.oUsuarioService.getUsuarioByEmail(this.loginForm.value.email).subscribe({
+          next: (user) => {
+            console.log('Usuario completo:', user);
+            this.oSessionService.setUsuario(user);
 
-          this.oSessionService.login(token);
-          this.oRouter.navigate(['/']);
+            // Aquí puedes guardar el usuario en algún servicio global o BehaviorSubject
+            // para que esté disponible en toda la app
+          },
+          error: (err) => {
+            console.error('Error al obtener usuario:', err);
+          }
+        });
 
-          //let parsedToken: IJwt;
-          //parsedToken = this.oSessionService.parseJwt(token);
-          //console.log('Token parseado:', parsedToken);
-        },
-        error: (error: HttpErrorResponse) => {
-          console.error('Error al realizar la solicitud', error);
-          alert('Correo o contraseña incorrectos');
-          this.errorMessage = 'Correo o contraseña incorrectos';
-        }
-      });
-    }
+        alert('Inicio de sesión exitoso');
+        this.oRouter.navigate(['/']);
+      },
+      error: (error: HttpErrorResponse) => {
+        alert('Correo o contraseña incorrectos');
+      }
+    });
   }
+}
 
   onAdmin() {
     this.loginForm.setValue({

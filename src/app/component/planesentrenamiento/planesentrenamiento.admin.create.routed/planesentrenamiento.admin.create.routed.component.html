@@ -27,6 +27,21 @@
             </mat-error>
           </mat-form-field>
         </div>
+        <!-- DIFICULTAD -->
+<div class="row mt-4">
+  <mat-form-field appearance="fill">
+    <mat-label>Dificultad</mat-label>
+    <mat-select formControlName="dificultad" required>
+      <mat-option value="BASICO">Básico</mat-option>
+      <mat-option value="INTERMEDIO">Intermedio</mat-option>
+      <mat-option value="AVANZADO">Avanzado</mat-option>
+    </mat-select>
+    <mat-error *ngIf="oPlanesentrenamientoForm?.get('dificultad')?.hasError('required')">
+      Debes seleccionar una dificultad
+    </mat-error>
+  </mat-form-field>
+</div>
+
         <div class="row mt-4">
           <mat-form-field>
             <mat-label>Descripcion</mat-label>

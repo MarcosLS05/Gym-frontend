@@ -1,0 +1,23 @@
+<form [formGroup]="oForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="titulo" class="form-label">Título</label>
+    <input id="titulo" type="text" class="form-control" formControlName="titulo" required />
+  </div>
+
+  <div class="mb-3">
+    <label for="descripcion" class="form-label">Descripción</label>
+    <textarea id="descripcion" class="form-control" rows="4" formControlName="descripcion" required></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="dificultad" class="form-label">Dificultad</label>
+    <select id="dificultad" class="form-select" formControlName="dificultad" required>
+      <option value="" disabled>Seleccione una dificultad</option>
+      <option value="BASICA">Básica</option>
+      <option value="MEDIA">Intermedia</option>
+      <option value="AVANZADA">Avanzada</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="oForm.invalid">Crear plan</button>
+</form>

@@ -6,45 +6,61 @@
       <i class="bi bi-person-circle"></i>
     </h1>
     <br />
-    <table class="table table-striped table-bordered my-5 text-center">
-      <tbody>
-        <tr class="text-center">
-          <th scope="row" class="bg-danger text-white text-end pe-5">Id</th>
-          <td class="text-start ps-5">{{ oUsuario.id }}</td>
-        </tr>
-        <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Nombre
-          </th>
-          <td class="text-start ps-5">{{ oUsuario.nombre }}</td>
-        </tr>
-        <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Primer Apellido
-          </th>
-          <td class="text-start ps-5">{{ oUsuario.apellido1 }}</td>
-        </tr>
-        <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Segundo Apellido
-          </th>
-          <td class="text-start ps-5">{{ oUsuario.apellido2 }}</td>
-        </tr>
-        <tr class="text-center">
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Correo
-          </th>
-          <td class="text-start ps-5">{{ oUsuario.email }}</td>
-        </tr>
-        <tr>
-          <th scope="row" class="bg-primary text-white text-end pe-5">
-            Tipo de usuario
-          </th>
-          <td class="text-start ps-5">
-            {{ oUsuario.tipousuario.titulo }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <table class="table table-hover table-borderless my-4">
+          <tbody>
+            <tr>
+              <th scope="row" class="bg-danger text-white text-end pe-4 py-3">ID</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.id }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Nombre</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.nombre }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Primer Apellido</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.apellido1 }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Segundo Apellido</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.apellido2 }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Correo</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.email }}</td>
+            </tr>
+                        <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Télefono</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.telefono }}</td>
+            </tr>
+                        <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Provincia</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.provincia }}</td>
+            </tr>
+                        <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Código Postal</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.codigo_postal }}</td>
+            </tr>
+                        <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Dirección</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.direccion }}</td>
+            </tr>
+                        <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">DNI</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.dni }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Fecha nacimiento</th>
+              <td class="text-start ps-4 py-3">{{ oUsuario.fecha_nacimiento | date : 'dd/MM/yyyy' }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Tipo de Usuario</th>
+              <td class="text-start ps-5">
+                <a [routerLink]="['/admin/tipousuario/view', oUsuario.tipousuario.id]">
+                  {{ oUsuario!.tipousuario.titulo }} ({{oUsuario!.tipousuario.id}})
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
   </div>
 </div>

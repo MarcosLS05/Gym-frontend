@@ -1,14 +1,15 @@
 import { inject, Injectable } from "@angular/core";
 import { IJwt } from "../model/jwt.interface";
-import { Subject } from "rxjs";
-
+import { BehaviorSubject, Subject } from "rxjs";
+import { IUsuario } from "../model/usuario.interface";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class SessionService {    
-
+    private usuarioSubject = new BehaviorSubject<IUsuario | null>(null);
+    usuario$ = this.usuarioSubject.asObservable();
     subjectLogin: Subject<void> = new Subject<void>();
     subjectLogout: Subject<void> = new Subject<void>();
 
@@ -64,6 +65,26 @@ export class SessionService {
         }
     }
 
+getUserRole(): string | null {
+  const token = this.getToken();
+  if (!token) return null;
+  const parsedToken = this.parseJwt(token);
+  // Aquí asumo que en el token el claim 'tipousuario' es un string (el título del rol)
+  if (parsedToken && parsedToken.tipousuario) {
+    return parsedToken.tipousuario;
+  }
+  return null;
+}
+
+    setUsuario(usuario: IUsuario): void {
+        this.usuarioSubject.next(usuario);
+    }
+
+    getUsuario(): IUsuario | null {
+        return this.usuarioSubject.value;
+    }
+
+
     private parseJwt(token: string): IJwt {
         var base64Url = token.split('.')[1];
         var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -90,6 +111,7 @@ export class SessionService {
     logout(): void {
         this.deleteToken();
         this.subjectLogout.next();
+        this.usuarioSubject.next(null);
     }
 
 
