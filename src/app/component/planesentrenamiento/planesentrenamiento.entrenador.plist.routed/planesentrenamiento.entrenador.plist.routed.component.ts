@@ -13,8 +13,8 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
-  selector: 'app-planesentrenamiento.entrenador.create',
-  templateUrl: './planesentrenamiento.entrenador.create.routed.component.html',
+  selector: 'app-planesentrenamiento-entrenador-plist',
+  templateUrl: 'planesentrenamiento.entrenador.plist.routed.component.html',
   imports: [
     MatDialogModule,
     MatFormFieldModule,
@@ -25,12 +25,15 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     MatIconModule,
   ],
-  styleUrls: ['./planesentrenamiento.entrenador.create.routed.component.css'],
+  styleUrls: ['planesentrenamiento.entrenador.plist.routed.component.css'],
 })
-export class PlanesentrenamientoEntrenadorCreateRoutedComponent implements OnInit {
+
+export class PlanesentrenamientoEntrenadorPlistRoutedComponent implements OnInit {
   private oRouter = inject(Router);
   private oSessionService: SessionService = inject(SessionService);
   private id_usuario: number = 0;
+
+    public misPlanes: IPlanesentrenamiento[] = [];
 
   public oForm: FormGroup = new FormGroup({
     titulo: new FormControl('', [Validators.required]),
@@ -43,45 +46,23 @@ export class PlanesentrenamientoEntrenadorCreateRoutedComponent implements OnIni
   ) {}
 
 ngOnInit(): void {
-  const tipo = this.oSessionService.getUserRole();
-  if (tipo === 'Entrenador Personal') {
-    const id = this.oSessionService.getUserId();
-    if (id && id > 0) {
-      this.id_usuario = id;
-    } else {
-      console.error('ID de usuario no válido');
-    }
-  } else {
-    console.warn('Tipo de usuario no autorizado');
+  const idCreador = this.oSessionService.getUserId(); // o como lo tengas guardado
+  if (idCreador) {
+    this.planesentrenamientoService.getPlanesByCreador(idCreador).subscribe({
+      next: (planes) => {
+        this.misPlanes = planes;
+        console.log('Planes del creador:', planes);
+      },
+      error: (err) => {
+        console.error('Error al obtener los planes:', err);
+      }
+    });
   }
 }
 
-
-
-
-  onSubmit(): void {
-    if (this.oForm.valid) {
-      const formData = this.oForm.value;
-      const { titulo, descripcion, dificultad } = formData;
-
-      if (!this.id_usuario || this.id_usuario <= 0) {
-        console.error('ID de creador no válido:', this.id_usuario);
-        return;
-      }
-
-      this.planesentrenamientoService.createPlan(
-        { titulo, descripcion, dificultad },
-        this.id_usuario
-      ).subscribe({
-        next: (data) => {
-          
-          // Redirigir, mostrar notificación, etc.
-          this.oRouter.navigate(['/']); // ejemplo
-        },
-        error: (err) => {
-          console.error('Error al crear el plan:', err);
-        }
-      });
-    }
+  edit(oPlanesentrenamiento: IPlanesentrenamiento) {
+    //navegar a la página de edición
+    this.oRouter.navigate(['entrenador/planesentrenamiento/edit', oPlanesentrenamiento.id]);
   }
+
 }

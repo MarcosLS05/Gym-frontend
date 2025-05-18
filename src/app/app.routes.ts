@@ -23,8 +23,9 @@ import { PlanesentrenamientoAdminPlistRoutedComponent } from './component/planes
 import { PlanesentrenamientoAdminEditRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.admin.edit.routed/planesentrenamiento.admin.edit.routed.component';
 import { PlanesentrenamientoAdminViewRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.admin.view.routed/planesentrenamiento.admin.view.routed.component';
 import { PlanesentrenamientoAdminDeleteRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.admin.delete.routed/planesentrenamiento.admin.delete.component';
-//import { PlanesentrenamientoEntrenadorCreateRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.entrenador.create.routed/planesentrenamiento.entrenador.create.routed.component';
-
+import { PlanesentrenamientoEntrenadorCreateRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.entrenador.create.routed/planesentrenamiento.entrenador.create.routed.component';
+import { PlanesentrenamientoEntrenadorPlistRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.entrenador.plist.routed/planesentrenamiento.entrenador.plist.routed.component';
+import { PlanesentrenamientoEntrenadorEditRoutedComponent } from './component/planesentrenamiento/planesentrenamiento.entrenador.edit.routed/planesentrenamiento.entrenador.edit.routed.component';
 
 import { GrupocontrataAdminPlistRoutedComponent } from './component/grupocontrata/grupocontrata.admin.plist.routed/grupocontrata.admin.plist.routed.component';
 import { GrupocontrataAdminEditRoutedComponent } from './component/grupocontrata/grupocontrata.admin.edit.routed/grupocontrata.admin.edit.routed.component';
@@ -72,10 +73,12 @@ export const routes: Routes = [
 
     { path: 'admin/planesentrenamiento/create', component: PlanesentrenamientoAdminCreateRoutedComponent, pathMatch: 'full', canActivate: [AdminOrEntrenadorPersonalGuard] },
     { path: 'admin/planesentrenamiento/plist', component: PlanesentrenamientoAdminPlistRoutedComponent, canActivate: [AdminOrEntrenadorPersonalGuard]},
-    { path: 'admin/planesentrenamiento/edit/:id', component: PlanesentrenamientoAdminEditRoutedComponent, canActivate: [AdminGuard]},
+    { path: 'admin/planesentrenamiento/edit/:id', component: PlanesentrenamientoAdminEditRoutedComponent, canActivate: [AdminOrEntrenadorPersonalGuard]},
     { path: 'admin/planesentrenamiento/view/:id', component: PlanesentrenamientoAdminViewRoutedComponent, canActivate: [AdminOrEntrenadorPersonalGuard]},
     { path: 'admin/planesentrenamiento/delete/:id', component: PlanesentrenamientoAdminDeleteRoutedComponent, canActivate: [AdminGuard]},
-//    { path: 'entrenador/planesentrenamiento/create', component: PlanesentrenamientoEntrenadorCreateRoutedComponent, canActivate: [EntrenadorPersonalGuard]},
+    { path: 'entrenador/planesentrenamiento/create', component: PlanesentrenamientoEntrenadorCreateRoutedComponent, canActivate: [EntrenadorPersonalGuard]},
+    { path: 'entrenador/planesentrenamiento/plist', component: PlanesentrenamientoEntrenadorPlistRoutedComponent, canActivate: [EntrenadorPersonalGuard] },
+    { path: 'entrenador/planesentrenamiento/edit/:id', component: PlanesentrenamientoEntrenadorEditRoutedComponent, canActivate: [EntrenadorPersonalGuard]},
 
     { path: 'admin/grupocontrata/create', component: GrupocontrataAdminCreateRoutedComponent, canActivate: [AdminGuard], pathMatch: 'full', },
     { path: 'admin/grupocontrata/plist', component: GrupocontrataAdminPlistRoutedComponent, canActivate: [AdminGuard]},

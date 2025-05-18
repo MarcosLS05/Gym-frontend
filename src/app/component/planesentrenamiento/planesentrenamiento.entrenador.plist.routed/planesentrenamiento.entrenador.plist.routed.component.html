@@ -1,0 +1,50 @@
+<div class="plans-container">
+  <h2 class="main-title">Mis Planes</h2>
+
+  <div *ngIf="misPlanes.length > 0; else noPlanes" class="cards-wrapper">
+    <div *ngFor="let plan of misPlanes" class="plan-card">
+      <div class="card-top">
+        <h3>{{ plan.titulo }}</h3>
+        <span class="difficulty" [ngClass]="{
+          'easy': plan.dificultad === 'BASICA',
+          'medium': plan.dificultad === 'MEDIA',
+          'hard': plan.dificultad === 'AVANZADA'
+        }">{{ plan.dificultad | lowercase }}</span>
+      </div>
+      <div class="card-content">
+        <p>{{ plan.descripcion }}</p>
+      </div>
+      <div class="card-footer">
+        <p class="date">Creado el: {{ plan.fecha_creacion }}</p>
+      </div>
+
+      <!-- Botón de edición -->
+      <div class="card-actions mt-3">
+        <button
+          class="btn btn-sm btn-primary"
+          [routerLink]="['/entrenador/planesentrenamiento/edit', plan.id]"
+        >
+          <i class="bi bi-pencil"></i> Editar
+        </button>
+                <button
+          class="btn btn-sm btn-primary"
+          [routerLink]="['/entrenador/planesentrenamiento/view', plan.id]"
+        >
+          <i class="bi bi-pencil"></i> Ver
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noPlanes>
+    <div class="empty-message">
+      <p>No tienes planes creados.</p>
+      <button
+          class="btn btn-sm btn-primary"
+          [routerLink]="['/entrenador/planesentrenamiento/create']"
+        >
+          <i class="bi bi-pencil"></i> Crear mi primer plan
+        </button>
+    </div>
+  </ng-template>
+</div>

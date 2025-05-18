@@ -75,6 +75,13 @@ getUserRole(): string | null {
   }
   return null;
 }
+getUserId(): number | null {
+  const token = this.getToken();
+  if (!token) return null;
+  const parsed: any = this.parseJwt(token);
+  if (parsed && parsed.id) return parsed.id;
+  return null;
+}
 
     setUsuario(usuario: IUsuario): void {
         this.usuarioSubject.next(usuario);

@@ -70,8 +70,14 @@ export class PlanesentrenamientoService {
   }
 
 createPlan(plan: Partial<IPlanesentrenamiento>, idCreador: number): Observable<IPlanesentrenamiento> {
-  return this.oHttp.post<IPlanesentrenamiento>(`${serverURL}/create/${idCreador}`, plan);
+  return this.oHttp.post<IPlanesentrenamiento>(`${this.serverURL}/create/${idCreador}`, plan);
 }
+
+getPlanesByCreador(idCreador: number): Observable<IPlanesentrenamiento[]> {
+  const url = `${this.serverURL}/misplanes/${idCreador}`;
+  return this.oHttp.get<IPlanesentrenamiento[]>(url, httpOptions);
+}
+
 
 
   delete(id: number) {
