@@ -3,13 +3,17 @@ import { PlanesentrenamientoService } from '../../../service/planesentrenamiento
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { IPlanesentrenamiento } from '../../../model/planesentrenamiento.interface';
 import { SessionService } from '../../../service/session.service';
+import { CommonModule } from '@angular/common';
 
 declare let bootstrap: any;
 
 @Component({
   selector: 'app-planesentrenamiento-entrenador-delete-routed',
   standalone: true,
-  imports: [RouterModule],
+  imports: [
+    RouterModule,
+    CommonModule
+  ],
   templateUrl: './planesentrenamiento.entrenador.delete.routed.component.html',
   styleUrl: './planesentrenamiento.entrenador.delete.routed.component.css',
 })

@@ -99,6 +99,35 @@
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
+/* Estilos para el menú colapsable en móvil */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Oculto a la izquierda */
+    width: 250px;
+    height: 100%;
+    background-color: #2a5298;
+    padding: 1rem;
+    overflow-y: auto;
+    transition: left 0.3s ease-in-out;
+    z-index: 1050; /* Por encima del contenido */
+  }
+
+  .navbar-collapse.show {
+    left: 0; /* Aparece desde la izquierda */
+  }
+
+  .navbar-toggler {
+    z-index: 1060; /* Encima del menú */
+  }
+
+  /* Evita que el resto del contenido se desplace cuando el menú aparece */
+  body.offcanvas-active {
+    overflow: hidden;
+  }
+}
+
 
 /* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
