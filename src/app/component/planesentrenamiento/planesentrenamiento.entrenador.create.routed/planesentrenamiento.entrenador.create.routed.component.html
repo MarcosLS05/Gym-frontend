@@ -1,3 +1,6 @@
+<div class="plans-container">
+  <h2 class="main-title">Creación de planes</h2>
+
 <form [formGroup]="oForm" (ngSubmit)="onSubmit()">
   <div class="mb-3">
     <label for="titulo" class="form-label">Título</label>
@@ -21,3 +24,4 @@
 
   <button type="submit" class="btn btn-primary" [disabled]="oForm.invalid">Crear plan</button>
 </form>
+</div>

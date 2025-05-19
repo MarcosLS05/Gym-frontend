@@ -10,7 +10,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 declare let bootstrap: any;
 
@@ -24,6 +26,9 @@ declare let bootstrap: any;
     MatInputModule,
     ReactiveFormsModule,
     RouterModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
   ],
 })
 export class PlanesentrenamientoEntrenadorEditRoutedComponent implements OnInit {
@@ -59,12 +64,14 @@ export class PlanesentrenamientoEntrenadorEditRoutedComponent implements OnInit 
         Validators.minLength(3),
         Validators.maxLength(50),
       ]),
+      dificultad: new FormControl('', [
+        Validators.required,
+      ]),
       descripcion: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(50),
       ]),
-      fechaCreacion: new FormControl('', [Validators.required]),
     });
   }
   
@@ -85,8 +92,9 @@ export class PlanesentrenamientoEntrenadorEditRoutedComponent implements OnInit 
   updateForm() {
     this.oPlanesentrenamientoForm?.controls['id'].setValue(this.oPlanesentrenamiento?.id);
     this.oPlanesentrenamientoForm?.controls['titulo'].setValue(this.oPlanesentrenamiento?.titulo);
+    this.oPlanesentrenamientoForm?.controls['dificultad'].setValue(this.oPlanesentrenamiento?.dificultad);
     this.oPlanesentrenamientoForm?.controls['descripcion'].setValue(this.oPlanesentrenamiento?.descripcion);
-    this.oPlanesentrenamientoForm?.controls['fechaCreacion'].setValue(this.oPlanesentrenamiento?.fecha_creacion);
+    
   }
   
 
@@ -145,7 +153,7 @@ hideModal = () => {
         next: (oPlanesentrenamiento: IPlanesentrenamiento) => {
           this.oPlanesentrenamiento = oPlanesentrenamiento;
           this.updateForm();
-          this.showModal('planesentrenamiento ' + this.oPlanesentrenamiento.id + ' actualizado');
+          this.showModal('Plan actualizado');
         },
         error: (error) => {
           this.showModal('Error al actualizar el planesentrenamiento');

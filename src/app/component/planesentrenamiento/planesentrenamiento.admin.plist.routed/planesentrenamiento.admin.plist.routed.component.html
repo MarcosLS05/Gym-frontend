@@ -40,8 +40,11 @@
         <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm hover-effect">
             <div class="card-body">
-              <h5 class="card-title">{{ planesentrenamiento.titulo }}</h5>
-              <p class="card-text">{{ planesentrenamiento.descripcion }}</p>
+              <h5 class="card-title">{{ planesentrenamiento.titulo }}</h5>  
+              <p class="card-text">Dificultad: {{ planesentrenamiento.dificultad }}</p>
+              <p class="card-text">
+                Creado en: {{ planesentrenamiento.fechaCreacion | date: 'YYYY-MM-dd HH:MM' }}
+              </p>
             </div>
             <div class="card-footer bg-transparent border-0">
               <div class="btn-group w-100" role="group">

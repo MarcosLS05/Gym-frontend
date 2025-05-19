@@ -42,6 +42,7 @@ export class PlanesentrenamientoAdminPlistRoutedComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.getPage();
   }
 

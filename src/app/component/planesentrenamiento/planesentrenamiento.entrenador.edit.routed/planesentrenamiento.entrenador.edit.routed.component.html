@@ -8,13 +8,7 @@
       </h2>
 
       <form [formGroup]="oPlanesentrenamientoForm!" (ngSubmit)="onSubmit()" novalidate>
-        <div class="row mt-4">
-          <mat-form-field>
-            <mat-label>Id</mat-label>
-            <input matInput formControlName="id" placeholder="Id" readonly />
-            <mat-hint align="end">No se puede cambiar</mat-hint>
-          </mat-form-field>
-        </div>
+
 
         <div class="row mt-4">
           <mat-form-field>
@@ -30,6 +24,22 @@
             }
           </mat-form-field>
         </div>
+          
+<div class="row mt-4">
+  <mat-form-field appearance="fill">
+    <mat-label>Dificultad</mat-label>
+    <mat-select formControlName="dificultad" required>
+      <mat-option value="" disabled>Seleccione una dificultad</mat-option>
+      <mat-option value="BASICA">Básica</mat-option>
+      <mat-option value="MEDIA">Intermedia</mat-option>
+      <mat-option value="AVANZADA">Avanzada</mat-option>
+    </mat-select>
+    <mat-hint align="end">Seleccione una de las 3 opciones</mat-hint>
+    @if (oPlanesentrenamientoForm?.get('dificultad')?.hasError('required')) {
+      <mat-error>Debe seleccionar una dificultad</mat-error>
+    }
+  </mat-form-field>
+</div>
 
         <div class="row mt-4">
           <mat-form-field>
@@ -87,7 +97,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Contante</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Gimnasio</h5>
         <button
           type="button"
           class="btn-close"

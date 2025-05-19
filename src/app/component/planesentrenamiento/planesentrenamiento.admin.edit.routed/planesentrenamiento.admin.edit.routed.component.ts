@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 declare let bootstrap: any;
 
@@ -24,6 +25,13 @@ declare let bootstrap: any;
     MatInputModule,
     ReactiveFormsModule,
     RouterModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        RouterModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
   ],
 })
 export class PlanesentrenamientoAdminEditRoutedComponent implements OnInit {
@@ -58,6 +66,9 @@ export class PlanesentrenamientoAdminEditRoutedComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(50),
       ]),
+      dificultad: new FormControl('', [
+        Validators.required,
+      ]),
       descripcion: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
@@ -83,6 +94,7 @@ export class PlanesentrenamientoAdminEditRoutedComponent implements OnInit {
   updateForm() {
     this.oPlanesentrenamientoForm?.controls['id'].setValue(this.oPlanesentrenamiento?.id);
     this.oPlanesentrenamientoForm?.controls['titulo'].setValue(this.oPlanesentrenamiento?.titulo);
+    this.oPlanesentrenamientoForm?.controls['dificultad'].setValue(this.oPlanesentrenamiento?.dificultad);
     this.oPlanesentrenamientoForm?.controls['descripcion'].setValue(this.oPlanesentrenamiento?.descripcion);
   }
   
@@ -121,7 +133,7 @@ export class PlanesentrenamientoAdminEditRoutedComponent implements OnInit {
         next: (oPlanesentrenamiento: IPlanesentrenamiento) => {
           this.oPlanesentrenamiento = oPlanesentrenamiento;
           this.updateForm();
-          this.showModal('planesentrenamiento ' + this.oPlanesentrenamiento.id + ' actualizado');
+          this.showModal('Plan con el id ' + this.oPlanesentrenamiento.id + ' actualizado');
         },
         error: (error) => {
           this.showModal('Error al actualizar el planesentrenamiento');

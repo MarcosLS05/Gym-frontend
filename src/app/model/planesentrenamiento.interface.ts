@@ -5,6 +5,6 @@ export interface IPlanesentrenamiento {
   dificultad: string;
   titulo: string;
   descripcion: string;
-  fecha_creacion: Date;
+  fechaCreacion: Date;
   creador?: IUsuario
 }

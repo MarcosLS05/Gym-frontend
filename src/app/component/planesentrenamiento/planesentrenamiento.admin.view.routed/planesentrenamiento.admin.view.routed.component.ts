@@ -26,6 +26,7 @@ export class PlanesentrenamientoAdminViewRoutedComponent implements OnInit {
 getOne() {
     this.oPlanesentrenamientoService.getOne(this.id).subscribe({
       next: (data: IPlanesentrenamiento) => {
+        
         this.oplanesentrenamiento = data;
       },
     });
