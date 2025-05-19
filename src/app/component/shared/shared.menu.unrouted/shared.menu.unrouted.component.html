@@ -44,18 +44,18 @@
         <!-- ENTRENADOR PERSONAL -->
         <li class="nav-item" *ngIf="userRole === 'Entrenador Personal'">
           <a class="nav-link" [class.active]="strRuta == '/entrenador/planesentrenamiento/plist'" href="/entrenador/planesentrenamiento/plist">
-            <i class="bi bi-person-lines-fill me-1"></i>Mis planes de entrenamiento
+            <i class="bi bi-person-lines-fill me-1"></i> Mis planes de entrenamiento
           </a>
         </li>
         <li class="nav-item" *ngIf="userRole === 'Entrenador Personal'">
           <a class="nav-link" [class.active]="strRuta == '/entrenador/evaluaciones/plist'" href="/entrenador/evaluaciones/plist">
-            <i class="bi bi-clipboard-check me-1"></i>Evaluaciones
+            <i class="bi bi-clipboard-check me-1"></i> Evaluaciones
           </a>
         </li>
 
         <li class="nav-item" *ngIf="userRole === 'Entrenador Personal'">
           <a class="nav-link" [class.active]="strRuta == 'entrenador/planesentrenamiento/create'" href="entrenador/planesentrenamiento/create">
-            <i class="bi bi-person-lines-fill me-1"></i>Crear plan de entrenamiento
+            <i class="bi bi-plus-square"></i> Crear plan de entrenamiento
           </a>
         </li>
       </ul>

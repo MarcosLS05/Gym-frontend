@@ -11,28 +11,32 @@
           'hard': plan.dificultad === 'AVANZADA'
         }">{{ plan.dificultad | lowercase }}</span>
       </div>
-      <div class="card-content">
-        <p>{{ plan.descripcion }}</p>
-      </div>
       <div class="card-footer">
-        <p class="date">Creado el: {{ plan.fecha_creacion }}</p>
+        <p class="date">Creado el: {{ plan.fechaCreacion | date: 'YYYY-MM-dd HH:MM' }}</p>
       </div>
 
       <!-- Botón de edición -->
       <div class="card-actions mt-3">
         <button
-          class="btn btn-sm btn-primary"
+          class="btn btn-outline-primary"
           [routerLink]="['/entrenador/planesentrenamiento/edit', plan.id]"
         >
           <i class="bi bi-pencil"></i> Editar
         </button>
-                <button
-          class="btn btn-sm btn-primary"
+        <button
+          class="btn btn-outline-warning"
           [routerLink]="['/entrenador/planesentrenamiento/view', plan.id]"
         >
           <i class="bi bi-pencil"></i> Ver
         </button>
+        <button
+          class="btn btn-outline-danger"
+          [routerLink]="['/entrenador/planesentrenamiento/delete', plan.id]"
+        >
+          <i class="bi bi-trash"></i> Borrar
+        </button>
       </div>
+
     </div>
   </div>
 

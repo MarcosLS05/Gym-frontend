@@ -1,0 +1,45 @@
+<div class="row justify-content-center m-3">
+  <div class="col-lg-7 col-md-10 col-sm-12">
+    <h1 class="my-5 text-center">
+      <i class="bi bi-card-list"></i>
+      Ver Plan de Entrenamiento
+      <i class="bi bi-credit-card-fill"></i>
+    </h1>
+    <table class="table table-striped table-bordered my-5 text-center">
+      <tbody>
+        <tr>
+          <th scope="row" class="bg-primary text-white text-end pe-4">
+            Título
+          </th>
+          <td class="text-start ps-4">{{ oplanesentrenamiento.titulo }}</td>
+        </tr>
+                <tr>
+          <th scope="row" class="bg-primary text-white text-end pe-4">
+            Dificultad
+          </th>
+          <td class="text-start ps-4">{{ oplanesentrenamiento.dificultad }}</td>
+        </tr>
+        <tr>
+          <th scope="row" class="bg-secondary text-white text-end pe-4">
+            Descripción
+          </th>
+          <td class="text-start ps-4">{{ oplanesentrenamiento.descripcion }}</td>
+        </tr>
+        <tr>
+          <th scope="row" class="bg-secondary text-white text-end pe-4">
+            Fecha de creación
+          </th>
+          <td class="text-start ps-4">{{ oplanesentrenamiento.fechaCreacion }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <a class="btn btn-warning mt-4 mx-1" href="entrenador/planesentrenamiento/plist">
+      <i class="bi bi-list"></i>
+      Ir a listado de Planes de entrenamiento
+    </a>
+
+  </div>
+</div>
