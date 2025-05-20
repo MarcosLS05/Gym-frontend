@@ -15,7 +15,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- ADMIN -->
         <li class="nav-item" *ngIf="userRole === 'Administrador'">
-          <a class="nav-link" [class.active]="strRuta == '/home' || strRuta == '/' || strRuta == ''" href="/home">
+          <a class="nav-link" [class.active]="strRuta == '/cliente/navegacion' || strRuta == '/cliente/navegacion' || strRuta == ''" href="/cliente/navegacion">
             <i class="bi bi-house-door me-1"></i>Inicio
           </a>
         </li>
@@ -42,7 +42,7 @@
 
         <!-- ENTRENADOR PERSONAL -->
         <li class="nav-item" *ngIf="userRole === 'Entrenador Personal'">
-          <a class="nav-link" [class.active]="strRuta == '/home' || strRuta == '/' || strRuta == ''" href="/home">
+          <a class="nav-link" [class.active]="strRuta == '/cliente/navegacion' || strRuta == '/cliente/navegacion' || strRuta == ''" href="/cliente/navegacion">
             <i class="bi bi-house-door me-1"></i>Inicio
           </a>
         </li>

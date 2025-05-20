@@ -1,0 +1,176 @@
+<div class="container-fluid px-0">
+  <!-- Hero Section -->
+  <div class="hero-section bg-primary text-white py-5">
+    <div class="container text-center py-5">
+      <h1 class="display-4 fw-bold mb-4">Encuentra tu plan de entrenamiento perfecto</h1>
+      <p class="lead mb-5">Descubre rutinas personalizadas para alcanzar tus objetivos fitness</p>
+      
+      <!-- Barra de búsqueda destacada -->
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="input-group mb-3 search-box">
+            <input type="text" class="form-control form-control-lg" placeholder="Buscar planes por nombre, dificultad..." 
+                   (keyup)="filter($event)" [(ngModel)]="strFiltro">
+            <button class="btn btn-light" type="button">
+              <i class="bi bi-search"></i> Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Filtros rápidos -->
+      <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
+        <button class="btn btn-outline-light rounded-pill">Principiante</button>
+        <button class="btn btn-outline-light rounded-pill">Intermedio</button>
+        <button class="btn btn-outline-light rounded-pill">Avanzado</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="container py-5">
+    <!-- Encabezado de resultados -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">
+        <i class="bi bi-lightning-charge-fill text-warning"></i>
+        Planes disponibles
+      </h2>
+      <div class="text-muted">
+        @if (strFiltro.length > 0) {
+          <span class="badge bg-info">{{ strFiltro }}</span>
+        } @else {
+          <span class="badge bg-secondary">Todos los planes</span>
+        }
+      </div>
+    </div>
+
+    <!-- Cards de planes de entrenamiento -->
+    <div class="row g-4">
+      @for (planesentrenamiento of oPage?.content; track planesentrenamiento.id) {
+      <div class="col-md-6 col-lg-4">
+        <div class="card training-card h-100">
+          
+
+          
+          <div class="card-body">
+            <h3 class="card-title">{{ planesentrenamiento.titulo }}</h3>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <!-- Fecha a la izquierda -->
+  <div class="d-flex align-items-center">
+    <i class="bi bi-calendar-check me-2"></i>
+    <small class="text-muted">{{ planesentrenamiento.fechaCreacion | date: 'dd/MM/yyyy' }}</small>
+  </div>
+  
+  <!-- Dificultad a la derecha -->
+  <small class="difficulty-badge 
+    @if (planesentrenamiento.dificultad === 'BASICA') {bg-success} 
+    @else if (planesentrenamiento.dificultad === 'MEDIA') {bg-warning} 
+    @else {bg-danger}">
+    {{ planesentrenamiento.dificultad }}
+  </small>
+</div>
+            
+            <!-- Mini descripción (podrías agregar este campo a tu modelo) -->
+            <p class="card-text text-muted">
+              {{ planesentrenamiento.descripcion | slice: 0:100 }}...
+                
+            
+            <!-- Etiquetas -->
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <span class="badge bg-light text-dark">6 semanas</span>
+              <span class="badge bg-light text-dark">5 días/semana</span>
+              <span class="badge bg-light text-dark">Gimnasio</span>
+            </div>
+          </div>
+          
+          <div class="card-footer bg-white border-0 pt-0">
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary">
+                <i class="bi bi-eye-fill me-2"></i>Ver detalles
+              </button>
+              <button class="btn btn-outline-secondary">
+                <i class="bi bi-download me-2"></i>Descargar PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      } @empty {
+      <div class="col-12 text-center py-5">
+        <img src="assets/img/logo.png" alt="No hay resultados" class="img-fluid mb-4" style="max-width: 300px;">
+        <h4 class="text-muted">No encontramos planes que coincidan con tu búsqueda</h4>
+        <button class="btn btn-primary mt-3">Ver todos los planes</button>
+      </div>
+      }
+    </div>
+
+    <!-- Paginación simplificada -->
+    @if ((strFiltro?.length ?? 0)) {
+    <nav class="d-flex justify-content-center mt-5">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" [class.disabled]="nPage - -1 === 1" (click)="goToPrev()" href="#">
+            <i class="bi bi-chevron-left"></i>
+          </a>
+        </li>
+        @for (pag of arrBotonera; track pag) {
+        <li class="page-item">
+          @if (pag === '...') {
+          <a class="page-link">{{ pag }}</a>
+          } @else {
+          <a class="page-link" href="#" (click)="goToPage(-(-pag))" [class.active]="nPage - -1 === -(-pag)">
+            {{ pag }}
+          </a>
+          }
+        </li>
+        }
+        <li class="page-item">
+          <a class="page-link" [class.disabled]="nPage - -1 === oPage?.totalPages" (click)="goToNext()" href="#">
+            <i class="bi bi-chevron-right"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    }
+  </div>
+
+  <!-- Sección de beneficios -->
+  <div class="bg-light py-5 mt-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2>¿Por qué elegir nuestros planes?</h2>
+        <p class="lead text-muted">Diseñados por profesionales para ayudarte a alcanzar tus metas</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="text-center p-4">
+            <div class="icon-box bg-primary bg-opacity-10 text-primary mb-4">
+              <i class="bi bi-person-check-fill fs-2"></i>
+            </div>
+            <h4>Personalizados</h4>
+            <p class="text-muted">Adaptados a diferentes niveles de condición física y objetivos.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="text-center p-4">
+            <div class="icon-box bg-success bg-opacity-10 text-success mb-4">
+              <i class="bi bi-graph-up fs-2"></i>
+            </div>
+            <h4>Resultados comprobados</h4>
+            <p class="text-muted">Métodos efectivos que han ayudado a cientos de personas.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="text-center p-4">
+            <div class="icon-box bg-warning bg-opacity-10 text-warning mb-4">
+              <i class="bi bi-calendar2-heart-fill fs-2"></i>
+            </div>
+            <h4>Flexibles</h4>
+            <p class="text-muted">Puedes seguirlos a tu ritmo y ajustarlos según tus necesidades.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -48,14 +48,6 @@
               <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Fecha nacimiento</th>
               <td class="text-start ps-4 py-3">{{ oUsuario.fecha_nacimiento | date : 'dd/MM/yyyy' }}</td>
             </tr>
-            <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Tipo de Usuario</th>
-              <td class="text-start ps-5">
-                <a [routerLink]="['/admin/tipousuario/view', oUsuario.tipousuario.id]">
-                  {{ oUsuario!.tipousuario.titulo }} ({{oUsuario!.tipousuario.id}})
-                </a>
-              </td>
-            </tr>
           </tbody>
         </table>
   </div>

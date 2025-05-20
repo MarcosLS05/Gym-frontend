@@ -1,0 +1,117 @@
+/* Estilos generales */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #007bff 0%, #00b4ff 100%);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
+}
+
+/* Barra de búsqueda */
+.search-box {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.search-box input {
+  border: none;
+  padding: 15px 25px;
+}
+
+.search-box input:focus {
+  box-shadow: none;
+}
+
+.search-box button {
+  padding: 0 25px;
+  font-weight: 600;
+}
+
+/* Tarjetas de entrenamiento */
+.training-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+card-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.training-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.difficulty-badge {
+  padding: 5px 15px;
+  border-radius: 50px;
+  color: black;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
+}
+
+
+
+/* Texto truncado en 3 líneas */
+.text-truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Icon boxes */
+.icon-box {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Paginación */
+.pagination .page-link {
+  border-radius: 50% !important;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  border: none;
+  color: #007bff;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #007bff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 2rem 0;
+  }
+  
+  .search-box {
+    width: 100%;
+  }
+  
+  .training-card {
+    margin-bottom: 20px;
+  }
+}

@@ -36,6 +36,8 @@ import { GrupocontrataAdminCreateRoutedComponent } from './component/grupocontra
 import { GrupocontrataAdminDeleteRoutedComponent } from './component/grupocontrata/grupocontrata.admin.delete.routed/grupocontrata.admin.delete.component';
 import { GrupocontrataXUsuarioAdminPlistRoutedComponent } from './component/grupocontrata/grupocontrata.xusuario.admin.plist.routed/grupocontrata.xusuario.admin.plist.routed.component';
 
+import { NavegacionClienteRoutedComponent } from './component/navegacion/navegacion/navegacion.cliente.routed.component';
+
 import { SharedLoginRoutedComponent } from './component/shared/shared.login.routed/shared.login.routed';
 import { SharedLogoutRoutedComponent } from     './component/shared/shared.logout.routed/shared.logout.routed';
 import { SharedByemailRoutedComponent } from './component/shared/shared.byemail.routed/shared.byemail.routed.component';
@@ -90,4 +92,8 @@ export const routes: Routes = [
     { path: 'admin/grupocontrata/view/:id', component: GrupocontrataAdminViewRoutedComponent, canActivate: [AdminGuard]},
     { path: 'admin/grupocontrata/delete/:id', component: GrupocontrataAdminDeleteRoutedComponent, canActivate: [AdminGuard]},
     { path: 'admin/grupocontrata/xusuario/plist/:id', component: GrupocontrataXUsuarioAdminPlistRoutedComponent, canActivate: [AdminGuard] },
+
+    { path: 'cliente/navegacion', component: NavegacionClienteRoutedComponent },
+
+
 ];
