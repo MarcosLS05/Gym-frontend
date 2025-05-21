@@ -1,42 +1,42 @@
-/* Estilos generales del navbar */
+
 .navbar {
-  background: linear-gradient(90deg, #1e3c72, #2a5298); /* Fondo degradado */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  padding: 0.5rem 1rem; /* Espaciado interno reducido */
+  background: linear-gradient(90deg, #1e3c72, #2a5298); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* Estilo del logo y la marca */
+
 .navbar-brand {
-  font-size: 1.25rem; /* Tamaño del texto reducido */
-  font-weight: bold; /* Texto en negrita */
-  color: #fff !important; /* Color blanco */
+  font-size: 1.25rem;
+  font-weight: bold; 
+  color: #fff !important; 
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* Espaciado entre el logo y el texto */
+  gap: 0.5rem; 
 }
 
 .navbar-brand img {
-  border: 2px solid #fff; /* Borde blanco para el logo */
-  border-radius: 50%; /* Logo redondeado */
-  width: 40px; /* Ajuste del tamaño del logo */
+  border: 2px solid #fff; 
+  border-radius: 50%; 
+  width: 40px; 
   height: 40px;
-  transition: transform 0.3s ease; /* Transición suave para el logo */
+  transition: transform 0.3s ease; 
 }
 
 .navbar-brand:hover img {
-  transform: rotate(360deg); /* Rotación del logo al pasar el mouse */
+  transform: rotate(360deg);
 }
 
-/* Estilo de los enlaces del navbar */
+
 .nav-link {
-  color: rgba(255, 255, 255, 0.8) !important; /* Color del texto */
-  font-size: 0.9rem; /* Tamaño del texto reducido */
-  padding: 0.5rem 0.75rem; /* Espaciado interno reducido */
-  transition: all 0.3s ease; /* Transición suave */
-  position: relative; /* Posición relativa para el pseudo-elemento */
+  color: rgba(255, 255, 255, 0.8) !important; 
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem; 
+  transition: all 0.3s ease; 
+  position: relative;
 }
 
 .nav-link::after {
@@ -47,96 +47,96 @@
   background: #fff;
   bottom: 0;
   left: 0;
-  transition: width 0.3s ease; /* Transición suave para el subrayado */
+  transition: width 0.3s ease;
 }
 
 .nav-link:hover::after {
-  width: 100%; /* Subrayado completo al pasar el mouse */
+  width: 100%; 
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: #fff !important; /* Color blanco al pasar el mouse o estar activo */
-  background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
-  border-radius: 5px; /* Bordes redondeados */
-  transform: translateY(-3px); /* Levantar ligeramente el enlace */
+  color: #fff !important; 
+  background-color: rgba(255, 255, 255, 0.1); 
+  border-radius: 5px; 
+  transform: translateY(-3px); 
 }
 
-/* Estilos para los botones dentro del navbar */
+
 .navbar-text .btn {
-  font-size: 0.9rem; /* Tamaño del texto del botón */
-  padding: 0.5rem 0.75rem; /* Espaciado interno reducido */
-  border-radius: 5px; /* Bordes redondeados */
-  transition: all 0.3s ease; /* Transición suave */
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem; 
+  border-radius: 5px; 
+  transition: all 0.3s ease;
 }
 
 .navbar-text .btn-outline-light {
-  border-color: rgba(255, 255, 255, 0.5); /* Borde semi-transparente */
-  color: rgba(255, 255, 255, 0.8); /* Color del texto */
+  border-color: rgba(255, 255, 255, 0.5); 
+  color: rgba(255, 255, 255, 0.8); 
 }
 
 .navbar-text .btn-outline-light:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
-  color: #fff; /* Color blanco */
-  transform: scale(1.05); /* Escalar ligeramente el botón */
+  background-color: rgba(255, 255, 255, 0.1); 
+  color: #fff; 
+  transform: scale(1.05); 
 }
 
-/* Enlaces dentro del navbar-text */
+
 .navbar-text a.text-white {
-  text-decoration: none; /* Sin subrayado */
-  transition: color 0.3s ease; /* Transición suave */
+  text-decoration: none;
+  transition: color 0.3s ease; 
 }
 
 .navbar-text a.text-white:hover {
-  color: #ddd !important; /* Color más claro al pasar el mouse */
+  color: #ddd !important; 
 }
 
-/* Estilos para el botón de menú en móviles */
+
 .navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.5); /* Borde semi-transparente */
+  border-color: rgba(255, 255, 255, 0.5); 
 }
 
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
-/* Estilos para el menú colapsable en móvil */
+
 @media (max-width: 991.98px) {
   .navbar-collapse {
     position: fixed;
     top: 0;
-    left: -250px; /* Oculto a la izquierda */
+    left: -250px; 
     width: 250px;
     height: 100%;
     background-color: #2a5298;
     padding: 1rem;
     overflow-y: auto;
     transition: left 0.3s ease-in-out;
-    z-index: 1050; /* Por encima del contenido */
+    z-index: 1050; 
   }
 
   .navbar-collapse.show {
-    left: 0; /* Aparece desde la izquierda */
+    left: 0; 
   }
 
   .navbar-toggler {
-    z-index: 1060; /* Encima del menú */
+    z-index: 1060; 
   }
 
-  /* Evita que el resto del contenido se desplace cuando el menú aparece */
+ 
   body.offcanvas-active {
     overflow: hidden;
   }
 }
 
 
-/* Ajustes para pantallas pequeñas */
+
 @media (max-width: 768px) {
   .navbar-brand span {
-      display: none; /* Oculta el texto "GIMNASIO" en pantallas pequeñas */
+      display: none; 
   }
 
   .navbar {
-      flex-direction: column; /* Ajusta la dirección del contenido */
+      flex-direction: column; 
       align-items: center;
   }
 

@@ -1,13 +1,13 @@
 body {
-   background-image: url('/assets/img/fondopantalla.jpg'); /* Cambia esto por la ruta de tu imagen */
-    background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    background-attachment: fixed; /* Fija la imagen para que no se desplace con el scroll */
+   background-image: url('/assets/img/fondopantalla.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
   }
 
   .container {
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para el contenido */
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
     margin-top: 20px;
