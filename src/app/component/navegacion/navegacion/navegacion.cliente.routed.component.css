@@ -18,6 +18,32 @@ body {
   overflow: hidden;
 }
 
+.toast-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  font-weight: bold;
+  z-index: 1000;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation-fill-mode: forwards;
+}
+
+
+@keyframes fadein {
+  from {opacity: 0; right: 0;}
+  to {opacity: 1; right: 20px;}
+}
+
+@keyframes fadeout {
+  from {opacity: 1; right: 20px;}
+  to {opacity: 0; right: 0;}
+}
+
 .search-box input {
   border: none;
   padding: 15px 25px;

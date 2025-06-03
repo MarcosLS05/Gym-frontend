@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { PlanesentrenamientoService } from '../../../service/planesentrenamiento.service';
 import { IPlanesentrenamiento } from '../../../model/planesentrenamiento.interface';
 import { CommonModule } from '@angular/common';
@@ -7,8 +7,11 @@ import { BotoneraService } from '../../../service/botonera.service';
 import { debounceTime, Subject } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { SessionService } from '../../../service/session.service';
 
 import { FormsModule } from '@angular/forms';
+import { CreateGcontrataCliente } from '../../../model/createGcontrataClienteDTO';
+import { GrupocontrataService } from '../../../service/grupocontrata.service';
 // ...other imports...
 @Component({
   standalone: true,
@@ -22,7 +25,9 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['navegacion.cliente.routed.component.css'],
 })
 
-export class NavegacionClienteRoutedComponent {
+export class NavegacionClienteRoutedComponent implements OnInit {
+private oSessionService: SessionService = inject(SessionService);
+private id_usuario: number = 0;
  oPage: IPage<IPlanesentrenamiento> | null = null;
   //
   nPage: number = 0; // 0-based server count
@@ -39,7 +44,9 @@ export class NavegacionClienteRoutedComponent {
   constructor(
     private oPlanesentrenamientoService: PlanesentrenamientoService,
     private oBotoneraService: BotoneraService,
-    private oRouter: Router
+    private oGcontrataService: GrupocontrataService,
+    private oRouter: Router,
+   
   ) {
     this.debounceSubject.pipe(debounceTime(10)).subscribe((value) => {
       this.getPage();
@@ -47,8 +54,18 @@ export class NavegacionClienteRoutedComponent {
   }
 
   ngOnInit() {
-    
-    this.getPage();
+        this.getPage();
+          const tipo = this.oSessionService.getUserRole();
+  if (tipo === 'Entrenador Personal' || tipo === 'Cliente') {
+    const id = this.oSessionService.getUserId();
+    if (id && id > 0) {
+      this.id_usuario = id;
+    } else {
+      console.error('ID de usuario no válido');
+    }
+  } else {
+    console.warn('Tipo de usuario no autorizado');
+  }
   }
 
   getPage() {
@@ -67,6 +84,42 @@ export class NavegacionClienteRoutedComponent {
         },
       });
   }
+
+mensajeExito: string = '';
+mostrarMensaje: boolean = false;
+
+addFavoritos(plan: IPlanesentrenamiento) {
+  if (this.id_usuario > 0) {
+    const dto = {
+      usuarioId: this.id_usuario,
+      planId: plan.id
+    };
+
+    this.oGcontrataService.addFavoritos(dto).subscribe({
+      next: (res) => {
+        this.mensajeExito = 'Plan añadido correctamente a favoritos';
+        this.mostrarMensaje = true;
+        setTimeout(() => {
+          this.mostrarMensaje = false;
+        }, 3000); // desaparece en 3 segundos
+      },
+      error: (err) => {
+        console.error('Error en el backend:', err);
+        this.mensajeExito = 'Error al añadir el plan a favoritos';
+        this.mostrarMensaje = true;
+        setTimeout(() => {
+          this.mostrarMensaje = false;
+        }, 3000);
+      }
+    });
+  } else {
+    console.warn('No hay usuario válido para añadir a favoritos.');
+  }
+}
+
+
+
+
 
 
 

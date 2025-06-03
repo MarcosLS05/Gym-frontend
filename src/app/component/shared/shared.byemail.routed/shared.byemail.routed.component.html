@@ -1,54 +1,86 @@
-<div class="row justify-content-center m-3">
-  <div class="col-lg-7 col-md-10 col-sm-12">
-    <h1 class="my-5 text-center">
-      <i class="bi bi-card-list"></i>
-      Detalles de {{ oUsuario.email }}
-      <i class="bi bi-person-circle"></i>
-    </h1>
-    <br />
-    <table class="table table-hover table-borderless my-4">
-          <tbody>
-            <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Nombre</th>
-              <td class="text-start ps-4 py-3">{{ oUsuario.nombre }}</td>
-            </tr>
-            <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Primer Apellido</th>
-              <td class="text-start ps-4 py-3">{{ oUsuario.apellido1 }}</td>
-            </tr>
-            <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Segundo Apellido</th>
-              <td class="text-start ps-4 py-3">{{ oUsuario.apellido2 }}</td>
-            </tr>
-            <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Correo</th>
-              <td class="text-start ps-4 py-3">{{ oUsuario.email }}</td>
-            </tr>
-                        <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Télefono</th>
-              <td class="text-start ps-4 py-3">{{ oUsuario.telefono }}</td>
-            </tr>
-                        <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Provincia</th>
-              <td class="text-start ps-4 py-3">{{ oUsuario.provincia }}</td>
-            </tr>
-                        <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Código Postal</th>
-              <td class="text-start ps-4 py-3">{{ oUsuario.codigo_postal }}</td>
-            </tr>
-                        <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Dirección</th>
-              <td class="text-start ps-4 py-3">{{ oUsuario.direccion }}</td>
-            </tr>
-                        <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">DNI</th>
-              <td class="text-start ps-4 py-3">{{ oUsuario.dni }}</td>
-            </tr>
-            <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Fecha nacimiento</th>
-              <td class="text-start ps-4 py-3">{{ oUsuario.fecha_nacimiento | date : 'dd/MM/yyyy' }}</td>
-            </tr>
-          </tbody>
-        </table>
+<div class="profile-container">
+  <!-- Sección de Datos Personales -->
+  <div class="personal-data-section">
+    <div class="profile-header">
+      <i class="bi bi-person-circle profile-icon"></i>
+      <h1>Mi Perfil</h1>
+    </div>
+    
+    <div class="user-info-card">
+      <div class="info-item">
+        <span class="info-label">Nombre completo</span>
+        <span class="info-value">{{ oUsuario.nombre }} {{ oUsuario.apellido1 }} {{ oUsuario.apellido2 }}</span>
+      </div>
+      
+      <div class="info-item">
+        <span class="info-label">Correo electrónico</span>
+        <span class="info-value">{{ oUsuario.email }}</span>
+      </div>
+      
+      <div class="info-item">
+        <span class="info-label">Teléfono</span>
+        <span class="info-value">{{ oUsuario.telefono }}</span>
+      </div>
+      
+      <div class="info-item">
+        <span class="info-label">Dirección</span>
+        <span class="info-value">{{ oUsuario.direccion }}, {{ oUsuario.codigo_postal }}, {{ oUsuario.provincia }}</span>
+      </div>
+      
+      <div class="info-item">
+        <span class="info-label">DNI</span>
+        <span class="info-value">{{ oUsuario.dni }}</span>
+      </div>
+      
+      <div class="info-item">
+        <span class="info-label">Fecha de nacimiento</span>
+        <span class="info-value">{{ oUsuario.fecha_nacimiento | date : 'dd/MM/yyyy' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de Planes de Entrenamiento -->
+  <div class="training-plans-section">
+    <h2 class="section-title">Mis planes añadidos</h2>
+    
+    <div *ngIf="oPage && oPage.content.length > 0" class="plans-grid">
+      <div *ngFor="let item of oPage.content" class="plan-card">
+        <div class="plan-header">
+          <h3>{{ item.planesentrenamiento.titulo }}</h3>
+          <span class="difficulty-badge {{ getDifficultyClass(item.planesentrenamiento.dificultad) }}">
+            {{ item.planesentrenamiento.dificultad }}
+          </span>
+        </div>
+        
+        <p class="plan-description">{{ item.planesentrenamiento.descripcion }}</p>
+        
+        <div class="plan-footer">
+          <span><i class="bi bi-person"></i> {{ item.planesentrenamiento.creador?.nombre }}</span>
+          <span><i class="bi bi-calendar"></i> {{ item.planesentrenamiento.fechaCreacion | date:'dd/MM/yyyy' }}</span>
+        </div>
+        
+          <!-- Ver -->
+          <button
+            class="btn btn-outline-primary flex-fill"
+            (click)="view(item.planesentrenamiento.id)">
+            <i class="bi bi-eye"></i> Ver
+          </button>
+          <button
+  class="btn btn-outline-secondary flex-fill"
+  (click)="downloadPdf(item)">
+  <i class="bi bi-download"></i> PDF
+</button>
+
+
+      </div>
+    </div>
+    
+    <div *ngIf="!oPage || oPage.content.length === 0" class="no-plans">
+      <i class="bi bi-info-circle"></i>
+      <p>Actualmente no tienes planes contratados</p>
+      <a href="cliente/navegacion">
+        <button class="browse-plans-btn">Explorar Planes</button>
+      </a>
+    </div>
   </div>
 </div>

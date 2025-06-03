@@ -17,18 +17,15 @@
           </div>
         </div>
       </div>
-      
-      <!-- Filtros rápidos -->
-      <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
-        <button class="btn btn-outline-light rounded-pill">Principiante</button>
-        <button class="btn btn-outline-light rounded-pill">Intermedio</button>
-        <button class="btn btn-outline-light rounded-pill">Avanzado</button>
-      </div>
     </div>
   </div>
 
   <!-- Contenido principal -->
   <div class="container py-5">
+      <div *ngIf="mostrarMensaje" class="toast-message mb-3">
+    {{ mensajeExito }}
+  </div>
+
     <!-- Encabezado de resultados -->
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="mb-0">
@@ -85,8 +82,8 @@
           
           <div class="card-footer bg-white border-0 pt-0">
             <div class="d-grid gap-2">
-              <button class="btn btn-primary">
-                <i class="bi bi-eye-fill me-2"></i>Ver detalles
+              <button class="btn btn-primary" (click)="addFavoritos(planesentrenamiento)">
+                <i class="bi bi-bookmark-plus"></i> Añadir a favoritos
               </button>
               <button class="btn btn-outline-secondary">
                 <i class="bi bi-download me-2"></i>Descargar PDF

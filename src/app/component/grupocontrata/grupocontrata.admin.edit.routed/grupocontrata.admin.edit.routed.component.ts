@@ -92,17 +92,6 @@ export class GrupocontrataAdminEditRoutedComponent implements OnInit {
   createForm() {
     this.oGrupocontrataForm = new FormGroup({
       id: new FormControl('', [Validators.required]),
-      titulo: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-      ]),
-      descripcion: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-      ]),
-
       usuario: new FormGroup({
         id: new FormControl('', [Validators.required]),
         nombre: new FormControl(''),
@@ -134,8 +123,6 @@ export class GrupocontrataAdminEditRoutedComponent implements OnInit {
 
   updateForm() {
     this.oGrupocontrataForm?.controls['id'].setValue(this.oGrupocontrata?.id);
-    this.oGrupocontrataForm?.controls['titulo'].setValue(this.oGrupocontrata?.titulo);
-    this.oGrupocontrataForm?.controls['descripcion'].setValue(this.oGrupocontrata?.descripcion);
   
     // Asigna los valores correctos para 'usuario' y 'planesentrenamiento'
     this.oGrupocontrataForm?.controls['usuario'].setValue({

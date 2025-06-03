@@ -16,28 +16,6 @@
           </mat-form-field>
         </div>
 
-        <div class="row mt-4">
-          <mat-form-field>
-            <mat-label>Titulo</mat-label>
-            <input matInput formControlName="titulo" placeholder="Titulo" />
-            <mat-hint align="end">De 3 a 50 caracteres</mat-hint>
-            <mat-error *ngIf="oGrupocontrataForm?.get('titulo')?.hasError('required')">Debes introducir un Titulo</mat-error>
-            <mat-error *ngIf="oGrupocontrataForm?.get('titulo')?.hasError('minlength')">Debes introducir un Titulo más largo</mat-error>
-            <mat-error *ngIf="oGrupocontrataForm?.get('titulo')?.hasError('maxlength')">Debes introducir un Titulo más corto</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="row mt-4">
-          <mat-form-field>
-            <mat-label>Descripcion</mat-label>
-            <input matInput formControlName="descripcion" placeholder="Descripcion" />
-            <mat-hint align="end">De 3 a 50 caracteres</mat-hint>
-            <mat-error *ngIf="oGrupocontrataForm?.get('descripcion')?.hasError('required')">Debes introducir una descripcion</mat-error>
-            <mat-error *ngIf="oGrupocontrataForm?.get('descripcion')?.hasError('minlength')">Debes introducir una descripcion más larga</mat-error>
-            <mat-error *ngIf="oGrupocontrataForm?.get('descripcion')?.hasError('maxlength')">Debes introducir una descripcion más corta</mat-error>
-          </mat-form-field>
-        </div>
-
         <!-- Usuario -->
         <div formGroupName="planesentrenamiento">
           <div class="row mt-4">

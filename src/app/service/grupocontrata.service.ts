@@ -5,6 +5,7 @@ import { httpOptions, serverURL } from '../environment/environment';
 import { Injectable } from '@angular/core';
 import { IGrupocontrata } from '../model/grupocontrata.interface';
 import { IUsuario } from '../model/usuario.interface';
+import { CreateGcontrataCliente } from '../model/createGcontrataClienteDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +91,12 @@ export class GrupocontrataService {
     return this.oHttp.post<IGrupocontrata>(URL, oGrupocontrata, httpOptions);
   }
 
+  addFavoritos(dto: CreateGcontrataCliente): Observable<IGrupocontrata> {
+  const URL: string = `${this.serverURL}/cliente`;
+  return this.oHttp.post<IGrupocontrata>(URL, dto, httpOptions);
+}
+
+
   update(oGrupocontrata: IGrupocontrata): Observable<IGrupocontrata> {
     let URL: string = '';
     URL += this.serverURL;
@@ -106,5 +113,11 @@ export class GrupocontrataService {
   delete(id: number) {
     return this.oHttp.delete(this.serverURL + '/' + id);
   }
+
+  getPageByUsuarioId(usuarioId: number, page: number, size: number) {
+  return this.oHttp.get<IPage<IGrupocontrata>>(
+    `${this.serverURL}/pagexusuario?usuarioId=${usuarioId}&page=${page}&size=${size}`
+  );
+}
 }
 

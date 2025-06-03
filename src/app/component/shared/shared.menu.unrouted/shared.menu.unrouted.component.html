@@ -65,7 +65,7 @@
 
                 <!-- Cliente -->
         <li class="nav-item" *ngIf="userRole === 'Cliente'">
-          <a class="nav-link" [class.active]="strRuta == '/home' || strRuta == '/' || strRuta == ''" href="/home">
+          <a class="nav-link" [class.active]="strRuta == '/cliente/navegacion' || strRuta == '/cliente/navegacion' || strRuta == ''" href="/cliente/navegacion">
             <i class="bi bi-house-door me-1"></i>Inicio
           </a>
         </li>
@@ -85,7 +85,7 @@
         } @else {
           <span class="me-3">
             <a href="/byemail/{{userEmail}}" class="text-white">
-              {{ userEmail }}
+               {{ userEmail }}
             </a>
           </span>
           <a href="/logout" class="btn btn-outline-light">

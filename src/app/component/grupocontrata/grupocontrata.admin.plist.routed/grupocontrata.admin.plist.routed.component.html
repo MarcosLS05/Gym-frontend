@@ -81,34 +81,28 @@
       <table class="table table-striped table-hover my-2">
         <thead class="table-dark">
           <tr>
-            <th (click)="sort('id')">
+            <th (click)="sort('id')" class="text-center">
               ID @if (strField === 'id') { @if (strDir === 'desc') {
               <i class="bi bi-caret-down-fill"></i>
               } @else {
               <i class="bi bi-caret-up-fill"></i>} }
             </th>
-            <th (click)="sort('titulo')">
-              Titulo @if (strField === 'titulo') { @if (strDir === 'desc') {
-              <i class="bi bi-caret-down-fill"></i>
-              } @else {
-              <i class="bi bi-caret-up-fill"></i>} }
-            </th>
-            <th (click)="sort('usuario')">
-              Descripción @if (strField === 'descripcion') { @if (strDir ===
-              'desc') {
-              <i class="bi bi-caret-down-fill"></i>
-              } @else {
-              <i class="bi bi-caret-up-fill"></i>} }
-            </th>
-            <th (click)="sort('usuario')">
+            <th (click)="sort('usuario')" class="text-center">
               Usuario @if (strField === 'usuario') { @if (strDir ===
               'desc') {
               <i class="bi bi-caret-down-fill"></i>
               } @else {
               <i class="bi bi-caret-up-fill"></i>} }
             </th>
-            <th (click)="sort('planesentrenamiento')">
+            <th (click)="sort('planesentrenamiento')" class="text-center">
               Plan de entrenamiento @if (strField === 'descripcion') { @if (strDir ===
+              'desc') {
+              <i class="bi bi-caret-down-fill"></i>
+              } @else {
+              <i class="bi bi-caret-up-fill"></i>} }
+            </th>
+            <th (click)="sort('creadoEn')" class="text-center">
+              Fecha de creacion @if (strField === 'creadoEn') { @if (strDir ===
               'desc') {
               <i class="bi bi-caret-down-fill"></i>
               } @else {
@@ -122,10 +116,11 @@
           @for (grupocontrata of oPage?.content; track grupocontrata.id) {
           <tr>
             <td class="text-center">{{ grupocontrata.id }}</td>
-            <td class="text-start">{{ grupocontrata.titulo | trim : 10 }}</td>
-            <td class="text-start">{{ grupocontrata.descripcion }}</td>
-            <td class="text-start">{{ grupocontrata.usuario.nombre }}</td>
-            <td class="text-start">{{ grupocontrata.planesentrenamiento.titulo }}</td>
+            <td class="text-center">{{ grupocontrata.usuario.nombre }}</td>
+            <td class="text-center">{{ grupocontrata.planesentrenamiento.titulo }}</td>
+            <td class="text-center">
+              {{ grupocontrata.creadoEn | date : 'dd/MM/yyyy' }}
+            </td>
             <td class="text-center">
               <div class="btn-group" role="group">
                 <button type="button" class="btn btn-outline-success btn-sm" (click)="view(grupocontrata)">

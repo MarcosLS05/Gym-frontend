@@ -109,20 +109,6 @@
                 } @else {
                 <i class="bi bi-caret-up-fill"></i>} }
               </th>
-              <th (click)="sort('titulo')" class="bg-primary text-white">
-                Titulo @if (strField === 'titulo') { @if (strDir ===
-                'desc') {
-                <i class="bi bi-caret-down-fill"></i>
-                } @else {
-                <i class="bi bi-caret-up-fill"></i>} }
-              </th>
-              <th (click)="sort('descripcion')" class="bg-primary text-white">
-                Descripcion @if (strField === 'descripcion') { @if (strDir ===
-                'desc') {
-                <i class="bi bi-caret-down-fill"></i>
-                } @else {
-                <i class="bi bi-caret-up-fill"></i>} }
-              </th>
               <th class="bg-primary text-white">Usuario</th>
               <th class="bg-warning text-black">Acciones</th>
             </tr>
@@ -132,8 +118,6 @@
             @for (grupocontrata of oPage?.content; track grupocontrata.id) {
             <tr>
               <td class="text-center">{{ grupocontrata.id }}</td>
-              <td class="text-start">{{ grupocontrata.titulo | trim : 30 }}</td>
-              <td class="text-start">{{ grupocontrata.descripcion | trim : 30 }}</td>
               <td class="text-start">
                 <a [routerLink]="['/admin/usuario/view', grupocontrata.usuario.id]">
                   {{ grupocontrata!.usuario.nombre }}  

@@ -108,18 +108,6 @@
             <td class="text-start ps-4">{{ id }}</td>
           </tr>
           <tr>
-            <th scope="row" class="bg-primary text-white text-end pe-4">
-              Título
-            </th>
-            <td class="text-start ps-4">{{ oGrupocontrata.titulo }}</td>
-          </tr>
-          <tr>
-            <th scope="row" class="bg-secondary text-white text-end pe-4">
-              Descripción
-            </th>
-            <td class="text-start ps-4">{{ oGrupocontrata.descripcion }}</td>
-          </tr>
-          <tr>
             <th scope="row" class="bg-secondary text-white text-end pe-4">
               Usuario
             </th>
@@ -130,6 +118,12 @@
               Plan de entrenamiento
             </th>
             <td class="text-start ps-4">{{ oGrupocontrata.planesentrenamiento.titulo }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="bg-secondary text-white text-end pe-4">
+              Fecha de creación
+            </th>
+            <td class="text-start ps-4">{{ oGrupocontrata.creadoEn | date : 'dd/MM/yyyy' }}</td>
           </tr>
         </tbody>
       </table>
