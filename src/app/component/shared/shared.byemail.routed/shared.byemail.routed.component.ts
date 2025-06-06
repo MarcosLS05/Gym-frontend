@@ -12,15 +12,15 @@ import { debounceTime, Subject } from 'rxjs';
 import { IPlanesentrenamiento } from '../../../model/planesentrenamiento.interface';
 import { SessionService } from '../../../service/session.service';
 import { PdfService } from '../../../service/pdf.service';
+import { FormsModule } from '@angular/forms';
+import { TrimPipe } from '../../../pipe/trim.pipe';
 @Component({
   selector: 'app-shared.byemail.routed',
   templateUrl: './shared.byemail.routed.component.html',
   styleUrls: ['./shared.byemail.routed.component.css'],
   standalone: true,
-imports: [
-    RouterModule,
-    CommonModule
-  ],
+  imports: [CommonModule, FormsModule, TrimPipe, RouterModule],
+
 })
 export class SharedByemailRoutedComponent implements OnInit {
   strRuta: string = '';
@@ -32,7 +32,7 @@ export class SharedByemailRoutedComponent implements OnInit {
    oPage: IPage<IGrupocontrata> | null = null;
     //
     nPage: number = 0; // 0-based server count
-    nRpp: number = 10;
+    nRpp: number = 6;
     //
     strField: string = '';
     strDir: string = '';
@@ -101,10 +101,11 @@ downloadPdf(contrato: IGrupocontrata): void {
 
 getPage() {
   if (!this.usuarioID) {
-
     console.error('usuarioID no definido');
     return;
   }
+
+  
 
   this.oGcontrataService.getPageByUsuarioId(this.usuarioID, this.nPage, this.nRpp).subscribe({
     next: (oPageFromServer: IPage<IGrupocontrata>) => {
@@ -116,6 +117,26 @@ getPage() {
     },
   });
 }
+
+enviarMSJ(idcreador: number): void {
+  
+}
+
+deleteGcontrata(id: number): void {
+  this.oGcontrataService.delete(id).subscribe({
+    next: () => {
+      console.log(`GrupoContrata ${id} eliminado`);
+      this.getPage(); 
+    },
+    error: (err) => {
+      console.error("Error al eliminar el grupo de contrato", err);
+    }
+  });
+}
+
+
+
+
 
 
   

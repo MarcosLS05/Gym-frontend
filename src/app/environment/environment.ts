@@ -4,7 +4,9 @@ export const environment = {
   production: false,
 };
 
-export const serverURL: string = 'https://gimnasio-api.puntaserver.com';
+
+export const serverURL: string = 'http://localhost:8085';
+//export const serverURL: string = 'https://gimnasio-api.puntaserver.com';
 
 export const httpOptions = {
   headers: new HttpHeaders({

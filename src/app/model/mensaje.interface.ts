@@ -1,10 +1,11 @@
+import { IUsuario } from "./usuario.interface";
 
 
 export interface IMensaje {
   id: number;
-  emisorId: number;
-  receptorId: number;
+  emisor: IUsuario;
+  receptor: IUsuario;
   contenido: string;
-  fechaEnvio: string; // o Date si lo parseas como tal
+  fechaEnvio: string; 
   leido: boolean;
 }

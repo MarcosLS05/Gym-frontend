@@ -42,6 +42,8 @@
   <!-- Sección de Planes de Entrenamiento -->
   <div class="training-plans-section">
     <h2 class="section-title">Mis planes añadidos</h2>
+
+    
     
     <div *ngIf="oPage && oPage.content.length > 0" class="plans-grid">
       <div *ngFor="let item of oPage.content" class="plan-card">
@@ -66,18 +68,50 @@
     (click)="downloadPdf(item)">
     <i class="bi bi-download"></i> PDF
   </button>
+  <button
+    class="btn btn-outline-primary">
+    
+    <i class="bi bi-chat-left-dots-fill"></i> Enviar mensaje
+  </button>
 
   <button
     class="btn btn-outline-danger"
-    (click)="(item)">
+    (click)="deleteGcontrata(item.id)">
     <i class="bi bi-trash-fill"></i>
   </button>
 </div>
 
-
-
       </div>
     </div>
+
+  <div class="d-flex justify-content-between mt-4">
+            <nav>
+              <ul class="pagination  align-items-center">
+                <li class="page-item">
+                  <a class="page-link" [class.disabled]="nPage - -1 === 1" (click)="goToPrev()" href="#">
+                    <i class="bi bi-chevron-left"></i>
+                    Anterior
+                  </a>
+                </li>
+                @for (pag of arrBotonera; track pag) {
+                <li class="page-item">
+                  @if (pag === '...') {
+                  <a class="page-link">{{ pag }}</a>
+                  } @else {
+                  <a class="page-link" href="#" (click)="goToPage(-(-pag))" [class.active]="nPage - -1 === -(-pag)">
+                    {{ pag }}
+                  </a>
+                  }
+                </li>
+                }
+                <li class="page-item">
+                  <a class="page-link" [class.disabled]="nPage - -1 === oPage?.totalPages" (click)="goToNext()" href="#">
+                    Siguiente
+                    <i class="bi bi-chevron-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
     
     <div *ngIf="!oPage || oPage.content.length === 0" class="no-plans">
       <i class="bi bi-info-circle"></i>

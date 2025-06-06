@@ -4,7 +4,6 @@ import { IPage } from '../model/model.interface';
 import { httpOptions, serverURL } from '../environment/environment';
 import { Injectable } from '@angular/core';
 import { IGrupocontrata } from '../model/grupocontrata.interface';
-import { IUsuario } from '../model/usuario.interface';
 import { CreateGcontrataCliente } from '../model/createGcontrataClienteDTO';
 
 @Injectable({

@@ -37,6 +37,12 @@ import { GrupocontrataAdminCreateRoutedComponent } from './component/grupocontra
 import { GrupocontrataAdminDeleteRoutedComponent } from './component/grupocontrata/grupocontrata.admin.delete.routed/grupocontrata.admin.delete.component';
 import { GrupocontrataXUsuarioAdminPlistRoutedComponent } from './component/grupocontrata/grupocontrata.xusuario.admin.plist.routed/grupocontrata.xusuario.admin.plist.routed.component';
 
+import { MensajeAdminPlistRoutedComponent } from './component/mensaje/mensaje.admin.plist.routed/mensaje.admin.plist.routed.component';
+//import { MensajeAdminEditRoutedComponent } from './component/mensaje/mensaje.admin.edit.routed/mensaje.admin.edit.routed.component';
+import { MensajeAdminViewRoutedComponent } from './component/mensaje/mensaje.admin.view.routed/mensaje.admin.view.routed.component';
+//import { MensajeAdminCreateRoutedComponent } from './component/mensaje/mensaje.admin.create.routed/mensaje.admin.create.routed.component';
+
+
 import { NavegacionClienteRoutedComponent } from './component/navegacion/navegacion/navegacion.cliente.routed.component';
 
 import { SharedLoginRoutedComponent } from './component/shared/shared.login.routed/shared.login.routed';
@@ -98,5 +104,6 @@ export const routes: Routes = [
 
     { path: 'cliente/navegacion', component: NavegacionClienteRoutedComponent },
 
-
+    {path: 'admin/mensaje/plist', component: MensajeAdminPlistRoutedComponent, canActivate: [AdminGuard]},
+    {path: 'admin/mensaje/view/:id', component: MensajeAdminViewRoutedComponent, canActivate: [AdminGuard]},
 ];
