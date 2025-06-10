@@ -40,7 +40,7 @@ import { GrupocontrataXUsuarioAdminPlistRoutedComponent } from './component/grup
 import { MensajeAdminPlistRoutedComponent } from './component/mensaje/mensaje.admin.plist.routed/mensaje.admin.plist.routed.component';
 //import { MensajeAdminEditRoutedComponent } from './component/mensaje/mensaje.admin.edit.routed/mensaje.admin.edit.routed.component';
 import { MensajeAdminViewRoutedComponent } from './component/mensaje/mensaje.admin.view.routed/mensaje.admin.view.routed.component';
-//import { MensajeAdminCreateRoutedComponent } from './component/mensaje/mensaje.admin.create.routed/mensaje.admin.create.routed.component';
+import { MensajeAdminCreateRoutedComponent } from './component/mensaje/mensaje.admin.create.routed/mensaje.admin.create.routed.component';
 
 
 import { NavegacionClienteRoutedComponent } from './component/navegacion/navegacion/navegacion.cliente.routed.component';
@@ -106,4 +106,5 @@ export const routes: Routes = [
 
     {path: 'admin/mensaje/plist', component: MensajeAdminPlistRoutedComponent, canActivate: [AdminGuard]},
     {path: 'admin/mensaje/view/:id', component: MensajeAdminViewRoutedComponent, canActivate: [AdminGuard]},
+    {path: 'admin/mensaje/create', component: MensajeAdminCreateRoutedComponent, canActivate: [AdminGuard]},
 ];

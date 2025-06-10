@@ -54,6 +54,7 @@ declare let bootstrap: any;
 export class MensajeAdminCreateRoutedComponent implements OnInit {
 
   id: number = 0;
+  oUsuarioForm: FormGroup | undefined = undefined;
   oMensajeForm: FormGroup | undefined = undefined;
   oMensaje: IMensaje | null = null;
   strMessage: string = '';
@@ -106,50 +107,24 @@ export class MensajeAdminCreateRoutedComponent implements OnInit {
     
   createForm() {
     this.oMensajeForm = new FormGroup({
-      nombre: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-      ]),
-      apellido1: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-      ]),
-      apellido2: new FormControl(''),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      telefono: new FormControl('', [
-        Validators.required,
-        Validators.minLength(9),
-        Validators.maxLength(9),]),
-      provincia: new FormControl(''),
-      codigo_postal: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(5),]),
-      direccion: new FormControl(''),
-      dni: new FormControl('', [
-        Validators.required,
-        Validators.minLength(9),
-        Validators.maxLength(9),]),
-      fecha_nacimiento: new FormControl(''),
-      password: new FormControl(''),
-      tipoMensaje: new FormGroup({
-        id: new FormControl('', Validators.required), 
-        titulo: new FormControl(''), 
+      usuario: new FormGroup({
+        id: new FormControl('', [Validators.required]),
+        nombre: new FormControl(''),
+        apellido1: new FormControl(''),
+        apellido2: new FormControl(''),
+        email: new FormControl(''),
       }),
     });
   }
 
   updateForm() {
-    this.oMensajeForm?.controls['nombre'].setValue('');
-    this.oMensajeForm?.controls['apellido1'].setValue('');
-    this.oMensajeForm?.controls['apellido2'].setValue('');
-    this.oMensajeForm?.controls['email'].setValue('');
-    this.oMensajeForm?.controls['password'].setValue('');
-    this.oMensajeForm?.controls['tipoMensaje'].setValue({
+    this.oMensajeForm?.controls['id'].setValue(this.oMensajeForm?.id);
+    this.oUsuarioForm?.controls['usuario'].setValue({
       id: null,
-      titulo: null,
+      nombre: null,
+      apellido1: null,
+      apellido2: null,
+      email: null,
     });
    
   }
