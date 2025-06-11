@@ -43,6 +43,10 @@ export class MensajeService {
   createMensaje(dto: EnviarMensajeDTO): Observable<any> {
     return this.oHttp.post(`${this.serverURL}/new`, dto);
   }
+  update(oMensaje: IMensaje): Observable<IMensaje> {
+  return this.oHttp.put<IMensaje>(this.serverURL, oMensaje);
+}
+
 
 
     get(id: number): Observable<IMensaje> {
