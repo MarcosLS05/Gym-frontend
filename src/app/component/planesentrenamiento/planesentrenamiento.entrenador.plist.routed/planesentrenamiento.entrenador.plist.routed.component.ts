@@ -51,7 +51,7 @@ ngOnInit(): void {
     this.planesentrenamientoService.getPlanesByCreador(idCreador).subscribe({
       next: (planes) => {
         this.misPlanes = planes;
-        console.log('Planes del creador:', planes);
+        
       },
       error: (err) => {
         console.error('Error al obtener los planes:', err);

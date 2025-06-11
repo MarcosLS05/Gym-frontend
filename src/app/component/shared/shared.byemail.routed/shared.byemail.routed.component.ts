@@ -80,8 +80,6 @@ ngOnInit() {
   this.usuarioID = this.oSessionService.getUserId() ?? 0;
   this.email = this.oActivatedRoute.snapshot.params['email'];
   this.cargarMensajes();
-  console.log('ID del usuario desde token:', this.usuarioID);
-  console.log('Email del usuario desde token:', this.email);
 
   this.getOne();
   this.getPage();
@@ -120,7 +118,7 @@ toggleInput(index: number) {
 
 getPage() {
   if (!this.usuarioID) {
-    console.error('usuarioID no definido');
+    
     return;
   }
 
@@ -170,7 +168,6 @@ enviarMSJ(contrato: IGrupocontrata): void {
 
   this.oMensajeService.enviarMensaje(dto).subscribe({
     next: (mensaje) => {
-      console.log('Mensaje enviado correctamente:', mensaje);
       this.contenidoMensajeMap[contratoId] = '';
       this.mostrarInputMap[contratoId] = false;
     },
@@ -193,7 +190,6 @@ responderMensaje(mensaje: IMensaje): void {
   this.oMensajeService.enviarMensaje(dto).subscribe({
     next: () => {
       this.respuestasMap[mensaje.id] = '';
-      alert('Mensaje enviado correctamente');
       this.mensajes = this.mensajes.filter(m => m.id !== mensaje.id);
     },
     error: (err) => {
@@ -206,7 +202,6 @@ responderMensaje(mensaje: IMensaje): void {
 deleteGcontrata(id: number): void {
   this.oGcontrataService.delete(id).subscribe({
     next: () => {
-      console.log(`GrupoContrata ${id} eliminado`);
       this.getPage(); 
     },
     error: (err) => {

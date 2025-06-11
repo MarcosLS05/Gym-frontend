@@ -52,7 +52,7 @@ onSubmit() {
         // Obtener usuario completo con rol
         this.oUsuarioService.getUsuarioByEmail(this.loginForm.value.email).subscribe({
           next: (user) => {
-            console.log('Usuario completo:', user);
+            
             this.oSessionService.setUsuario(user);
 
             // Aquí puedes guardar el usuario en algún servicio global o BehaviorSubject
@@ -63,7 +63,7 @@ onSubmit() {
           }
         });
 
-        alert('Inicio de sesión exitoso');
+        
         this.oRouter.navigate(['/']);
       },
       error: (error: HttpErrorResponse) => {

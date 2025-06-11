@@ -102,8 +102,7 @@ get() {
   this.oPlanesentrenamientoService.get(this.id).subscribe({
     next: (oPlanesentrenamiento: IPlanesentrenamiento) => {
       const userId = this.oSessionService.getUserId();
-      console.log('UserId del sessionService:', userId);
-      console.log('Creador del plan:', oPlanesentrenamiento.creador);
+      
 const userIdNumber = Number(userId);
 if (oPlanesentrenamiento.creador?.id !== userIdNumber) {
   this.showModal('No tienes permiso para editar este plan');
@@ -133,7 +132,7 @@ if (oPlanesentrenamiento.creador?.id !== userIdNumber) {
 
 hideModal = () => {
   this.myModal.hide();
-  console.log('Navegando con oPlanesentrenamiento:', this.oPlanesentrenamiento);
+  
   if (this.oPlanesentrenamiento && this.oPlanesentrenamiento.id) {
     this.oRouter.navigate(['/entrenador/planesentrenamiento/view', this.oPlanesentrenamiento.id]);
   } else {

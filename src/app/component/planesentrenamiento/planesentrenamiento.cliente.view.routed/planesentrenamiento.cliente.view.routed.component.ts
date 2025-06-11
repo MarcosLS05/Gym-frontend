@@ -35,7 +35,7 @@ export class PlanesentrenamientoClienteViewRoutedComponent implements OnInit {
     this.id = this.oActivatedRoute.snapshot.params['id'];
     this.email = this.oActivatedRoute.snapshot.params['email'];
 
-    console.log('Email del usuario desde token:', this.email);
+    
     this.getOne();
   }
 
