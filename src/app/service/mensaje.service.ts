@@ -40,10 +40,10 @@ export class MensajeService {
     return this.oHttp.delete(this.serverURL + '/' + id);
   }
 
-    create(oMensaje: IMensaje): Observable<IMensaje> {
-    const URL: string = `${serverURL}/mensajes/new`; 
-    return this.oHttp.post<IMensaje>(URL, oMensaje, httpOptions);
+  createMensaje(dto: EnviarMensajeDTO): Observable<any> {
+    return this.oHttp.post(`${this.serverURL}/new`, dto);
   }
+
 
     get(id: number): Observable<IMensaje> {
     let URL: string = '';

@@ -1,0 +1,113 @@
+<div class="container mt-5 d-flex align-items-center justify-content-center">
+  <div class="row">
+    <div class="col text-center">
+      <h2 class="my-2">
+        <i class="bi bi-plus-square"></i>
+        Creación de contratos
+        <i class="bi bi-person-circle"></i>
+      </h2>
+      <form [formGroup]="oMensajeForm!" (ngSubmit)="onSubmit()" novalidate>
+        <div class="row mt-4">
+          <mat-form-field>
+            <mat-label>Contenido</mat-label>
+            <input
+              matInput
+              formControlName="contenido"
+              placeholder="Pon aqui tu Contenido"
+            />
+            <mat-hint align="start">De 3 caracteres a 50 caracteres</mat-hint>
+            @if (oMensajeForm?.get('contenido')?.hasError('required')) {
+            <mat-error>Debes introducir una contenido</mat-error>
+            } @if (oMensajeForm?.get('contenido')?.hasError('minlength')) {
+            <mat-error>Debes introducir una contenido mas larga</mat-error>
+            } @if (oMensajeForm?.get('contenido')?.hasError('maxlength')) {
+            <mat-error>Debes introducir una contenido mas corta</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div formGroupName="usuario">
+          <div class="row mt-4">
+              <mat-form-field>
+                  <mat-label>Usuarios disponibles</mat-label>
+                  <div class="d-flex justify-content-end">
+                      <button class="btn btn-primary" (click)="showUsuarioSelectorModal()">
+                          <i class="bi bi-search"></i>
+                          Buscar
+                      </button>
+                  </div>
+                  <div class="d-flex justify-content-start">
+                      {{oUsuario.nombre}}
+                  </div>
+                  <div class="d-flex justify-content-start">
+                    {{oUsuario.apellido1}}
+                </div>
+                    <div class="d-flex justify-content-start">
+                  {{oUsuario.apellido2}}
+                    </div>
+                  <div class="d-flex justify-content-start">
+                      {{oUsuario.email}}
+                  </div>
+                  <input matInput formControlName="nombre" />
+                  <input matInput formControlName="id" />
+                  
+              </mat-form-field>
+          </div>
+        </div>
+        <br />
+        <button
+          class="btn btn-warning mt-4 mx-1"
+          [routerLink]="['/admin', 'mensaje', 'plist']"
+        >
+          <i class="bi bi-list"></i>
+          Ir a listado de mensajes
+        </button>
+
+        <button class="btn btn-secondary mt-4 mx-1" (click)="onReset()">
+          <i class="bi bi-x-lg"></i>
+          Reset
+        </button>
+
+        <button class="btn btn-primary mt-4 mx-1" type="submit" [disabled]="!oMensajeForm?.valid">
+          <i class="bi bi-floppy"></i>
+          Guardar
+      </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  [id]="'mimodal'"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">GIMNASIO</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="hideModal()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ strMessage }}</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="hideModal()"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -17,19 +17,19 @@
               <td class="text-start ps-4 py-3">{{ oMensaje.id }}</td>
             </tr>
             <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Nombre</th>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Nombre de usuario emisor</th>
               <td class="text-start ps-4 py-3">{{ oMensaje.emisor?.nombre }}</td>
             </tr>
             <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Primer Apellido</th>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Nombre de usuario receptor</th>
               <td class="text-start ps-4 py-3">{{ oMensaje.receptor?.nombre }}</td>
             </tr>
             <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Segundo Apellido</th>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Contenido</th>
               <td class="text-start ps-4 py-3">{{ oMensaje.contenido }}</td>
             </tr>
             <tr>
-              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Correo</th>
+              <th scope="row" class="bg-primary text-white text-end pe-4 py-3">Fecha de envío</th>
               <td class="text-start ps-4 py-3">{{ oMensaje.fechaEnvio | date : 'dd/MM/yyyy HH:mm' }}</td>
             </tr>         
           </tbody>
@@ -41,7 +41,7 @@
     <div class="d-flex justify-content-center mt-5">
       <a class="btn btn-warning mx-2" href="admin/mensaje/plist">
         <i class="bi bi-list"></i>
-        Ir a Listado de Mensajes
+        Ir a Listado de mensajes
       </a>
     </div>
   </div>
