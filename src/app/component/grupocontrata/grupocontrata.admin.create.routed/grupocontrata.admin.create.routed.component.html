@@ -7,42 +7,6 @@
         <i class="bi bi-person-circle"></i>
       </h2>
       <form [formGroup]="oGrupocontrataForm!" (ngSubmit)="onSubmit()" novalidate>
-        <div class="row mt-4">
-          <mat-form-field>
-            <mat-label>Titulo</mat-label>
-            <input
-              matInput
-              formControlName="titulo"
-              placeholder="Pon aquí tu Titulo"
-            />
-            <mat-hint align="start">De 3 caracteres a 50 caracteres</mat-hint>
-            @if (oGrupocontrataForm?.get('titulo')?.hasError('required')){
-            <mat-error> El campo titulo es obligatorio </mat-error>
-            } @if (oGrupocontrataForm?.get('titulo')?.hasError('minlength')){
-            <mat-error> El titulo debe ser mas largo </mat-error>
-            } @if (oGrupocontrataForm?.get('titulo')?.hasError('maxlength')){
-            <mat-error> El titulo debe ser mas corto </mat-error>
-            }
-          </mat-form-field>
-        </div>
-        <div class="row mt-4">
-          <mat-form-field>
-            <mat-label>Descripcion</mat-label>
-            <input
-              matInput
-              formControlName="descripcion"
-              placeholder="Pon aqui tu Descripcion"
-            />
-            <mat-hint align="start">De 3 caracteres a 50 caracteres</mat-hint>
-            @if (oGrupocontrataForm?.get('descripcion')?.hasError('required')) {
-            <mat-error>Debes introducir una descripcion</mat-error>
-            } @if (oGrupocontrataForm?.get('descripcion')?.hasError('minlength')) {
-            <mat-error>Debes introducir una descripcion mas larga</mat-error>
-            } @if (oGrupocontrataForm?.get('descripcion')?.hasError('maxlength')) {
-            <mat-error>Debes introducir una descripcion mas corta</mat-error>
-            }
-          </mat-form-field>
-        </div>
         <div formGroupName="planesentrenamiento">
           <div class="row mt-4">
               <mat-form-field>

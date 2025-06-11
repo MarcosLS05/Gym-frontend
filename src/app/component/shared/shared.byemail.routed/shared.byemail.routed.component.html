@@ -5,33 +5,33 @@
       <i class="bi bi-person-circle profile-icon"></i>
       <h1>Mi Perfil</h1>
     </div>
-    
+
     <div class="user-info-card">
       <div class="info-item">
         <span class="info-label">Nombre completo</span>
         <span class="info-value">{{ oUsuario.nombre }} {{ oUsuario.apellido1 }} {{ oUsuario.apellido2 }}</span>
       </div>
-      
+
       <div class="info-item">
         <span class="info-label">Correo electrónico</span>
         <span class="info-value">{{ oUsuario.email }}</span>
       </div>
-      
+
       <div class="info-item">
         <span class="info-label">Teléfono</span>
         <span class="info-value">{{ oUsuario.telefono }}</span>
       </div>
-      
+
       <div class="info-item">
         <span class="info-label">Dirección</span>
         <span class="info-value">{{ oUsuario.direccion }}, {{ oUsuario.codigo_postal }}, {{ oUsuario.provincia }}</span>
       </div>
-      
+
       <div class="info-item">
         <span class="info-label">DNI</span>
         <span class="info-value">{{ oUsuario.dni }}</span>
       </div>
-      
+
       <div class="info-item">
         <span class="info-label">Fecha de nacimiento</span>
         <span class="info-value">{{ oUsuario.fecha_nacimiento | date : 'dd/MM/yyyy' }}</span>
@@ -39,86 +39,147 @@
     </div>
   </div>
 
-  <!-- Sección de Planes de Entrenamiento -->
-  <div class="training-plans-section">
-    <h2 class="section-title">Mis planes añadidos</h2>
-
-    
-    
-    <div *ngIf="oPage && oPage.content.length > 0" class="plans-grid">
-      <div *ngFor="let item of oPage.content" class="plan-card">
-        <div class="plan-header">
-          <h3>{{ item.planesentrenamiento.titulo }}</h3>
-          <span class="difficulty-badge {{ getDifficultyClass(item.planesentrenamiento.dificultad) }}">
-            {{ item.planesentrenamiento.dificultad }}
-          </span>
-        </div>
-        
-        <p class="plan-description">{{ item.planesentrenamiento.descripcion }}</p>
-        
-        <div class="plan-footer">
-          <span><i class="bi bi-person"></i> {{ item.planesentrenamiento.creador?.nombre }}</span>
-          <span><i class="bi bi-calendar"></i> {{ item.planesentrenamiento.fechaCreacion | date:'dd/MM/yyyy' }}</span>
-        </div>
-        
-
-<div class="plan-actions">
-  <button
-    class="btn btn-outline-secondary"
-    (click)="downloadPdf(item)">
-    <i class="bi bi-download"></i> PDF
-  </button>
-  <button
-    class="btn btn-outline-primary">
-    
-    <i class="bi bi-chat-left-dots-fill"></i> Enviar mensaje
-  </button>
-
-  <button
-    class="btn btn-outline-danger"
-    (click)="deleteGcontrata(item.id)">
-    <i class="bi bi-trash-fill"></i>
-  </button>
-</div>
-
-      </div>
+  <div class="content-section">
+    <!-- Selector de pestañas -->
+    <div class="tab-selector">
+      <button class="btn btn-outline-primary me-2" [class.active]="selectedTab === 'planes'" (click)="selectedTab = 'planes'">
+        Mis Planes Añadidos
+      </button>
+      <button class="btn btn-outline-success" [class.active]="selectedTab === 'mensajes'" (click)="selectedTab = 'mensajes'">
+        Mis Mensajes
+      </button>
     </div>
 
-  <div class="d-flex justify-content-between mt-4">
-            <nav>
-              <ul class="pagination  align-items-center">
-                <li class="page-item">
-                  <a class="page-link" [class.disabled]="nPage - -1 === 1" (click)="goToPrev()" href="#">
-                    <i class="bi bi-chevron-left"></i>
-                    Anterior
-                  </a>
-                </li>
-                @for (pag of arrBotonera; track pag) {
-                <li class="page-item">
-                  @if (pag === '...') {
+    <!-- Contenido de la pestaña: Planes -->
+    <div *ngIf="selectedTab === 'planes'" class="training-plans-section">
+      <h2 class="section-title">Mis planes añadidos</h2>
+
+      <div *ngIf="oPage && oPage.content.length > 0" class="plans-grid">
+        <div *ngFor="let item of oPage.content" class="plan-card">
+          <div class="plan-header">
+            <h3>{{ item.planesentrenamiento.titulo }}</h3>
+            <span class="difficulty-badge {{ getDifficultyClass(item.planesentrenamiento.dificultad) }}">
+              {{ item.planesentrenamiento.dificultad }}
+            </span>
+          </div>
+
+          <p class="plan-description">{{ item.planesentrenamiento.descripcion }}</p>
+
+          <div class="plan-footer">
+            <span><i class="bi bi-person"></i> {{ item.planesentrenamiento.creador?.nombre }}</span>
+            <span><i class="bi bi-calendar"></i> {{ item.planesentrenamiento.fechaCreacion | date:'dd/MM/yyyy' }}</span>
+          </div>
+
+<div class="plan-actions">
+  <div class="action-buttons">
+    <button class="btn btn-outline-secondary" (click)="downloadPdf(item)">
+      <i class="bi bi-download"></i> PDF
+    </button>
+    <button class="btn btn-outline-primary message-toggle-btn" (click)="mostrarInputMap[item.id] = !mostrarInputMap[item.id]">
+      <i class="bi bi-chat-left-dots-fill"></i> Enviar mensaje
+    </button>
+    <button class="btn btn-outline-danger" (click)="deleteGcontrata(item.id)">
+      <i class="bi bi-trash-fill"></i>
+    </button>
+  </div>
+
+  <!-- Input de mensaje individual que aparecerá debajo -->
+  <div *ngIf="mostrarInputMap[item.id]" class="message-input-container">
+    <div class="input-group">
+      <input
+        type="text"
+        [(ngModel)]="contenidoMensajeMap[item.id]"
+        placeholder="Escribe tu mensaje..."
+        class="form-control message-input"
+      />
+      <button class="btn btn-success send-btn" (click)="enviarMSJ(item)">
+        <i class="bi bi-send-fill"></i> 
+      </button>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+
+      <!-- Paginación -->
+      <div class="pagination-container">
+        <nav>
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" [class.disabled]="nPage - -1 === 1" (click)="goToPrev()" href="#">
+                <i class="bi bi-chevron-left"></i> Anterior
+              </a>
+            </li>
+            @for (pag of arrBotonera; track pag) {
+              <li class="page-item">
+                @if (pag === '...') {
                   <a class="page-link">{{ pag }}</a>
-                  } @else {
+                } @else {
                   <a class="page-link" href="#" (click)="goToPage(-(-pag))" [class.active]="nPage - -1 === -(-pag)">
                     {{ pag }}
                   </a>
-                  }
-                </li>
                 }
-                <li class="page-item">
-                  <a class="page-link" [class.disabled]="nPage - -1 === oPage?.totalPages" (click)="goToNext()" href="#">
-                    Siguiente
-                    <i class="bi bi-chevron-right"></i>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-    
-    <div *ngIf="!oPage || oPage.content.length === 0" class="no-plans">
-      <i class="bi bi-info-circle"></i>
-      <p>Actualmente no tienes planes contratados</p>
-      <a href="cliente/navegacion">
-        <button class="browse-plans-btn">Explorar Planes</button>
-      </a>
+              </li>
+            }
+            <li class="page-item">
+              <a class="page-link" [class.disabled]="nPage - -1 === oPage?.totalPages" (click)="goToNext()" href="#">
+                Siguiente <i class="bi bi-chevron-right"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Sin planes -->
+      <div *ngIf="!oPage || oPage.content.length === 0" class="no-plans">
+        <i class="bi bi-info-circle"></i>
+        <p>Actualmente no tienes planes contratados</p>
+        <a href="cliente/navegacion">
+          <button class="browse-plans-btn">Explorar Planes</button>
+        </a>
+      </div>
     </div>
+
+    <!-- Contenido de la pestaña: Mensajes -->
+<div *ngIf="selectedTab === 'mensajes'" class="messages-section">
+  <h2 class="section-title">Mis mensajes</h2>
+
+  <!-- Lista de mensajes -->
+  <div *ngIf="mensajes && mensajes.length > 0; else noMensajes" class="message-list">
+    <div *ngFor="let mensaje of mensajes" class="message-card mb-4 p-3 border rounded shadow-sm">
+      <div class="message-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-1">Mensaje</h5>
+        <small class="text-muted">{{ mensaje.fechaEnvio | date:'dd/MM/yyyy HH:mm' }}</small>
+      </div>
+
+      <p class="mb-2">{{ mensaje.contenido }}</p>
+
+      <div class="message-sender text-muted">
+        <i class="bi bi-person-fill"></i> De: {{ mensaje.emisor?.nombre }} {{ mensaje.emisor?.apellidos }}
+      </div>
+
+      <!-- Responder -->
+      <div class="mt-3">
+        <input
+          type="text"
+          class="form-control mb-2"
+          placeholder="Escribe tu respuesta..."
+          [(ngModel)]="respuestasMap[mensaje.id]"
+        />
+        <button class="btn btn-primary btn-sm" (click)="responderMensaje(mensaje)">Responder</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sin mensajes -->
+  <ng-template #noMensajes>
+    <div class="no-messages text-center mt-5">
+      <i class="bi bi-envelope display-4"></i>
+      <p class="mt-2">No tienes mensajes en tu bandeja.</p>
+    </div>
+  </ng-template>
+</div>
+
+
   </div>
 </div>

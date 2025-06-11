@@ -28,6 +28,11 @@ export class MensajeService {
     return this.oHttp.get<IMensaje[]>(`${this.serverURL}/conversacion?usuario1Id=${usuario1Id}&usuario2Id=${usuario2Id}`);
   }
 
+  getMensajesRecibidos(receptorId: number): Observable<IMensaje[]> {
+  return this.oHttp.get<IMensaje[]>(`${this.serverURL}/recibidos/${receptorId}`);
+}
+
+
   getUsuariosConversados(userId: number): Observable<number[]> {
     return this.oHttp.get<number[]>(`${this.serverURL}/usuariosConversados/${userId}`);
   }

@@ -14,6 +14,9 @@ import { SessionService } from '../../../service/session.service';
 import { PdfService } from '../../../service/pdf.service';
 import { FormsModule } from '@angular/forms';
 import { TrimPipe } from '../../../pipe/trim.pipe';
+import { MensajeService } from '../../../service/mensaje.service';
+import { EnviarMensajeDTO } from '../../../model/EnviarMensajeDTO.interface';
+import { IMensaje } from '../../../model/mensaje.interface';
 @Component({
   selector: 'app-shared.byemail.routed',
   templateUrl: './shared.byemail.routed.component.html',
@@ -26,8 +29,14 @@ export class SharedByemailRoutedComponent implements OnInit {
   strRuta: string = '';
   usuarioID: number = 0;
   email: string = "";
+contenidoMensajeMap: { [id: number]: string } = {};
+mostrarInputMap: { [id: number]: boolean } = {};
   oUsuario: IUsuario = {} as IUsuario;
   modalImage: string = '';
+  selectedTab: string = 'planes'; 
+  mensajes: any[] = []; 
+  mensajesRecibidos: IMensaje[] = [];
+  respuestasMap: { [mensajeId: number]: string } = {};
 
    oPage: IPage<IGrupocontrata> | null = null;
     //
@@ -48,6 +57,7 @@ constructor(
   private oUsuarioService: UsuarioService,
   private oPlanesentrenamientoService: PlanesentrenamientoService,
   private oBotoneraService: BotoneraService,
+  private oMensajeService: MensajeService,
   private oGcontrataService: GrupocontrataService,
   private oRouter: Router,
   private oSessionService: SessionService,
@@ -69,7 +79,7 @@ constructor(
 ngOnInit() {
   this.usuarioID = this.oSessionService.getUserId() ?? 0;
   this.email = this.oActivatedRoute.snapshot.params['email'];
-
+  this.cargarMensajes();
   console.log('ID del usuario desde token:', this.usuarioID);
   console.log('Email del usuario desde token:', this.email);
 
@@ -97,6 +107,15 @@ downloadPdf(contrato: IGrupocontrata): void {
   this.oPdfService.generarPlanEntrenamiento(contrato);
 }
 
+inputVisible: boolean[] = [];
+
+
+toggleInput(index: number) {
+  this.inputVisible[index] = !this.inputVisible[index];
+}
+
+
+
 
 
 getPage() {
@@ -105,10 +124,13 @@ getPage() {
     return;
   }
 
-  
-
   this.oGcontrataService.getPageByUsuarioId(this.usuarioID, this.nPage, this.nRpp).subscribe({
     next: (oPageFromServer: IPage<IGrupocontrata>) => {
+      oPageFromServer.content.forEach(item => {
+        (item as any).mostrarInputMensaje = false;
+        (item as any).contenidoMensaje = '';
+      });
+
       this.oPage = oPageFromServer;
       this.arrBotonera = this.oBotoneraService.getBotonera(this.nPage, oPageFromServer.totalPages);
     },
@@ -118,9 +140,68 @@ getPage() {
   });
 }
 
-enviarMSJ(idcreador: number): void {
-  
+cargarMensajes(): void {
+  this.oMensajeService.getMensajesRecibidos(this.usuarioID).subscribe({
+    next: (data) => {
+      this.mensajes = data;
+    },
+    error: (err) => {
+      console.error('Error cargando mensajes:', err);
+    }
+  });
 }
+
+enviarMSJ(contrato: IGrupocontrata): void {
+  const contratoId = contrato.id;
+  const contenido = (this.contenidoMensajeMap[contratoId] || '').trim();
+  if (!contenido) return;
+
+  const receptorId = contrato.planesentrenamiento.creador?.id;
+  if (!receptorId) {
+    console.error('El receptorId no está definido.');
+    return;
+  }
+
+  const dto: EnviarMensajeDTO = {
+    emisorId: this.usuarioID,
+    receptorId: receptorId,
+    contenido: contenido
+  };
+
+  this.oMensajeService.enviarMensaje(dto).subscribe({
+    next: (mensaje) => {
+      console.log('Mensaje enviado correctamente:', mensaje);
+      this.contenidoMensajeMap[contratoId] = '';
+      this.mostrarInputMap[contratoId] = false;
+    },
+    error: (err) => {
+      console.error('Error al enviar mensaje:', err);
+    }
+  });
+}
+
+responderMensaje(mensaje: IMensaje): void {
+  const contenido = (this.respuestasMap[mensaje.id] || '').trim();
+  if (!contenido) return;
+
+  const dto: EnviarMensajeDTO = {
+    emisorId: this.usuarioID,              // ID del usuario autenticado
+    receptorId: mensaje.emisor.id,         // Se responde al EMISOR del mensaje recibido
+    contenido: contenido
+  };
+
+  this.oMensajeService.enviarMensaje(dto).subscribe({
+    next: () => {
+      this.respuestasMap[mensaje.id] = '';
+      alert('Mensaje enviado correctamente');
+      this.mensajes = this.mensajes.filter(m => m.id !== mensaje.id);
+    },
+    error: (err) => {
+      console.error('Error al enviar mensaje de respuesta', err);
+    }
+  });
+}
+
 
 deleteGcontrata(id: number): void {
   this.oGcontrataService.delete(id).subscribe({
