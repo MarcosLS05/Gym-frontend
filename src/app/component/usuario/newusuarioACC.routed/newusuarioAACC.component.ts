@@ -78,8 +78,8 @@ registrarUsuario() {
     return;
   }
 
-  if (!this.usuario.password || this.usuario.password.length < 8) {
-    this.mensajeError = 'La contraseña debe tener al menos 8 caracteres.';
+  if (!this.usuario.password || this.usuario.password.length < 5) {
+    this.mensajeError = 'La contraseña debe tener al menos 5 caracteres.';
     this.resetError();
     return;
   }
