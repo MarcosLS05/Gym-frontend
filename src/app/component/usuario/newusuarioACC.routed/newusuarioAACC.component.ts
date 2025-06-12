@@ -16,6 +16,9 @@ import { Router, RouterModule } from '@angular/router';
     imports: [CommonModule, FormsModule, RouterModule],
 })
 export class newusuarioACCComponent {
+
+  codigo_postalStr: string = '';
+
 togglePasswordVisibility() {
 throw new Error('Method not implemented.');
 }
@@ -87,11 +90,14 @@ registrarUsuario() {
     return;
   }
 
-  if (!this.usuario.codigo_postal || this.usuario.codigo_postal.toString().length !== 5) {
-    this.mensajeError = 'El código postal debe tener 5 dígitos.';
-    this.resetError();
-    return;
-  }
+const codPostal = parseInt(this.codigo_postalStr.trim(), 10);
+if (isNaN(codPostal) || this.codigo_postalStr.length !== 5) {
+  this.mensajeError = 'El código postal debe tener 5 dígitos numéricos.';
+  this.resetError();
+  return;
+}
+
+this.usuario.codigo_postal = codPostal;
 
   if (!this.usuario.direccion || this.usuario.direccion.trim().length === 0) {
     this.mensajeError = 'La dirección es obligatoria.';
@@ -130,7 +136,7 @@ registrarUsuario() {
     email: this.usuario.email.trim(),
     telefono: this.usuario.telefono.trim(),
     provincia: this.usuario.provincia.trim(),
-    codigo_postal: this.usuario.codigo_postal,
+    codigo_postal: this.usuario.codigo_postal = codPostal,
     direccion: this.usuario.direccion.trim(),
     dni: this.usuario.dni.trim(),
     fecha_nacimiento: this.usuario.fecha_nacimiento,
