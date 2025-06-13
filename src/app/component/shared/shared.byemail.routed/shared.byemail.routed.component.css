@@ -386,16 +386,18 @@
     flex-direction: column;
   }
   
-  .message-input-container {
-    margin-top: 0.5rem;
-  }
-  
-  .input-group {
-    flex-direction: column;
-  }
-  
-  .send-btn {
+  .message-input-container .input-group {
+    flex-direction: row !important; /* Forzamos a mantener en fila */
     width: 100%;
+  }
+  
+  .message-input-container .message-input {
+    width: 70%; /* Aseguramos que el input ocupe espacio */
+  }
+  
+  .message-input-container .send-btn {
+    width: 30%; /* Aseguramos que el botón ocupe espacio */
+    min-width: auto;
     padding: 0.5rem;
   }
 }
