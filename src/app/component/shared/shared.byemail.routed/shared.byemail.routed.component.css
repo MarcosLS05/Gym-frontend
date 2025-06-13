@@ -381,24 +381,27 @@
 }
 
 /* Ajustes para el diseño responsive */
-@media (max-width: 576px) {
+@media (max-width: 575.98px) {  
   .plan-actions {
     flex-direction: column;
   }
   
   .message-input-container .input-group {
-    flex-direction: row !important; /* Forzamos a mantener en fila */
+    display: flex;
+    flex-direction: row;
     width: 100%;
+    gap: 8px; 
   }
   
   .message-input-container .message-input {
-    width: 70%; /* Aseguramos que el input ocupe espacio */
+    flex: 1 1 70%; 
+    min-width: 0; 
   }
   
   .message-input-container .send-btn {
-    width: 30%; /* Aseguramos que el botón ocupe espacio */
-    min-width: auto;
+    flex: 0 0 28%; 
     padding: 0.5rem;
+    white-space: nowrap; 
   }
 }
 
