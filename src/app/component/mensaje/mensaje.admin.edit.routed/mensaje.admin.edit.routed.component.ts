@@ -185,7 +185,7 @@ updateForm() {
         next: (oMensaje: IMensaje) => {
           this.oMensaje = oMensaje;
           this.updateForm();
-          this.showModal('Contrato ' + this.oMensaje.id + ' actualizado');
+          this.showModal('Mensaje ' + this.oMensaje.id + ' actualizado');
         },
         error: (err) => {
           console.log(err);
