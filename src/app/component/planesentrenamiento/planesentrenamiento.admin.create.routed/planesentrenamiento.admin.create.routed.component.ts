@@ -1,27 +1,19 @@
-import { Component,inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { CryptoService } from '../../../service/crypto.service';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-
-import {
-  FormControl,
-  FormGroup,  
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SessionService } from '../../../service/session.service';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IPlanesentrenamiento } from '../../../model/planesentrenamiento.interface';
 import { PlanesentrenamientoService } from '../../../service/planesentrenamiento.service';
 import { CommonModule } from '@angular/common';
 
-declare let bootstrap: any;
-
 @Component({
   standalone: true,
-  selector: 'app-planesentrenamiento.admin.create.routed',
+  selector: 'app-planesentrenamiento.admin.create',
   templateUrl: './planesentrenamiento.admin.create.routed.component.html',
   imports: [
     MatDialogModule,
@@ -36,94 +28,60 @@ declare let bootstrap: any;
   styleUrls: ['./planesentrenamiento.admin.create.routed.component.css'],
 })
 export class PlanesentrenamientoAdminCreateRoutedComponent implements OnInit {
+  private oRouter = inject(Router);
+  private oSessionService: SessionService = inject(SessionService);
+  private id_usuario: number = 0;
 
-  id: number = 0;
-  oPlanesentrenamientoForm: FormGroup | undefined = undefined;
-  oPlanesentrenamiento: IPlanesentrenamiento | null = null;
-  strMessage: string = '';
-
-  myModal: any;
-
-  form: FormGroup = new FormGroup({});
+  public oForm: FormGroup = new FormGroup({
+    titulo: new FormControl('', [Validators.required]),
+    descripcion: new FormControl('', [Validators.required]),
+    dificultad: new FormControl('', [Validators.required])
+  });
 
   constructor(
-    private oPlanesentrenamientoService: PlanesentrenamientoService,
-    private oRouter: Router
+    public planesentrenamientoService: PlanesentrenamientoService
   ) {}
 
-  ngOnInit() {
-    this.createForm();
-    this.oPlanesentrenamientoForm?.markAllAsTouched();
+ngOnInit(): void {
+  const tipo = this.oSessionService.getUserRole();
+  if (tipo === 'Entrenador Personal' || tipo === 'Administrador') {
+    const id = this.oSessionService.getUserId();
+    if (id && id > 0) {
+      this.id_usuario = id;
+    } else {
+      console.error('ID de usuario no válido');
+    }
+  } else {
+    console.warn('Tipo de usuario no autorizado');
   }
-
-  createForm() {
-    this.oPlanesentrenamientoForm = new FormGroup({
-      dificultad: new FormControl(''),
-      titulo: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-      ]),
-      descripcion: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-      ]),
-      
-    });
-  }
-
-  updateForm() {
-    this.oPlanesentrenamientoForm?.controls['titulo'].setValue('');
-    this.oPlanesentrenamientoForm?.controls['descripcion'].setValue('');
-    this.oPlanesentrenamientoForm?.controls['dificultad'].setValue('');
-    this.oPlanesentrenamientoForm?.controls['fecha_creacion'].setValue(new Date());
-   
-  }
+}
 
 
 
 
-  showModal(mensaje: string) {
-    this.strMessage = mensaje;
-    setTimeout(() => {
-      this.myModal = new bootstrap.Modal(document.getElementById('mimodal'), {
-        keyboard: false,
-      });
-      this.myModal.show();
-    }, 0);
-  }
-  
+  onSubmit(): void {
+    if (this.oForm.valid) {
+      const formData = this.oForm.value;
+      const { titulo, descripcion, dificultad } = formData;
 
-  onReset() {
-    this.updateForm();
-    return false;
-  }
+      if (!this.id_usuario || this.id_usuario <= 0) {
+        console.error('ID de creador no válido:', this.id_usuario);
+        return;
+      }
 
-  hideModal = () => {
-    this.myModal.hide();
-    this.oRouter.navigate(['/admin/planesentrenamiento/view/' + this.oPlanesentrenamiento?.id]);
-  }
-
-  onSubmit() { 
-    if (this.oPlanesentrenamientoForm?.invalid) {
-      this.showModal('Formulario inválido');
-      return;
-    } else {      
-      this.oPlanesentrenamientoService.create(this.oPlanesentrenamientoForm?.value).subscribe({
-        next: (oPlanesentrenamiento: IPlanesentrenamiento) => {
-          this.oPlanesentrenamiento = oPlanesentrenamiento;
-          this.showModal('Plan de entrenamiento creado con el id: ' + this.oPlanesentrenamiento.id);
+      this.planesentrenamientoService.createPlan(
+        { titulo, descripcion, dificultad },
+        this.id_usuario
+      ).subscribe({
+        next: (data) => {
+          
+          // Redirigir, mostrar notificación, etc.
+          this.oRouter.navigate(['admin/planesentrenamiento/plist']); // ejemplo
         },
         error: (err) => {
-          this.showModal('Error al crear el plan de entrenamiento');
-          console.error(err);
-        },
+          console.error('Error al crear el plan:', err);
+        }
       });
     }
   }
-  
-
-
-
 }

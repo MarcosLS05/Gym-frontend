@@ -25,6 +25,19 @@
             }
           </mat-form-field>
         </div>
+                <div>
+              <label for="password" class="form-label fw-bold">Fecha Envío</label>
+              <input
+                type="date"
+                id="fechaEnvio"
+                class="form-control"
+                formControlName="fechaEnvio"
+                placeholder="Fecha de envío"
+              />
+              <div *ngIf="oMensajeForm?.get('fechaEnvio')?.errors" class="text-danger">
+                <small *ngIf="oMensajeForm?.get('fechaEnvio')?.hasError('required')">Debes introducir una fecha.</small>
+              </div>
+        </div>
         <div formGroupName="usuario">
           <div class="row mt-4">
               <mat-form-field>

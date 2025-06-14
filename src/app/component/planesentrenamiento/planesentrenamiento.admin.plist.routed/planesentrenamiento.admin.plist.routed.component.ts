@@ -21,7 +21,7 @@ export class PlanesentrenamientoAdminPlistRoutedComponent implements OnInit {
   oPage: IPage<IPlanesentrenamiento> | null = null;
   //
   nPage: number = 0; // 0-based server count
-  nRpp: number = 10;
+  nRpp: number = 9;
   //
   strField: string = '';
   strDir: string = '';

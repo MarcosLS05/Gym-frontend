@@ -44,7 +44,7 @@ export class PlanesentrenamientoEntrenadorCreateRoutedComponent implements OnIni
 
 ngOnInit(): void {
   const tipo = this.oSessionService.getUserRole();
-  if (tipo === 'Entrenador Personal') {
+  if (tipo === 'Entrenador Personal' || tipo === 'Administrador') {
     const id = this.oSessionService.getUserId();
     if (id && id > 0) {
       this.id_usuario = id;

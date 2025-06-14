@@ -116,6 +116,7 @@ this.oMensajeForm = new FormGroup({
     email: new FormControl(''),
   }),
   contenido: new FormControl('', [Validators.required, Validators.minLength(1)]),
+  fechaEnvio: new FormControl(new Date(), [Validators.required]),
 });
 
   }
@@ -130,6 +131,8 @@ this.oMensajeForm = new FormGroup({
       email: null,
     });
    this.oMensajeForm?.get('contenido')?.setValue('');
+    this.oMensajeForm?.get('fechaEnvio')?.setValue(new Date());
+
   }
 
   showModal(mensaje: string) {
