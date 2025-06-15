@@ -59,7 +59,7 @@ delete(): void {
     this.oPlanesentrenamientoService.delete(this.oPlanesentrenamiento.id).subscribe({
       next: () => {
         this.showModal(
-          `Plan de entrenamiento con id ${this.oPlanesentrenamiento?.id} ha sido borrado`
+          `Plan de entrenamiento borrado`
         );
       },
       error: () => {
