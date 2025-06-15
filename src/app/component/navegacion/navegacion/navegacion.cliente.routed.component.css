@@ -2,142 +2,143 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
+  
+  & .hero-section {
+    background: linear-gradient(135deg, #007bff 0%, #00b4ff 100%);
+    
+    & .search-box {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 50px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      
+      &:focus-within {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+      }
+      
+      & input {
+        border: none;
+        padding: 15px 25px;
+        
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+      
+      & button {
+        padding: 0 25px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        
+        &:hover {
+          background-color: #e2e6ea;
+        }
+        
+        & i {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+  
+  & .toast-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    font-weight: bold;
+    z-index: 1000;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation-fill-mode: forwards;
+  }
+  
+  & .training-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    & .difficulty-badge {
+      padding: 5px 15px;
+      border-radius: 50px;
+      color: black;
+      font-size: 0.8rem;
+      font-weight: bold;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  & .pagination {
+    & .page-item {
+      margin: 0 2px;
+      
+      & .page-link {
+        border-radius: 8px;
+        min-width: 40px;
+        text-align: center;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          background-color: #f0f0f0;
+        }
+      }
+      
+      &.active .page-link {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+      }
+    }
+  }
+  
+  & .icon-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
 }
 
-/* Hero Section */
-.hero-section {
-  background: linear-gradient(135deg, #007bff 0%, #00b4ff 100%);
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
-}
-
-/* Barra de búsqueda */
-.search-box {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 50px;
-  overflow: hidden;
-}
-
-.toast-message {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #28a745;
-  color: white;
-  padding: 15px 25px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  font-weight: bold;
-  z-index: 1000;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation-fill-mode: forwards;
-}
-
-
+/* Animaciones */
 @keyframes fadein {
-  from {opacity: 0; right: 0;}
-  to {opacity: 1; right: 20px;}
+  from { opacity: 0; right: 0; }
+  to { opacity: 1; right: 20px; }
 }
 
 @keyframes fadeout {
-  from {opacity: 1; right: 20px;}
-  to {opacity: 0; right: 0;}
+  from { opacity: 1; right: 20px; }
+  to { opacity: 0; right: 0; }
 }
 
-.search-box input {
-  border: none;
-  padding: 15px 25px;
-}
-
-.search-box input:focus {
-  box-shadow: none;
-}
-
-.search-box button {
-  padding: 0 25px;
-  font-weight: 600;
-}
-
-/* Tarjetas de entrenamiento */
-.training-card {
-  border: none;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-card-title {
-  font-size: 20px;
-  font-weight: bold;
-  color: #007bff;
-}
-
-.training-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.difficulty-badge {
-  padding: 5px 15px;
-  border-radius: 50px;
-  color: black;
-  font-size: 0.8rem;
-  font-weight: bold;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  margin-left: 10px;
-}
-
-
-
-/* Texto truncado en 3 líneas */
-.text-truncate-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Icon boxes */
-.icon-box {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Paginación */
-.pagination .page-link {
-  border-radius: 50% !important;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-  border: none;
-  color: #007bff;
-}
-
-.pagination .page-item.active .page-link {
-  background-color: #007bff;
-}
-
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
-  .hero-section {
-    padding: 2rem 0;
-  }
-  
-  .search-box {
-    width: 100%;
-  }
-  
-  .training-card {
-    margin-bottom: 20px;
+  body {
+    & .hero-section {
+      padding: 2rem 0;
+    }
+    
+    & .search-box {
+      width: 100%;
+    }
   }
 }

@@ -31,7 +31,7 @@ private id_usuario: number = 0;
  oPage: IPage<IPlanesentrenamiento> | null = null;
   //
   nPage: number = 0; // 0-based server count
-  nRpp: number = 10;
+  nRpp: number = 15;
   //
   strField: string = '';
   strDir: string = '';

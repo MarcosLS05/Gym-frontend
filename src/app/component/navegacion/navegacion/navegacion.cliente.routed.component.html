@@ -1,33 +1,40 @@
-<div class="container-fluid px-0">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes de Entrenamiento</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+<main class="container-fluid px-0">
   <!-- Hero Section -->
-  <div class="hero-section bg-primary text-white py-5">
+  <header class="hero-section bg-primary text-white py-5">
     <div class="container text-center py-5">
       <h1 class="display-4 fw-bold mb-4">Encuentra tu plan de entrenamiento perfecto</h1>
       <p class="lead mb-5">Descubre rutinas personalizadas para alcanzar tus objetivos fitness</p>
       
       <!-- Barra de búsqueda destacada -->
-      <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-          <div class="input-group mb-3 search-box">
-            <input type="text" class="form-control form-control-lg" placeholder="Buscar planes por nombre, dificultad..." 
-                   (keyup)="filter($event)" [(ngModel)]="strFiltro">
-            <button class="btn btn-light" type="button">
-              <i class="bi bi-search"></i> Buscar
-            </button>
-          </div>
-        </div>
+      <div class="row justify-content-center">         
+        <div class="col-md-8 col-lg-6">           
+          <div class="input-group mb-3 search-box">             
+            <input type="text" class="form-control form-control-lg" placeholder="Buscar planes por nombre, dificultad..."                     (keyup)="filter($event)" [(ngModel)]="strFiltro">             <button class="btn btn-light" type="button">               
+        <i class="bi bi-search"></i> Buscar             
+      </button>           
+          </div>         
+        </div>       
       </div>
     </div>
-  </div>
+  </header>
 
   <!-- Contenido principal -->
-  <div class="container py-5">
+  <section class="container py-5">
       <div *ngIf="mostrarMensaje" class="toast-message mb-3">
-    {{ mensajeExito }}
-  </div>
+        {{ mensajeExito }}
+      </div>
 
     <!-- Encabezado de resultados -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <header class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="mb-0">
         <i class="bi bi-lightning-charge-fill text-warning"></i>
         Planes disponibles
@@ -39,38 +46,34 @@
           <span class="badge bg-secondary">Todos los planes</span>
         }
       </div>
-    </div>
+    </header>
 
     <!-- Cards de planes de entrenamiento -->
     <div class="row g-4">
       @for (planesentrenamiento of oPage?.content; track planesentrenamiento.id) {
-      <div class="col-md-6 col-lg-4">
+      <article class="col-md-6 col-lg-4">
         <div class="card training-card h-100">
-          
-
-          
           <div class="card-body">
             <h3 class="card-title">{{ planesentrenamiento.titulo }}</h3>
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <!-- Fecha a la izquierda -->
-  <div class="d-flex align-items-center">
-    <i class="bi bi-calendar-check me-2"></i>
-    <small class="text-muted">{{ planesentrenamiento.fechaCreacion | date: 'dd/MM/yyyy' }}</small>
-  </div>
-  
-  <!-- Dificultad a la derecha -->
-  <small class="difficulty-badge 
-    @if (planesentrenamiento.dificultad === 'BASICA') {bg-success} 
-    @else if (planesentrenamiento.dificultad === 'MEDIA') {bg-warning} 
-    @else {bg-danger}">
-    {{ planesentrenamiento.dificultad }}
-  </small>
-</div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <!-- Fecha -->
+              <div class="d-flex align-items-center">
+                <i class="bi bi-calendar-check me-2"></i>
+                <small class="text-muted">{{ planesentrenamiento.fechaCreacion | date: 'dd/MM/yyyy' }}</small>
+              </div>
+              
+              <!-- Dificultad -->
+              <small class="difficulty-badge 
+                @if (planesentrenamiento.dificultad === 'BASICA') {bg-success} 
+                @else if (planesentrenamiento.dificultad === 'MEDIA') {bg-warning} 
+                @else {bg-danger}">
+                {{ planesentrenamiento.dificultad }}
+              </small>
+            </div>
             
-            <!-- Mini descripción (podrías agregar este campo a tu modelo) -->
+            <!-- Descripción -->
             <p class="card-text text-muted">
               {{ planesentrenamiento.descripcion | slice: 0:100 }}...
-                
             
             <!-- Etiquetas -->
             <div class="d-flex flex-wrap gap-2 mb-3">
@@ -80,15 +83,15 @@
             </div>
           </div>
           
-          <div class="card-footer bg-white border-0 pt-0">
+          <footer class="card-footer bg-white border-0 pt-0">
             <div class="d-grid gap-2">
               <button class="btn btn-primary" (click)="addFavoritos(planesentrenamiento)">
                 <i class="bi bi-bookmark-plus"></i> Añadir a favoritos
               </button>
             </div>
-          </div>
+          </footer>
         </div>
-      </div>
+      </article>
       } @empty {
       <div class="col-12 text-center py-5">
         <img src="assets/img/logo.png" alt="No hay resultados" class="img-fluid mb-4" style="max-width: 300px;">
@@ -98,46 +101,66 @@
       }
     </div>
 
-    <!-- Paginación simplificada -->
-    @if ((strFiltro?.length ?? 0)) {
-    <nav class="d-flex justify-content-center mt-5">
-      <ul class="pagination">
-        <li class="page-item">
-          <a class="page-link" [class.disabled]="nPage - -1 === 1" (click)="goToPrev()" href="#">
-            <i class="bi bi-chevron-left"></i>
-          </a>
-        </li>
-        @for (pag of arrBotonera; track pag) {
-        <li class="page-item">
-          @if (pag === '...') {
-          <a class="page-link">{{ pag }}</a>
-          } @else {
-          <a class="page-link" href="#" (click)="goToPage(-(-pag))" [class.active]="nPage - -1 === -(-pag)">
-            {{ pag }}
-          </a>
-          }
-        </li>
-        }
-        <li class="page-item">
-          <a class="page-link" [class.disabled]="nPage - -1 === oPage?.totalPages" (click)="goToNext()" href="#">
-            <i class="bi bi-chevron-right"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    }
-  </div>
+    <!-- Paginación -->
+    <footer class="pagination-footer mt-5">
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Registros por página -->
+        <nav aria-label="Registros por página">
+          <ul class="pagination mb-0">
+            <li class="page-item" [class.active]="nRpp === 10">
+              <a class="page-link" (click)="goToRpp(15)" href="#">15</a>
+            </li>
+            <li class="page-item" [class.active]="nRpp === 50">
+              <a class="page-link" (click)="goToRpp(50)" href="#">50</a>
+            </li>
+            <li class="page-item" [class.active]="nRpp === 100">
+              <a class="page-link" (click)="goToRpp(100)" href="#">100</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Navegación entre páginas -->
+        <nav aria-label="Navegación de páginas">
+          <ul class="pagination mb-0">
+            <li class="page-item">
+              <a class="page-link" [class.disabled]="nPage - -1 === 1" (click)="goToPrev()" href="#">
+                <i class="bi bi-chevron-left"></i>
+                Anterior
+              </a>
+            </li>
+            @for (pag of arrBotonera; track pag) {
+            <li class="page-item">
+              @if (pag === '...') {
+              <a class="page-link">{{ pag }}</a>
+              } @else {
+              <a class="page-link" href="#" (click)="goToPage(-(-pag))" [class.active]="nPage - -1 === -(-pag)">
+                {{ pag }}
+              </a>
+              }
+            </li>
+            }
+            <li class="page-item">
+              <a class="page-link" [class.disabled]="nPage - -1 === oPage?.totalPages" (click)="goToNext()" href="#">
+                Siguiente
+                <i class="bi bi-chevron-right"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </section>
 
   <!-- Sección de beneficios -->
-  <div class="bg-light py-5 mt-5">
+  <section class="bg-light py-5 mt-5">
     <div class="container">
-      <div class="text-center mb-5">
+      <header class="text-center mb-5">
         <h2>¿Por qué elegir nuestros planes?</h2>
         <p class="lead text-muted">Diseñados por profesionales para ayudarte a alcanzar tus metas</p>
-      </div>
+      </header>
       
       <div class="row g-4">
-        <div class="col-md-4">
+        <article class="col-md-4">
           <div class="text-center p-4">
             <div class="icon-box bg-primary bg-opacity-10 text-primary mb-4">
               <i class="bi bi-person-check-fill fs-2"></i>
@@ -145,8 +168,8 @@
             <h4>Personalizados</h4>
             <p class="text-muted">Adaptados a diferentes niveles de condición física y objetivos.</p>
           </div>
-        </div>
-        <div class="col-md-4">
+        </article>
+        <article class="col-md-4">
           <div class="text-center p-4">
             <div class="icon-box bg-success bg-opacity-10 text-success mb-4">
               <i class="bi bi-graph-up fs-2"></i>
@@ -154,8 +177,8 @@
             <h4>Resultados comprobados</h4>
             <p class="text-muted">Métodos efectivos que han ayudado a cientos de personas.</p>
           </div>
-        </div>
-        <div class="col-md-4">
+        </article>
+        <article class="col-md-4">
           <div class="text-center p-4">
             <div class="icon-box bg-warning bg-opacity-10 text-warning mb-4">
               <i class="bi bi-calendar2-heart-fill fs-2"></i>
@@ -163,8 +186,10 @@
             <h4>Flexibles</h4>
             <p class="text-muted">Puedes seguirlos a tu ritmo y ajustarlos según tus necesidades.</p>
           </div>
-        </div>
+        </article>
       </div>
     </div>
-  </div>
-</div>
+  </section>
+</main>
+</body>
+</html>
